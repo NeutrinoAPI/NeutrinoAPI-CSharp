@@ -1,7 +1,7 @@
 /*
  * NeutrinoAPI.PCL
  *
- * This file was automatically generated for NeutrinoAPI.com by APIMATIC BETA v2.0 on 12/06/2015
+ * This file was automatically generated for NeutrinoAPI.com by APIMATIC BETA v2.0 on 01/07/2016
  */
 using System;
 using System.Collections.Generic;
@@ -53,7 +53,7 @@ namespace NeutrinoAPI.PCL.Controllers
         /// <param name="ip">Required parameter: The IP address</param>
         /// <param name="reverseLookup">Optional parameter: Do reverse DNS (PTR) lookup. This option can add extra delay to the request so only use it if you need it</param>
         /// <return>Returns the IPInfoResponse response from the API call</return>
-        public IPInfoResponse CreateIPInfo(
+        public IPInfoResponse IPInfo(
                 string ip,
                 bool? reverseLookup = null)
         {
@@ -78,16 +78,16 @@ namespace NeutrinoAPI.PCL.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                {"user-agent", "APIMATIC 2.0"},
-                {"accept", "application/json"}
+                { "user-agent", "APIMATIC 2.0" },
+                { "accept", "application/json" }
             };
 
             //append form/field parameters
             var _fields = new Dictionary<string,object>()
             {
-                {"ip", ip},
-                {"output-case", "camel"},
-                {"reverse-lookup", (null != reverseLookup) ? reverseLookup : false}
+                { "ip", ip },
+                { "output-case", "camel" },
+                { "reverse-lookup", (null != reverseLookup) ? reverseLookup : false }
             };
 
             //prepare the API call request to fetch the response
@@ -96,10 +96,8 @@ namespace NeutrinoAPI.PCL.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) ClientInstance.ExecuteAsString(_request);
             HttpContext _context = new HttpContext(_request,_response);
-
-            //Error handling using HTTP status codes
-            if ((_response.StatusCode < 200) || (_response.StatusCode > 206)) //[200,206] = HTTP OK
-                throw new APIException(@"HTTP Response Not OK", _context);
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
 
             try
             {
@@ -118,7 +116,7 @@ namespace NeutrinoAPI.PCL.Controllers
         /// <param name="countryCode">Optional parameter: The ISO 2-letter country code to be biased towards (default is no country bias)</param>
         /// <param name="languageCode">Optional parameter: The language to display results in</param>
         /// <return>Returns the GeocodeAddressResponse response from the API call</return>
-        public GeocodeAddressResponse CreateGeocodeAddress(
+        public GeocodeAddressResponse GeocodeAddress(
                 string address,
                 string countryCode = null,
                 string languageCode = null)
@@ -144,17 +142,17 @@ namespace NeutrinoAPI.PCL.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                {"user-agent", "APIMATIC 2.0"},
-                {"accept", "application/json"}
+                { "user-agent", "APIMATIC 2.0" },
+                { "accept", "application/json" }
             };
 
             //append form/field parameters
             var _fields = new Dictionary<string,object>()
             {
-                {"address", address},
-                {"output-case", "camel"},
-                {"country-code", countryCode},
-                {"language-code", (null != languageCode) ? languageCode : "en"}
+                { "address", address },
+                { "output-case", "camel" },
+                { "country-code", countryCode },
+                { "language-code", (null != languageCode) ? languageCode : "en" }
             };
 
             //prepare the API call request to fetch the response
@@ -163,10 +161,8 @@ namespace NeutrinoAPI.PCL.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) ClientInstance.ExecuteAsString(_request);
             HttpContext _context = new HttpContext(_request,_response);
-
-            //Error handling using HTTP status codes
-            if ((_response.StatusCode < 200) || (_response.StatusCode > 206)) //[200,206] = HTTP OK
-                throw new APIException(@"HTTP Response Not OK", _context);
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
 
             try
             {
@@ -185,7 +181,7 @@ namespace NeutrinoAPI.PCL.Controllers
         /// <param name="longitude">Required parameter: The location longitude</param>
         /// <param name="languageCode">Optional parameter: The language to display results in</param>
         /// <return>Returns the GeocodeReverseResponse response from the API call</return>
-        public GeocodeReverseResponse CreateGeocodeReverse(
+        public GeocodeReverseResponse GeocodeReverse(
                 double latitude,
                 double longitude,
                 string languageCode = null)
@@ -211,17 +207,17 @@ namespace NeutrinoAPI.PCL.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                {"user-agent", "APIMATIC 2.0"},
-                {"accept", "application/json"}
+                { "user-agent", "APIMATIC 2.0" },
+                { "accept", "application/json" }
             };
 
             //append form/field parameters
             var _fields = new Dictionary<string,object>()
             {
-                {"latitude", latitude},
-                {"longitude", longitude},
-                {"output-case", "camel"},
-                {"language-code", (null != languageCode) ? languageCode : "en"}
+                { "latitude", latitude },
+                { "longitude", longitude },
+                { "output-case", "camel" },
+                { "language-code", (null != languageCode) ? languageCode : "en" }
             };
 
             //prepare the API call request to fetch the response
@@ -230,10 +226,8 @@ namespace NeutrinoAPI.PCL.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) ClientInstance.ExecuteAsString(_request);
             HttpContext _context = new HttpContext(_request,_response);
-
-            //Error handling using HTTP status codes
-            if ((_response.StatusCode < 200) || (_response.StatusCode > 206)) //[200,206] = HTTP OK
-                throw new APIException(@"HTTP Response Not OK", _context);
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
 
             try
             {

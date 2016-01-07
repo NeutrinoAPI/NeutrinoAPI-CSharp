@@ -1,7 +1,7 @@
 /*
  * NeutrinoAPI.PCL
  *
- * This file was automatically generated for NeutrinoAPI.com by APIMATIC BETA v2.0 on 12/06/2015
+ * This file was automatically generated for NeutrinoAPI.com by APIMATIC BETA v2.0 on 01/07/2016
  */
 using System;
 using System.Collections.Generic;
@@ -56,7 +56,7 @@ namespace NeutrinoAPI.PCL.Controllers
         /// <param name="height">Optional parameter: The height of the QR code (in px)</param>
         /// <param name="width">Optional parameter: The width of the QR code (in px)</param>
         /// <return>Returns the Stream response from the API call</return>
-        public Stream CreateQRCode(
+        public Stream QRCode(
                 string content,
                 string bgColor = null,
                 string fgColor = null,
@@ -85,16 +85,16 @@ namespace NeutrinoAPI.PCL.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                {"user-agent", "APIMATIC 2.0"}
+                { "user-agent", "APIMATIC 2.0" }
             };
 
             //append form/field parameters
             var _fields = new Dictionary<string,object>()
             {
-                {"content", content},
-                {"bg-color", (null != bgColor) ? bgColor : "#ffffff"},
-                {"fg-color", (null != fgColor) ? fgColor : "#000000"},
-                {"height", (null != height) ? height : 250}
+                { "content", content },
+                { "bg-color", (null != bgColor) ? bgColor : "#ffffff" },
+                { "fg-color", (null != fgColor) ? fgColor : "#000000" },
+                { "height", (null != height) ? height : 250 }
             };
 
             //prepare the API call request to fetch the response
@@ -103,10 +103,8 @@ namespace NeutrinoAPI.PCL.Controllers
             //invoke request and get response
             HttpResponse _response = ClientInstance.ExecuteAsBinary(_request);
             HttpContext _context = new HttpContext(_request,_response);
-
-            //Error handling using HTTP status codes
-            if ((_response.StatusCode < 200) || (_response.StatusCode > 206)) //[200,206] = HTTP OK
-                throw new APIException(@"HTTP Response Not OK", _context);
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
 
             try
             {
@@ -126,7 +124,7 @@ namespace NeutrinoAPI.PCL.Controllers
         /// <param name="margin">Optional parameter: The PDF document margin (in mm)</param>
         /// <param name="title">Optional parameter: The PDF document title</param>
         /// <return>Returns the Stream response from the API call</return>
-        public Stream CreateHTMLToPDF(
+        public Stream HTMLToPDF(
                 string content,
                 int? htmlWidth = null,
                 int? margin = null,
@@ -153,16 +151,16 @@ namespace NeutrinoAPI.PCL.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                {"user-agent", "APIMATIC 2.0"}
+                { "user-agent", "APIMATIC 2.0" }
             };
 
             //append form/field parameters
             var _fields = new Dictionary<string,object>()
             {
-                {"content", content},
-                {"html-width", (null != htmlWidth) ? htmlWidth : 1024},
-                {"margin", (null != margin) ? margin : 10},
-                {"title", title}
+                { "content", content },
+                { "html-width", (null != htmlWidth) ? htmlWidth : 1024 },
+                { "margin", (null != margin) ? margin : 10 },
+                { "title", title }
             };
 
             //prepare the API call request to fetch the response
@@ -171,10 +169,8 @@ namespace NeutrinoAPI.PCL.Controllers
             //invoke request and get response
             HttpResponse _response = ClientInstance.ExecuteAsBinary(_request);
             HttpContext _context = new HttpContext(_request,_response);
-
-            //Error handling using HTTP status codes
-            if ((_response.StatusCode < 200) || (_response.StatusCode > 206)) //[200,206] = HTTP OK
-                throw new APIException(@"HTTP Response Not OK", _context);
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
 
             try
             {
@@ -194,7 +190,7 @@ namespace NeutrinoAPI.PCL.Controllers
         /// <param name="width">Required parameter: Width to resize to (in px)</param>
         /// <param name="format">Optional parameter: The output image format, can be either png or jpg</param>
         /// <return>Returns the Stream response from the API call</return>
-        public Stream CreateImageResize(
+        public Stream ImageResize(
                 int height,
                 string imageUrl,
                 int width,
@@ -221,16 +217,16 @@ namespace NeutrinoAPI.PCL.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                {"user-agent", "APIMATIC 2.0"}
+                { "user-agent", "APIMATIC 2.0" }
             };
 
             //append form/field parameters
             var _fields = new Dictionary<string,object>()
             {
-                {"height", height},
-                {"image-url", imageUrl},
-                {"width", width},
-                {"format", (null != format) ? format : "png"}
+                { "height", height },
+                { "image-url", imageUrl },
+                { "width", width },
+                { "format", (null != format) ? format : "png" }
             };
 
             //prepare the API call request to fetch the response
@@ -239,10 +235,8 @@ namespace NeutrinoAPI.PCL.Controllers
             //invoke request and get response
             HttpResponse _response = ClientInstance.ExecuteAsBinary(_request);
             HttpContext _context = new HttpContext(_request,_response);
-
-            //Error handling using HTTP status codes
-            if ((_response.StatusCode < 200) || (_response.StatusCode > 206)) //[200,206] = HTTP OK
-                throw new APIException(@"HTTP Response Not OK", _context);
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
 
             try
             {
@@ -265,7 +259,7 @@ namespace NeutrinoAPI.PCL.Controllers
         /// <param name="position">Optional parameter: The position of the watermark image, possible values are: center, top-left, top-center, top-right, bottom-left, bottom-center, bottom-right</param>
         /// <param name="width">Optional parameter: If set resize the resulting image to this width (preserving aspect ratio)</param>
         /// <return>Returns the Stream response from the API call</return>
-        public Stream CreateImageWatermark(
+        public Stream ImageWatermark(
                 string imageUrl,
                 string watermarkUrl,
                 string format = null,
@@ -295,19 +289,19 @@ namespace NeutrinoAPI.PCL.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                {"user-agent", "APIMATIC 2.0"}
+                { "user-agent", "APIMATIC 2.0" }
             };
 
             //append form/field parameters
             var _fields = new Dictionary<string,object>()
             {
-                {"image-url", imageUrl},
-                {"watermark-url", watermarkUrl},
-                {"format", (null != format) ? format : "png"},
-                {"height", height},
-                {"opacity", (null != opacity) ? opacity : 50},
-                {"position", (null != position) ? position : "center"},
-                {"width", width}
+                { "image-url", imageUrl },
+                { "watermark-url", watermarkUrl },
+                { "format", (null != format) ? format : "png" },
+                { "height", height },
+                { "opacity", (null != opacity) ? opacity : 50 },
+                { "position", (null != position) ? position : "center" },
+                { "width", width }
             };
 
             //prepare the API call request to fetch the response
@@ -316,10 +310,8 @@ namespace NeutrinoAPI.PCL.Controllers
             //invoke request and get response
             HttpResponse _response = ClientInstance.ExecuteAsBinary(_request);
             HttpContext _context = new HttpContext(_request,_response);
-
-            //Error handling using HTTP status codes
-            if ((_response.StatusCode < 200) || (_response.StatusCode > 206)) //[200,206] = HTTP OK
-                throw new APIException(@"HTTP Response Not OK", _context);
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
 
             try
             {

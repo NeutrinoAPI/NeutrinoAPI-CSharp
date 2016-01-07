@@ -2,7 +2,7 @@
 <!--
  - NeutrinoAPI.PCL
  -
- - This file was automatically generated for NeutrinoAPI.com by APIMATIC BETA v2.0 on 12/06/2015
+ - This file was automatically generated for NeutrinoAPI.com by APIMATIC BETA v2.0 on 01/07/2016
 -->
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
@@ -10,7 +10,7 @@
     <AssemblyName>NeutrinoAPI.PCL</AssemblyName>
     <OutputType>Library</OutputType>
     <OutputPath>bin/DEBUG/</OutputPath>
-    <ProjectGuid>{8dc4747e-1811-40cd-b662-5aa8d7454d53}</ProjectGuid>
+    <ProjectGuid>{80715976-c2fd-470e-a41d-e68fdb9194ce}</ProjectGuid>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
     <NuGetPackageImportStamp>ee2bb91c</NuGetPackageImportStamp>
@@ -70,7 +70,7 @@
     </Reference>
     <Reference Include="unirest-net">
       <HintPath>..\packages\Unirest-APIMATIC.1.0.0.2\lib\unirest-net.dll</HintPath>
-    </Reference>	
+    </Reference>
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Models\VerifySecurityCodeResponse.cs" />
@@ -99,18 +99,18 @@
      <Compile Include="Controllers\ImagingController.cs" />
      <Compile Include="Controllers\SecurityAndNetworkingController.cs" />
      <Compile Include="Controllers\ECommerceController.cs" />
-     <Compile Include="HTTP\Client\IHTTPClient.cs" />
-     <Compile Include="HTTP\Client\UnirestClient.cs" />
-     <Compile Include="HTTP\Client\HttpContext.cs" />
-     <Compile Include="HTTP\Request\HttpRequest.cs" />
-     <Compile Include="HTTP\Request\HttpMethod.cs" />
-     <Compile Include="HTTP\Response\HttpResponse.cs" />
-     <Compile Include="HTTP\Response\HttpStringResponse.cs" />
-     <Compile Include="HTTP\Client\FileStreamInfo.cs" />
+     <Compile Include="Http\Client\IHTTPClient.cs" />
+     <Compile Include="Http\Client\UnirestClient.cs" />
+     <Compile Include="Http\Client\HttpContext.cs" />
+     <Compile Include="Http\Request\HttpRequest.cs" />
+     <Compile Include="Http\Request\HttpMethod.cs" />
+     <Compile Include="Http\Response\HttpResponse.cs" />
+     <Compile Include="Http\Response\HttpStringResponse.cs" />
+     <Compile Include="Http\Client\FileStreamInfo.cs" />
      <Compile Include="Controllers\BaseController.cs" />
      <Compile Include="Configuration.cs" />
     <Compile Include="APIHelper.cs" />
-    <Compile Include="APIException.cs" />
+	<Compile Include="APIException.cs" />
     <Compile Include="NeutrinoAPIClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="packages.config" />

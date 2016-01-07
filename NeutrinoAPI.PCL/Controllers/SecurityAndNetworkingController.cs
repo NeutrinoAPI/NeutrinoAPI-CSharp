@@ -1,7 +1,7 @@
 /*
  * NeutrinoAPI.PCL
  *
- * This file was automatically generated for NeutrinoAPI.com by APIMATIC BETA v2.0 on 12/06/2015
+ * This file was automatically generated for NeutrinoAPI.com by APIMATIC BETA v2.0 on 01/07/2016
  */
 using System;
 using System.Collections.Generic;
@@ -53,7 +53,7 @@ namespace NeutrinoAPI.PCL.Controllers
         /// <param name="fetchContent">Required parameter: If this URL responds with html, text, json or xml then return the response. This option is useful if you want to perform further processing on the URL content</param>
         /// <param name="url">Required parameter: The URL to process</param>
         /// <return>Returns the URLInfoResponse response from the API call</return>
-        public URLInfoResponse CreateURLInfo(
+        public URLInfoResponse URLInfo(
                 bool fetchContent,
                 string url)
         {
@@ -78,16 +78,16 @@ namespace NeutrinoAPI.PCL.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                {"user-agent", "APIMATIC 2.0"},
-                {"accept", "application/json"}
+                { "user-agent", "APIMATIC 2.0" },
+                { "accept", "application/json" }
             };
 
             //append form/field parameters
             var _fields = new Dictionary<string,object>()
             {
-                {"fetch-content", fetchContent},
-                {"output-case", "camel"},
-                {"url", url}
+                { "fetch-content", fetchContent },
+                { "output-case", "camel" },
+                { "url", url }
             };
 
             //prepare the API call request to fetch the response
@@ -96,10 +96,8 @@ namespace NeutrinoAPI.PCL.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) ClientInstance.ExecuteAsString(_request);
             HttpContext _context = new HttpContext(_request,_response);
-
-            //Error handling using HTTP status codes
-            if ((_response.StatusCode < 200) || (_response.StatusCode > 206)) //[200,206] = HTTP OK
-                throw new APIException(@"HTTP Response Not OK", _context);
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
 
             try
             {
@@ -116,7 +114,7 @@ namespace NeutrinoAPI.PCL.Controllers
         /// </summary>
         /// <param name="host">Required parameter: An IPv4 address or a domain name. If you supply a domain name it will be checked against the URI DNSBL list</param>
         /// <return>Returns the HostReputationResponse response from the API call</return>
-        public HostReputationResponse CreateHostReputation(
+        public HostReputationResponse HostReputation(
                 string host)
         {
             //the base uri for api requestss
@@ -140,15 +138,15 @@ namespace NeutrinoAPI.PCL.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                {"user-agent", "APIMATIC 2.0"},
-                {"accept", "application/json"}
+                { "user-agent", "APIMATIC 2.0" },
+                { "accept", "application/json" }
             };
 
             //append form/field parameters
             var _fields = new Dictionary<string,object>()
             {
-                {"host", host},
-                {"output-case", "camel"}
+                { "host", host },
+                { "output-case", "camel" }
             };
 
             //prepare the API call request to fetch the response
@@ -157,10 +155,8 @@ namespace NeutrinoAPI.PCL.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) ClientInstance.ExecuteAsString(_request);
             HttpContext _context = new HttpContext(_request,_response);
-
-            //Error handling using HTTP status codes
-            if ((_response.StatusCode < 200) || (_response.StatusCode > 206)) //[200,206] = HTTP OK
-                throw new APIException(@"HTTP Response Not OK", _context);
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
 
             try
             {
@@ -177,7 +173,7 @@ namespace NeutrinoAPI.PCL.Controllers
         /// </summary>
         /// <param name="ip">Required parameter: An IPv4 address</param>
         /// <return>Returns the IPBlocklistResponse response from the API call</return>
-        public IPBlocklistResponse CreateIPBlocklist(
+        public IPBlocklistResponse IPBlocklist(
                 string ip)
         {
             //the base uri for api requestss
@@ -201,15 +197,15 @@ namespace NeutrinoAPI.PCL.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                {"user-agent", "APIMATIC 2.0"},
-                {"accept", "application/json"}
+                { "user-agent", "APIMATIC 2.0" },
+                { "accept", "application/json" }
             };
 
             //append form/field parameters
             var _fields = new Dictionary<string,object>()
             {
-                {"ip", ip},
-                {"output-case", "camel"}
+                { "ip", ip },
+                { "output-case", "camel" }
             };
 
             //prepare the API call request to fetch the response
@@ -218,10 +214,8 @@ namespace NeutrinoAPI.PCL.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) ClientInstance.ExecuteAsString(_request);
             HttpContext _context = new HttpContext(_request,_response);
-
-            //Error handling using HTTP status codes
-            if ((_response.StatusCode < 200) || (_response.StatusCode > 206)) //[200,206] = HTTP OK
-                throw new APIException(@"HTTP Response Not OK", _context);
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
 
             try
             {

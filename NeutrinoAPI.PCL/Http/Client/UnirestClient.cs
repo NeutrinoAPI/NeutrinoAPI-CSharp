@@ -25,14 +25,19 @@ namespace NeutrinoAPI.PCL.Http.Client
             {
                 case HttpMethod.Get:
                     return new UniHttpMethod(HttpMethod.Get.ToString());
+
                 case HttpMethod.Post:
                     return new UniHttpMethod(HttpMethod.Post.ToString());
+
                 case HttpMethod.Put:
                     return new UniHttpMethod(HttpMethod.Put.ToString());
+
                 case HttpMethod.Patch:
                     return new UniHttpMethod(HttpMethod.Patch.ToString());
+
                 case HttpMethod.Delete:
                     return new UniHttpMethod(HttpMethod.Delete.ToString());
+
                 default:
                     throw new ArgumentOutOfRangeException("Unkown method" + method.ToString());
             }
@@ -74,13 +79,11 @@ namespace NeutrinoAPI.PCL.Http.Client
                         string.Format("{0}={1}", Uri.EscapeDataString(kvp.Key), Uri.EscapeDataString(kvp.Value.ToString()))));
                     uniRequest.body(paramsString);
                     uniRequest.header("Content-Type", "application/x-www-form-urlencoded");
-
                 }
-                
             }
 
             //set request headers
-            Dictionary<String, Object> headers = request.Headers.ToDictionary(item=> item.Key,item=> (Object) item.Value);
+            Dictionary<string, Object> headers = request.Headers.ToDictionary(item=> item.Key,item=> (Object) item.Value);
             uniRequest.headers(headers);
 
             //Set basic auth credentials if any
@@ -88,9 +91,8 @@ namespace NeutrinoAPI.PCL.Http.Client
             {
                 uniRequest.basicAuth(request.Username, request.Password);
             }
+
             return uniRequest;
-
-
         }
 
         private static HttpResponse ConvertResponse(HttpResponse<Stream> binaryResponse)
@@ -101,7 +103,6 @@ namespace NeutrinoAPI.PCL.Http.Client
                 RawBody = binaryResponse.Body,
                 StatusCode = binaryResponse.Code
             };
-
         }
 
         private static HttpResponse ConvertResponse(HttpResponse<string> stringResponse)
@@ -146,7 +147,6 @@ namespace NeutrinoAPI.PCL.Http.Client
         public HttpRequest Get(string queryUrl)
         {
             return new HttpRequest(HttpMethod.Get,queryUrl);
-
         }
 
         public HttpRequest Post(string queryUrl)
@@ -205,12 +205,12 @@ namespace NeutrinoAPI.PCL.Http.Client
         public HttpRequest Delete(string queryUrl, Dictionary<string, string> headers, Dictionary<string, object> formParameters, string username = null,
             string password = null)
         {
-            return new HttpRequest(HttpMethod.Patch, queryUrl, headers, formParameters, username, password);
+            return new HttpRequest(HttpMethod.Delete, queryUrl, headers, formParameters, username, password);
         }
 
         public HttpRequest DeleteBody(string queryUrl, Dictionary<string, string> headers, string body, string username = null, string password = null)
         {
-            return new HttpRequest(HttpMethod.Patch, queryUrl, headers, body, username, password);
+            return new HttpRequest(HttpMethod.Delete, queryUrl, headers, body, username, password);
         }
     }
 }

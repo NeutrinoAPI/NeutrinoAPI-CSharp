@@ -1,7 +1,7 @@
 /*
  * NeutrinoAPI.PCL
  *
- * This file was automatically generated for NeutrinoAPI.com by APIMATIC BETA v2.0 on 12/06/2015
+ * This file was automatically generated for NeutrinoAPI.com by APIMATIC BETA v2.0 on 01/07/2016
  */
 using System;
 using System.Collections.Generic;
@@ -53,7 +53,7 @@ namespace NeutrinoAPI.PCL.Controllers
         /// <param name="audioUrl">Required parameter: A URL to a valid audio file. Accepted audio formats are: MP3, WAV, OGG</param>
         /// <param name="number">Required parameter: The phone number to call. Must be valid international format</param>
         /// <return>Returns the PhonePlaybackResponse response from the API call</return>
-        public PhonePlaybackResponse CreatePhonePlayback(
+        public PhonePlaybackResponse PhonePlayback(
                 string audioUrl,
                 string number)
         {
@@ -78,16 +78,16 @@ namespace NeutrinoAPI.PCL.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                {"user-agent", "APIMATIC 2.0"},
-                {"accept", "application/json"}
+                { "user-agent", "APIMATIC 2.0" },
+                { "accept", "application/json" }
             };
 
             //append form/field parameters
             var _fields = new Dictionary<string,object>()
             {
-                {"audio-url", audioUrl},
-                {"number", number},
-                {"output-case", "camel"}
+                { "audio-url", audioUrl },
+                { "number", number },
+                { "output-case", "camel" }
             };
 
             //prepare the API call request to fetch the response
@@ -96,10 +96,8 @@ namespace NeutrinoAPI.PCL.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) ClientInstance.ExecuteAsString(_request);
             HttpContext _context = new HttpContext(_request,_response);
-
-            //Error handling using HTTP status codes
-            if ((_response.StatusCode < 200) || (_response.StatusCode > 206)) //[200,206] = HTTP OK
-                throw new APIException(@"HTTP Response Not OK", _context);
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
 
             try
             {
@@ -116,7 +114,7 @@ namespace NeutrinoAPI.PCL.Controllers
         /// </summary>
         /// <param name="securityCode">Required parameter: The security code to verify</param>
         /// <return>Returns the VerifySecurityCodeResponse response from the API call</return>
-        public VerifySecurityCodeResponse CreateVerifySecurityCode(
+        public VerifySecurityCodeResponse VerifySecurityCode(
                 int securityCode)
         {
             //the base uri for api requestss
@@ -140,15 +138,15 @@ namespace NeutrinoAPI.PCL.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                {"user-agent", "APIMATIC 2.0"},
-                {"accept", "application/json"}
+                { "user-agent", "APIMATIC 2.0" },
+                { "accept", "application/json" }
             };
 
             //append form/field parameters
             var _fields = new Dictionary<string,object>()
             {
-                {"output-case", "camel"},
-                {"security-code", securityCode}
+                { "output-case", "camel" },
+                { "security-code", securityCode }
             };
 
             //prepare the API call request to fetch the response
@@ -157,10 +155,8 @@ namespace NeutrinoAPI.PCL.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) ClientInstance.ExecuteAsString(_request);
             HttpContext _context = new HttpContext(_request,_response);
-
-            //Error handling using HTTP status codes
-            if ((_response.StatusCode < 200) || (_response.StatusCode > 206)) //[200,206] = HTTP OK
-                throw new APIException(@"HTTP Response Not OK", _context);
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
 
             try
             {
@@ -178,7 +174,7 @@ namespace NeutrinoAPI.PCL.Controllers
         /// <param name="number">Required parameter: A phone number</param>
         /// <param name="countryCode">Optional parameter: ISO 2-letter country code, assume numbers are based in this country. If not set numbers are assumed to be in international format (with or without the leading + sign)</param>
         /// <return>Returns the HLRLookupResponse response from the API call</return>
-        public HLRLookupResponse CreateHLRLookup(
+        public HLRLookupResponse HLRLookup(
                 string number,
                 string countryCode = null)
         {
@@ -203,16 +199,16 @@ namespace NeutrinoAPI.PCL.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                {"user-agent", "APIMATIC 2.0"},
-                {"accept", "application/json"}
+                { "user-agent", "APIMATIC 2.0" },
+                { "accept", "application/json" }
             };
 
             //append form/field parameters
             var _fields = new Dictionary<string,object>()
             {
-                {"number", number},
-                {"output-case", "camel"},
-                {"country-code", countryCode}
+                { "number", number },
+                { "output-case", "camel" },
+                { "country-code", countryCode }
             };
 
             //prepare the API call request to fetch the response
@@ -221,10 +217,8 @@ namespace NeutrinoAPI.PCL.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) ClientInstance.ExecuteAsString(_request);
             HttpContext _context = new HttpContext(_request,_response);
-
-            //Error handling using HTTP status codes
-            if ((_response.StatusCode < 200) || (_response.StatusCode > 206)) //[200,206] = HTTP OK
-                throw new APIException(@"HTTP Response Not OK", _context);
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
 
             try
             {
@@ -246,7 +240,7 @@ namespace NeutrinoAPI.PCL.Controllers
         /// <param name="playbackDelay">Optional parameter: The delay in milliseconds between the playback of each security code</param>
         /// <param name="securityCode">Optional parameter: Pass in your own security code. This is useful if you have implemented TOTP or similar 2FA methods. If not set then we will generate a secure random code (only numerical security codes are currently supported)</param>
         /// <return>Returns the PhoneVerifyResponse response from the API call</return>
-        public PhoneVerifyResponse CreatePhoneVerify(
+        public PhoneVerifyResponse PhoneVerify(
                 string number,
                 int? codeLength = null,
                 string countryCode = null,
@@ -275,20 +269,20 @@ namespace NeutrinoAPI.PCL.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                {"user-agent", "APIMATIC 2.0"},
-                {"accept", "application/json"}
+                { "user-agent", "APIMATIC 2.0" },
+                { "accept", "application/json" }
             };
 
             //append form/field parameters
             var _fields = new Dictionary<string,object>()
             {
-                {"number", number},
-                {"output-case", "camel"},
-                {"code-length", (null != codeLength) ? codeLength : 6},
-                {"country-code", countryCode},
-                {"language-code", (null != languageCode) ? languageCode : "en"},
-                {"playback-delay", (null != playbackDelay) ? playbackDelay : 800},
-                {"security-code", securityCode}
+                { "number", number },
+                { "output-case", "camel" },
+                { "code-length", (null != codeLength) ? codeLength : 6 },
+                { "country-code", countryCode },
+                { "language-code", (null != languageCode) ? languageCode : "en" },
+                { "playback-delay", (null != playbackDelay) ? playbackDelay : 800 },
+                { "security-code", securityCode }
             };
 
             //prepare the API call request to fetch the response
@@ -297,10 +291,8 @@ namespace NeutrinoAPI.PCL.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) ClientInstance.ExecuteAsString(_request);
             HttpContext _context = new HttpContext(_request,_response);
-
-            //Error handling using HTTP status codes
-            if ((_response.StatusCode < 200) || (_response.StatusCode > 206)) //[200,206] = HTTP OK
-                throw new APIException(@"HTTP Response Not OK", _context);
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
 
             try
             {
@@ -321,7 +313,7 @@ namespace NeutrinoAPI.PCL.Controllers
         /// <param name="languageCode">Optional parameter: The language to send the verification code in, available languages are: de - German, en - English, es - Spanish, fr - Fench, it - Italian, pt - Portuguese, ru - Russian</param>
         /// <param name="securityCode">Optional parameter: ass in your own security code. This is useful if you have implemented TOTP or similar 2FA methods. If not set then we will generate a secure random code (only numerical security codes are currently supported)</param>
         /// <return>Returns the SMSVerifyResponse response from the API call</return>
-        public SMSVerifyResponse CreateSMSVerify(
+        public SMSVerifyResponse SMSVerify(
                 string number,
                 int? codeLength = null,
                 string countryCode = null,
@@ -349,19 +341,19 @@ namespace NeutrinoAPI.PCL.Controllers
             //append request with appropriate headers and parameters
             var _headers = new Dictionary<string,string>()
             {
-                {"user-agent", "APIMATIC 2.0"},
-                {"accept", "application/json"}
+                { "user-agent", "APIMATIC 2.0" },
+                { "accept", "application/json" }
             };
 
             //append form/field parameters
             var _fields = new Dictionary<string,object>()
             {
-                {"number", number},
-                {"output-case", "camel"},
-                {"code-length", (null != codeLength) ? codeLength : 5},
-                {"country-code", countryCode},
-                {"language-code", (null != languageCode) ? languageCode : "en"},
-                {"security-code", securityCode}
+                { "number", number },
+                { "output-case", "camel" },
+                { "code-length", (null != codeLength) ? codeLength : 5 },
+                { "country-code", countryCode },
+                { "language-code", (null != languageCode) ? languageCode : "en" },
+                { "security-code", securityCode }
             };
 
             //prepare the API call request to fetch the response
@@ -370,10 +362,8 @@ namespace NeutrinoAPI.PCL.Controllers
             //invoke request and get response
             HttpStringResponse _response = (HttpStringResponse) ClientInstance.ExecuteAsString(_request);
             HttpContext _context = new HttpContext(_request,_response);
-
-            //Error handling using HTTP status codes
-            if ((_response.StatusCode < 200) || (_response.StatusCode > 206)) //[200,206] = HTTP OK
-                throw new APIException(@"HTTP Response Not OK", _context);
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
 
             try
             {
