@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace NeutrinoAPI.PCL.Http.Request
+namespace NeutrinoAPI.Http.Request
 {
     public class HttpRequest
     {
@@ -23,7 +23,7 @@ namespace NeutrinoAPI.PCL.Http.Request
         /// <summary>
         /// Form parameters for the current http request
         /// </summary>
-        public Dictionary<string, Object> FormParameters { get; set; }
+        public List<KeyValuePair<string, Object>> FormParameters { get; set; }
 
         /// <summary>
         /// Optional raw string to send as request body
@@ -91,7 +91,7 @@ namespace NeutrinoAPI.PCL.Http.Request
         /// <param name="formParameters">Form parameters collection for the request</param>
         /// <param name="username">Basic auth username</param>
         /// <param name="password">Basic auth password</param>
-        public HttpRequest(HttpMethod method, string queryUrl, Dictionary<string, string> headers,Dictionary<string, Object> formParameters, string username, string password)
+        public HttpRequest(HttpMethod method, string queryUrl, Dictionary<string, string> headers, List<KeyValuePair<string, Object>> formParameters, string username, string password)
             : this(method, queryUrl, headers, username, password)
         {
             this.FormParameters = formParameters;

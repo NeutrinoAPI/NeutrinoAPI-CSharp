@@ -1,7 +1,7 @@
 /*
  * NeutrinoAPI.PCL
  *
- * This file was automatically generated for NeutrinoAPI.com by APIMATIC BETA v2.0 on 01/07/2016
+ * This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io )
  */
 using System;
 using System.IO;
@@ -12,16 +12,18 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using NeutrinoAPI.PCL;
+using NeutrinoAPI;
+using NeutrinoAPI.Utilities;
 
-namespace NeutrinoAPI.PCL.Models
+
+namespace NeutrinoAPI.Models
 {
-    public class URLInfoResponse : INotifyPropertyChanged 
+    public class URLInfoResponse : BaseModel 
     {
         // These fields hold the values for the public properties.
         private string httpStatusMessage;
         private string serverRegion;
-        private Dictionary<string, object> query;
+        private object query;
         private string serverName;
         private int urlPort;
         private string serverCountry;
@@ -41,6 +43,7 @@ namespace NeutrinoAPI.PCL.Models
         private string urlProtocol;
         private string contentType;
         private bool httpRedirect;
+        private string content;
 
         /// <summary>
         /// The HTTP status message assoicated with the status code
@@ -80,7 +83,7 @@ namespace NeutrinoAPI.PCL.Models
         /// A key:value map of the URL query paramaters
         /// </summary>
         [JsonProperty("query")]
-        public Dictionary<string, object> Query 
+        public object Query 
         { 
             get 
             {
@@ -417,19 +420,19 @@ namespace NeutrinoAPI.PCL.Models
         }
 
         /// <summary>
-        /// Property changed event for observer pattern
+        /// The actual content this URL responded with. Only set if the 'fetch-content' option was used
         /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
-        /// Raises event when a property is changed
-        /// </summary>
-        /// <param name="propertyName">Name of the changed property</param>
-        protected void onPropertyChanged(String propertyName)
-        {
-            if (PropertyChanged != null)
+        [JsonProperty("content")]
+        public string Content 
+        { 
+            get 
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                return this.content; 
+            } 
+            set 
+            {
+                this.content = value;
+                onPropertyChanged("Content");
             }
         }
     }

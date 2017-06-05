@@ -18,20 +18,23 @@ using NeutrinoAPI.Utilities;
 
 namespace NeutrinoAPI.Models
 {
-    public class IPInfoResponse : BaseModel 
+    public class IPProbeResponse : BaseModel 
     {
         // These fields hold the values for the public properties.
         private bool valid;
         private string country;
-        private string hostname;
-        private string city;
+        private string providerType;
         private string countryCode;
-        private double latitude;
+        private string hostname;
+        private string providerDomain;
+        private string city;
+        private string providerWebsite;
+        private string ip;
         private string region;
-        private double longitude;
+        private string providerDescription;
 
         /// <summary>
-        /// Is this a valid IP address
+        /// Is this a valid IPv4 or IPv6 address
         /// </summary>
         [JsonProperty("valid")]
         public bool Valid 
@@ -65,7 +68,41 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// The IPs hostname (only set if reverse-lookup has been used)
+        /// The detected provider type. See API docs for specific provider type details
+        /// </summary>
+        [JsonProperty("provider-type")]
+        public string ProviderType 
+        { 
+            get 
+            {
+                return this.providerType; 
+            } 
+            set 
+            {
+                this.providerType = value;
+                onPropertyChanged("ProviderType");
+            }
+        }
+
+        /// <summary>
+        /// ISO 2-letter country code
+        /// </summary>
+        [JsonProperty("country-code")]
+        public string CountryCode 
+        { 
+            get 
+            {
+                return this.countryCode; 
+            } 
+            set 
+            {
+                this.countryCode = value;
+                onPropertyChanged("CountryCode");
+            }
+        }
+
+        /// <summary>
+        /// The IPs hostname (PTR)
         /// </summary>
         [JsonProperty("hostname")]
         public string Hostname 
@@ -78,6 +115,23 @@ namespace NeutrinoAPI.Models
             {
                 this.hostname = value;
                 onPropertyChanged("Hostname");
+            }
+        }
+
+        /// <summary>
+        /// The domain name of the provider
+        /// </summary>
+        [JsonProperty("provider-domain")]
+        public string ProviderDomain 
+        { 
+            get 
+            {
+                return this.providerDomain; 
+            } 
+            set 
+            {
+                this.providerDomain = value;
+                onPropertyChanged("ProviderDomain");
             }
         }
 
@@ -99,36 +153,36 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// ISO 2-letter country code
+        /// The website URL for the provider
         /// </summary>
-        [JsonProperty("countryCode")]
-        public string CountryCode 
+        [JsonProperty("provider-website")]
+        public string ProviderWebsite 
         { 
             get 
             {
-                return this.countryCode; 
+                return this.providerWebsite; 
             } 
             set 
             {
-                this.countryCode = value;
-                onPropertyChanged("CountryCode");
+                this.providerWebsite = value;
+                onPropertyChanged("ProviderWebsite");
             }
         }
 
         /// <summary>
-        /// Location latitude
+        /// The IP address
         /// </summary>
-        [JsonProperty("latitude")]
-        public double Latitude 
+        [JsonProperty("ip")]
+        public string Ip 
         { 
             get 
             {
-                return this.latitude; 
+                return this.ip; 
             } 
             set 
             {
-                this.latitude = value;
-                onPropertyChanged("Latitude");
+                this.ip = value;
+                onPropertyChanged("Ip");
             }
         }
 
@@ -150,19 +204,19 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// Location longitude
+        /// A description of the provider, usually extracted from the providers website or WHOIS record
         /// </summary>
-        [JsonProperty("longitude")]
-        public double Longitude 
+        [JsonProperty("provider-description")]
+        public string ProviderDescription 
         { 
             get 
             {
-                return this.longitude; 
+                return this.providerDescription; 
             } 
             set 
             {
-                this.longitude = value;
-                onPropertyChanged("Longitude");
+                this.providerDescription = value;
+                onPropertyChanged("ProviderDescription");
             }
         }
     }

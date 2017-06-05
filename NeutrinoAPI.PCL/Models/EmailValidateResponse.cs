@@ -1,7 +1,7 @@
 /*
  * NeutrinoAPI.PCL
  *
- * This file was automatically generated for NeutrinoAPI.com by APIMATIC BETA v2.0 on 01/07/2016
+ * This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io )
  */
 using System;
 using System.IO;
@@ -12,11 +12,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using NeutrinoAPI.PCL;
+using NeutrinoAPI;
+using NeutrinoAPI.Utilities;
 
-namespace NeutrinoAPI.PCL.Models
+
+namespace NeutrinoAPI.Models
 {
-    public class EmailValidateResponse : INotifyPropertyChanged 
+    public class EmailValidateResponse : BaseModel 
     {
         // These fields hold the values for the public properties.
         private bool valid;
@@ -25,9 +27,11 @@ namespace NeutrinoAPI.PCL.Models
         private bool domainError;
         private bool isFreemail;
         private string email;
+        private bool isDisposable;
+        private bool typosFixed;
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// Is this a valid email
         /// </summary>
         [JsonProperty("valid")]
         public bool Valid 
@@ -44,7 +48,7 @@ namespace NeutrinoAPI.PCL.Models
         }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// True if this address has a syntax error
         /// </summary>
         [JsonProperty("syntaxError")]
         public bool SyntaxError 
@@ -61,7 +65,7 @@ namespace NeutrinoAPI.PCL.Models
         }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// The email domain
         /// </summary>
         [JsonProperty("domain")]
         public string Domain 
@@ -78,7 +82,7 @@ namespace NeutrinoAPI.PCL.Models
         }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// True if this address has a domain error (e.g. no valid mail server records)
         /// </summary>
         [JsonProperty("domainError")]
         public bool DomainError 
@@ -95,7 +99,7 @@ namespace NeutrinoAPI.PCL.Models
         }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// True if this address is a free-mail address
         /// </summary>
         [JsonProperty("isFreemail")]
         public bool IsFreemail 
@@ -112,7 +116,7 @@ namespace NeutrinoAPI.PCL.Models
         }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// The full email address (this could be different to the supplied address if fix-typos is used)
         /// </summary>
         [JsonProperty("email")]
         public string Email 
@@ -129,19 +133,36 @@ namespace NeutrinoAPI.PCL.Models
         }
 
         /// <summary>
-        /// Property changed event for observer pattern
+        /// True if this address is a disposable, temporary or darknet related email address
         /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
+        [JsonProperty("isDisposable")]
+        public bool IsDisposable 
+        { 
+            get 
+            {
+                return this.isDisposable; 
+            } 
+            set 
+            {
+                this.isDisposable = value;
+                onPropertyChanged("IsDisposable");
+            }
+        }
 
         /// <summary>
-        /// Raises event when a property is changed
+        /// True if typos have been fixed
         /// </summary>
-        /// <param name="propertyName">Name of the changed property</param>
-        protected void onPropertyChanged(String propertyName)
-        {
-            if (PropertyChanged != null)
+        [JsonProperty("typosFixed")]
+        public bool TyposFixed 
+        { 
+            get 
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                return this.typosFixed; 
+            } 
+            set 
+            {
+                this.typosFixed = value;
+                onPropertyChanged("TyposFixed");
             }
         }
     }

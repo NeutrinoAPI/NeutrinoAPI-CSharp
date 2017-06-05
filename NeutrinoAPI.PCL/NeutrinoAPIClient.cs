@@ -1,84 +1,104 @@
 /*
  * NeutrinoAPI.PCL
  *
- * This file was automatically generated for NeutrinoAPI.com by APIMATIC BETA v2.0 on 01/07/2016
+ * This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io )
  */
 using System;
-using NeutrinoAPI.PCL.Controllers;
+using NeutrinoAPI.Controllers;
+using NeutrinoAPI.Http.Client;
 
-namespace NeutrinoAPI.PCL
+namespace NeutrinoAPI
 {
-    public partial class NeutrinoAPIClient
+    public partial class NeutrinoAPIClient: INeutrinoAPIClient
     {
-
-        /// <summary>
-        /// Singleton access to Geolocation controller
-        /// </summary>
-        public GeolocationController Geolocation
-        {
-            get
-            {
-                return GeolocationController.Instance;
-            }
-        }
-
-        /// <summary>
-        /// Singleton access to Telephony controller
-        /// </summary>
-        public TelephonyController Telephony
-        {
-            get
-            {
-                return TelephonyController.Instance;
-            }
-        }
 
         /// <summary>
         /// Singleton access to DataTools controller
         /// </summary>
-        public DataToolsController DataTools
+        public IDataTools DataTools
         {
             get
             {
-                return DataToolsController.Instance;
-            }
-        }
-
-        /// <summary>
-        /// Singleton access to Imaging controller
-        /// </summary>
-        public ImagingController Imaging
-        {
-            get
-            {
-                return ImagingController.Instance;
-            }
-        }
-
-        /// <summary>
-        /// Singleton access to SecurityAndNetworking controller
-        /// </summary>
-        public SecurityAndNetworkingController SecurityAndNetworking
-        {
-            get
-            {
-                return SecurityAndNetworkingController.Instance;
+                return NeutrinoAPI.Controllers.DataTools.Instance;
             }
         }
 
         /// <summary>
         /// Singleton access to ECommerce controller
         /// </summary>
-        public ECommerceController ECommerce
+        public IECommerce ECommerce
         {
             get
             {
-                return ECommerceController.Instance;
+                return NeutrinoAPI.Controllers.ECommerce.Instance;
             }
         }
 
         /// <summary>
-        /// Client constructor
+        /// Singleton access to Geolocation controller
+        /// </summary>
+        public IGeolocation Geolocation
+        {
+            get
+            {
+                return NeutrinoAPI.Controllers.Geolocation.Instance;
+            }
+        }
+
+        /// <summary>
+        /// Singleton access to SecurityAndNetworking controller
+        /// </summary>
+        public ISecurityAndNetworking SecurityAndNetworking
+        {
+            get
+            {
+                return NeutrinoAPI.Controllers.SecurityAndNetworking.Instance;
+            }
+        }
+
+        /// <summary>
+        /// Singleton access to Telephony controller
+        /// </summary>
+        public ITelephony Telephony
+        {
+            get
+            {
+                return NeutrinoAPI.Controllers.Telephony.Instance;
+            }
+        }
+
+        /// <summary>
+        /// Singleton access to Imaging controller
+        /// </summary>
+        public IImaging Imaging
+        {
+            get
+            {
+                return NeutrinoAPI.Controllers.Imaging.Instance;
+            }
+        }
+        /// <summary>
+        /// The shared http client to use for all API calls
+        /// </summary>
+        public IHttpClient SharedHttpClient
+        {
+            get
+            {
+                return BaseController.ClientInstance;
+            }
+            set
+            {
+                BaseController.ClientInstance = value;
+            }        
+        }
+        
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        public NeutrinoAPIClient() { }
+
+        /// <summary>
+        /// Client initialization constructor
         /// </summary>
         public NeutrinoAPIClient(string userId, string apiKey)
         {

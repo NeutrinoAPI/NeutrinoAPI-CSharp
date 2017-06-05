@@ -1,7 +1,7 @@
 /*
  * NeutrinoAPI.PCL
  *
- * This file was automatically generated for NeutrinoAPI.com by APIMATIC BETA v2.0 on 01/07/2016
+ * This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io )
  */
 using System;
 using System.IO;
@@ -12,11 +12,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using NeutrinoAPI.PCL;
+using NeutrinoAPI;
+using NeutrinoAPI.Utilities;
 
-namespace NeutrinoAPI.PCL.Models
+
+namespace NeutrinoAPI.Models
 {
-    public class GeocodeReverseResponse : INotifyPropertyChanged 
+    public class GeocodeReverseResponse : BaseModel 
     {
         // These fields hold the values for the public properties.
         private string country;
@@ -25,6 +27,8 @@ namespace NeutrinoAPI.PCL.Models
         private string city;
         private string countryCode;
         private string postalCode;
+        private string state;
+        private Dictionary<string, string> addressComponents;
 
         /// <summary>
         /// The country of the location
@@ -129,19 +133,36 @@ namespace NeutrinoAPI.PCL.Models
         }
 
         /// <summary>
-        /// Property changed event for observer pattern
+        /// The state of the location
         /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
+        [JsonProperty("state")]
+        public string State 
+        { 
+            get 
+            {
+                return this.state; 
+            } 
+            set 
+            {
+                this.state = value;
+                onPropertyChanged("State");
+            }
+        }
 
         /// <summary>
-        /// Raises event when a property is changed
+        /// The components which make up the address such as road, city, state etc. May also include additional metadata about the address
         /// </summary>
-        /// <param name="propertyName">Name of the changed property</param>
-        protected void onPropertyChanged(String propertyName)
-        {
-            if (PropertyChanged != null)
+        [JsonProperty("addressComponents")]
+        public Dictionary<string, string> AddressComponents 
+        { 
+            get 
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                return this.addressComponents; 
+            } 
+            set 
+            {
+                this.addressComponents = value;
+                onPropertyChanged("AddressComponents");
             }
         }
     }

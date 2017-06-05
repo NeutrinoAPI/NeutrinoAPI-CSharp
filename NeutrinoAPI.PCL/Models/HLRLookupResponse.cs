@@ -1,7 +1,7 @@
 /*
  * NeutrinoAPI.PCL
  *
- * This file was automatically generated for NeutrinoAPI.com by APIMATIC BETA v2.0 on 01/07/2016
+ * This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io )
  */
 using System;
 using System.IO;
@@ -12,11 +12,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using NeutrinoAPI.PCL;
+using NeutrinoAPI;
+using NeutrinoAPI.Utilities;
 
-namespace NeutrinoAPI.PCL.Models
+
+namespace NeutrinoAPI.Models
 {
-    public class HLRLookupResponse : INotifyPropertyChanged 
+    public class HLRLookupResponse : BaseModel 
     {
         // These fields hold the values for the public properties.
         private bool numberValid;
@@ -36,6 +38,8 @@ namespace NeutrinoAPI.PCL.Models
         private string location;
         private string originNetwork;
         private bool isMobile;
+        private bool isRoaming;
+        private string country;
 
         /// <summary>
         /// Is this a valid phone number (mobile or otherwise)
@@ -327,19 +331,36 @@ namespace NeutrinoAPI.PCL.Models
         }
 
         /// <summary>
-        /// Property changed event for observer pattern
+        /// Is this number currently roaming from its origin country
         /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
+        [JsonProperty("isRoaming")]
+        public bool IsRoaming 
+        { 
+            get 
+            {
+                return this.isRoaming; 
+            } 
+            set 
+            {
+                this.isRoaming = value;
+                onPropertyChanged("IsRoaming");
+            }
+        }
 
         /// <summary>
-        /// Raises event when a property is changed
+        /// The phone number country
         /// </summary>
-        /// <param name="propertyName">Name of the changed property</param>
-        protected void onPropertyChanged(String propertyName)
-        {
-            if (PropertyChanged != null)
+        [JsonProperty("country")]
+        public string Country 
+        { 
+            get 
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                return this.country; 
+            } 
+            set 
+            {
+                this.country = value;
+                onPropertyChanged("Country");
             }
         }
     }

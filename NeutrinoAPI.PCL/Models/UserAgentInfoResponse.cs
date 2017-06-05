@@ -1,7 +1,7 @@
 /*
  * NeutrinoAPI.PCL
  *
- * This file was automatically generated for NeutrinoAPI.com by APIMATIC BETA v2.0 on 01/07/2016
+ * This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io )
  */
 using System;
 using System.IO;
@@ -12,11 +12,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using NeutrinoAPI.PCL;
+using NeutrinoAPI;
+using NeutrinoAPI.Utilities;
 
-namespace NeutrinoAPI.PCL.Models
+
+namespace NeutrinoAPI.Models
 {
-    public class UserAgentInfoResponse : INotifyPropertyChanged 
+    public class UserAgentInfoResponse : BaseModel 
     {
         // These fields hold the values for the public properties.
         private int mobileScreenWidth;
@@ -30,6 +32,10 @@ namespace NeutrinoAPI.PCL.Models
         private string version;
         private string operatingSystem;
         private string mobileBrowser;
+        private bool isAndroid;
+        private bool isIos;
+        private string operatingSystemFamily;
+        private string operatingSystemVersion;
 
         /// <summary>
         /// Mobile device screen width (in px)
@@ -219,19 +225,70 @@ namespace NeutrinoAPI.PCL.Models
         }
 
         /// <summary>
-        /// Property changed event for observer pattern
+        /// True if this is an Android based mobile user agent
         /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
+        [JsonProperty("isAndroid")]
+        public bool IsAndroid 
+        { 
+            get 
+            {
+                return this.isAndroid; 
+            } 
+            set 
+            {
+                this.isAndroid = value;
+                onPropertyChanged("IsAndroid");
+            }
+        }
 
         /// <summary>
-        /// Raises event when a property is changed
+        /// True if this is an iOS based mobile user agent
         /// </summary>
-        /// <param name="propertyName">Name of the changed property</param>
-        protected void onPropertyChanged(String propertyName)
-        {
-            if (PropertyChanged != null)
+        [JsonProperty("isIos")]
+        public bool IsIos 
+        { 
+            get 
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                return this.isIos; 
+            } 
+            set 
+            {
+                this.isIos = value;
+                onPropertyChanged("IsIos");
+            }
+        }
+
+        /// <summary>
+        /// The operating system family name, this is the OS name without any version information
+        /// </summary>
+        [JsonProperty("operatingSystemFamily")]
+        public string OperatingSystemFamily 
+        { 
+            get 
+            {
+                return this.operatingSystemFamily; 
+            } 
+            set 
+            {
+                this.operatingSystemFamily = value;
+                onPropertyChanged("OperatingSystemFamily");
+            }
+        }
+
+        /// <summary>
+        /// The operating system version number (if detectable)
+        /// </summary>
+        [JsonProperty("operatingSystemVersion")]
+        public string OperatingSystemVersion 
+        { 
+            get 
+            {
+                return this.operatingSystemVersion; 
+            } 
+            set 
+            {
+                this.operatingSystemVersion = value;
+                onPropertyChanged("OperatingSystemVersion");
             }
         }
     }

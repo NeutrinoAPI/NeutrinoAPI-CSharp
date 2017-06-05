@@ -1,7 +1,7 @@
 /*
  * NeutrinoAPI.PCL
  *
- * This file was automatically generated for NeutrinoAPI.com by APIMATIC BETA v2.0 on 01/07/2016
+ * This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io )
  */
 using System;
 using System.IO;
@@ -12,11 +12,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using NeutrinoAPI.PCL;
+using NeutrinoAPI;
+using NeutrinoAPI.Utilities;
 
-namespace NeutrinoAPI.PCL.Models
+
+namespace NeutrinoAPI.Models
 {
-    public class Location : INotifyPropertyChanged 
+    public class Location : BaseModel 
     {
         // These fields hold the values for the public properties.
         private string country;
@@ -26,9 +28,11 @@ namespace NeutrinoAPI.PCL.Models
         private double latitude;
         private string postalCode;
         private double longitude;
+        private string state;
+        private Dictionary<string, string> addressComponents;
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// The country of the location
         /// </summary>
         [JsonProperty("country")]
         public string Country 
@@ -45,7 +49,7 @@ namespace NeutrinoAPI.PCL.Models
         }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// The fully formatted address
         /// </summary>
         [JsonProperty("address")]
         public string Address 
@@ -62,7 +66,7 @@ namespace NeutrinoAPI.PCL.Models
         }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// The city of the location
         /// </summary>
         [JsonProperty("city")]
         public string City 
@@ -79,7 +83,7 @@ namespace NeutrinoAPI.PCL.Models
         }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// The ISO 2-letter country code of the location
         /// </summary>
         [JsonProperty("countryCode")]
         public string CountryCode 
@@ -96,7 +100,7 @@ namespace NeutrinoAPI.PCL.Models
         }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// The location latitude
         /// </summary>
         [JsonProperty("latitude")]
         public double Latitude 
@@ -113,7 +117,7 @@ namespace NeutrinoAPI.PCL.Models
         }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// The postal code for the location
         /// </summary>
         [JsonProperty("postalCode")]
         public string PostalCode 
@@ -130,7 +134,7 @@ namespace NeutrinoAPI.PCL.Models
         }
 
         /// <summary>
-        /// TODO: Write general description for this method
+        /// The location longitude
         /// </summary>
         [JsonProperty("longitude")]
         public double Longitude 
@@ -147,19 +151,36 @@ namespace NeutrinoAPI.PCL.Models
         }
 
         /// <summary>
-        /// Property changed event for observer pattern
+        /// The state of the location (if applicable)
         /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
+        [JsonProperty("state")]
+        public string State 
+        { 
+            get 
+            {
+                return this.state; 
+            } 
+            set 
+            {
+                this.state = value;
+                onPropertyChanged("State");
+            }
+        }
 
         /// <summary>
-        /// Raises event when a property is changed
+        /// The components which make up the address such as road, city, state etc. May also include additional metadata about the address
         /// </summary>
-        /// <param name="propertyName">Name of the changed property</param>
-        protected void onPropertyChanged(String propertyName)
-        {
-            if (PropertyChanged != null)
+        [JsonProperty("addressComponents")]
+        public Dictionary<string, string> AddressComponents 
+        { 
+            get 
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                return this.addressComponents; 
+            } 
+            set 
+            {
+                this.addressComponents = value;
+                onPropertyChanged("AddressComponents");
             }
         }
     }

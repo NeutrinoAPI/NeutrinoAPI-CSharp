@@ -1,11 +1,5 @@
-/*
- * NeutrinoAPI.PCL
- *
- * This file was automatically generated for NeutrinoAPI.com by APIMATIC BETA v2.0 on 01/07/2016
- */
-using System;
 
-namespace NeutrinoAPI.PCL
+namespace NeutrinoAPI
 {
     public partial class Configuration
     {
@@ -14,11 +8,11 @@ namespace NeutrinoAPI.PCL
 
         //Your user ID
         //TODO: Replace the UserId with an appropriate value
-        public static string UserId = "TODO: Replace";
+        public static string UserId = "";
 
         //Your API key
         //TODO: Replace the ApiKey with an appropriate value
-        public static string ApiKey = "TODO: Replace";
+        public static string ApiKey = "";
 
     }
 }

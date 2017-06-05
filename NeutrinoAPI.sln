@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeutrinoAPI.PCL", "NeutrinoAPI.PCL/NeutrinoAPI.PCL.csproj", "{80715976-c2fd-470e-a41d-e68fdb9194ce}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeutrinoAPI.PCL", "NeutrinoAPI.PCL/NeutrinoAPI.PCL.csproj", "{13fdc0e2-fd11-422d-9e9c-7612a9249054}"
 EndProject
 Global
     GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
         Release|Any CPU = Release|Any CPU
     EndGlobalSection
     GlobalSection(ProjectConfigurationPlatforms) = postSolution
-        {80715976-c2fd-470e-a41d-e68fdb9194ce}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-        {80715976-c2fd-470e-a41d-e68fdb9194ce}.Debug|Any CPU.Build.0 = Debug|Any CPU
-        {80715976-c2fd-470e-a41d-e68fdb9194ce}.Release|Any CPU.ActiveCfg = Release|Any CPU
-        {80715976-c2fd-470e-a41d-e68fdb9194ce}.Release|Any CPU.Build.0 = Release|Any CPU
+        {13fdc0e2-fd11-422d-9e9c-7612a9249054}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+        {13fdc0e2-fd11-422d-9e9c-7612a9249054}.Debug|Any CPU.Build.0 = Debug|Any CPU
+        {13fdc0e2-fd11-422d-9e9c-7612a9249054}.Release|Any CPU.ActiveCfg = Release|Any CPU
+        {13fdc0e2-fd11-422d-9e9c-7612a9249054}.Release|Any CPU.Build.0 = Release|Any CPU
     EndGlobalSection
     GlobalSection(SolutionProperties) = preSolution
         HideSolutionNode = FALSE

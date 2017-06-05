@@ -2,15 +2,15 @@
 <!--
  - NeutrinoAPI.PCL
  -
- - This file was automatically generated for NeutrinoAPI.com by APIMATIC BETA v2.0 on 01/07/2016
+ - This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io )
 -->
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <RootNamespace>NeutrinoAPI.PCL</RootNamespace>
+    <RootNamespace>NeutrinoAPI</RootNamespace>
     <AssemblyName>NeutrinoAPI.PCL</AssemblyName>
     <OutputType>Library</OutputType>
     <OutputPath>bin/DEBUG/</OutputPath>
-    <ProjectGuid>{80715976-c2fd-470e-a41d-e68fdb9194ce}</ProjectGuid>
+    <ProjectGuid>{13fdc0e2-fd11-422d-9e9c-7612a9249054}</ProjectGuid>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
     <NuGetPackageImportStamp>ee2bb91c</NuGetPackageImportStamp>
@@ -20,7 +20,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>  
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Profile92</TargetFrameworkProfile>
+    <TargetFrameworkProfile>Profile328</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -41,14 +41,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-	<Reference Include="Microsoft.Threading.Tasks">
+    <Reference Include="Microsoft.Threading.Tasks">
       <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net40+sl4+win8+wp71+wpa81\Microsoft.Threading.Tasks.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Threading.Tasks.Extensions">
       <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\portable-net40+sl4+win8+wp71+wpa81\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.IO">
       <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\portable-net40+win8+wp8+wpa81\System.IO.dll</HintPath>
@@ -69,51 +69,70 @@
       <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\portable-net40+win8+wp8+wpa81\System.Threading.Tasks.dll</HintPath>
     </Reference>
     <Reference Include="unirest-net">
-      <HintPath>..\packages\Unirest-APIMATIC.1.0.0.2\lib\unirest-net.dll</HintPath>
+      <HintPath>..\packages\Unirest-APIMATIC.1.0.1.27\lib\portable-net40+sl5+wp80+win8+wpa81\unirest-net.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Models\VerifySecurityCodeResponse.cs" />
-     <Compile Include="Models\IPBlocklistResponse.cs" />
-     <Compile Include="Models\HLRLookupResponse.cs" />
-     <Compile Include="Models\BINLookupResponse.cs" />
-     <Compile Include="Models\HostReputationResponse.cs" />
-     <Compile Include="Models\GeocodeAddressResponse.cs" />
-     <Compile Include="Models\BadWordFilterResponse.cs" />
-     <Compile Include="Models\PhonePlaybackResponse.cs" />
-     <Compile Include="Models\HTMLExtractResponse.cs" />
-     <Compile Include="Models\PhoneVerifyResponse.cs" />
-     <Compile Include="Models\SMSVerifyResponse.cs" />
-     <Compile Include="Models\Blacklist.cs" />
-     <Compile Include="Models\IPInfoResponse.cs" />
-     <Compile Include="Models\URLInfoResponse.cs" />
-     <Compile Include="Models\GeocodeReverseResponse.cs" />
-     <Compile Include="Models\UserAgentInfoResponse.cs" />
-     <Compile Include="Models\EmailValidateResponse.cs" />
-     <Compile Include="Models\PhoneValidateResponse.cs" />
-     <Compile Include="Models\Location.cs" />
-     <Compile Include="Models\ConvertResponse.cs" />
-     <Compile Include="Controllers\GeolocationController.cs" />
-     <Compile Include="Controllers\TelephonyController.cs" />
-     <Compile Include="Controllers\DataToolsController.cs" />
-     <Compile Include="Controllers\ImagingController.cs" />
-     <Compile Include="Controllers\SecurityAndNetworkingController.cs" />
-     <Compile Include="Controllers\ECommerceController.cs" />
-     <Compile Include="Http\Client\IHTTPClient.cs" />
-     <Compile Include="Http\Client\UnirestClient.cs" />
-     <Compile Include="Http\Client\HttpContext.cs" />
-     <Compile Include="Http\Request\HttpRequest.cs" />
-     <Compile Include="Http\Request\HttpMethod.cs" />
-     <Compile Include="Http\Response\HttpResponse.cs" />
-     <Compile Include="Http\Response\HttpStringResponse.cs" />
-     <Compile Include="Http\Client\FileStreamInfo.cs" />
-     <Compile Include="Controllers\BaseController.cs" />
-     <Compile Include="Configuration.cs" />
-    <Compile Include="APIHelper.cs" />
-	<Compile Include="APIException.cs" />
+    <Compile Include="Models\Location.cs" />
+    <Compile Include="Models\URLInfoResponse.cs" />
+    <Compile Include="Models\UserAgentInfoResponse.cs" />
+    <Compile Include="Models\HTMLExtractResponse.cs" />
+    <Compile Include="Models\IPProbeResponse.cs" />
+    <Compile Include="Models\HLRLookupResponse.cs" />
+    <Compile Include="Models\PhoneVerifyResponse.cs" />
+    <Compile Include="Models\HostReputationResponse.cs" />
+    <Compile Include="Models\SMSVerifyResponse.cs" />
+    <Compile Include="Models\IPInfoResponse.cs" />
+    <Compile Include="Models\Blacklist.cs" />
+    <Compile Include="Models\GeocodeReverseResponse.cs" />
+    <Compile Include="Models\BadWordFilterResponse.cs" />
+    <Compile Include="Models\PhonePlaybackResponse.cs" />
+    <Compile Include="Models\GeocodeAddressResponse.cs" />
+    <Compile Include="Models\BINLookupResponse.cs" />
+    <Compile Include="Models\VerifySecurityCodeResponse.cs" />
+    <Compile Include="Models\IPBlocklistResponse.cs" />
+    <Compile Include="Models\ConvertResponse.cs" />
+    <Compile Include="Models\EmailValidateResponse.cs" />
+    <Compile Include="Models\PhoneValidateResponse.cs" />
+    <Compile Include="Exceptions\APIErrorException.cs" />
+    <Compile Include="Controllers\DataTools.cs" />
+    <Compile Include="Controllers\IDataTools.cs" />
+    <Compile Include="Controllers\ECommerce.cs" />
+    <Compile Include="Controllers\IECommerce.cs" />
+    <Compile Include="Controllers\Geolocation.cs" />
+    <Compile Include="Controllers\IGeolocation.cs" />
+    <Compile Include="Controllers\SecurityAndNetworking.cs" />
+    <Compile Include="Controllers\ISecurityAndNetworking.cs" />
+    <Compile Include="Controllers\Telephony.cs" />
+    <Compile Include="Controllers\ITelephony.cs" />
+    <Compile Include="Controllers\Imaging.cs" />
+    <Compile Include="Controllers\IImaging.cs" />
+    <Compile Include="Http\Client\IHTTPClient.cs" />
+    <Compile Include="Http\Client\UnirestClient.cs" />
+    <Compile Include="Http\Client\HttpEventHandlers.cs" />
+    <Compile Include="Http\Client\HttpContext.cs" />
+    <Compile Include="Http\Request\HttpRequest.cs" />
+    <Compile Include="Http\Request\HttpMethod.cs" />
+    <Compile Include="Http\Response\HttpResponse.cs" />
+    <Compile Include="Http\Response\HttpStringResponse.cs" />
+    <Compile Include="Http\Client\FileStreamInfo.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Configuration.cs" />
+    <Compile Include="Utilities\APIHelper.cs" />
+    <Compile Include="Utilities\ArrayDeserialization.cs" />
+    <Compile Include="Utilities\UnixDateTimeConverter.cs" />
+    <Compile Include="Utilities\CustomDateTimeConverter.cs" />
+    <Compile Include="Utilities\RetryHelper.cs" />
+    <Compile Include="Utilities\ListDateTimeConverter.cs" />
+    <Compile Include="Exceptions\APIException.cs" />
     <Compile Include="NeutrinoAPIClient.cs" />
+    <Compile Include="INeutrinoAPIClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="packages.config" />
+    <None Include="NeutrinoAPI.PCL.nuspec">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="$(SolutionDir)\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('$(SolutionDir)\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />

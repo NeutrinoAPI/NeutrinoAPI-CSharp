@@ -1,11 +1,11 @@
-namespace NeutrinoAPI.PCL.Http.Request
+namespace NeutrinoAPI.Http.Request
 {
     public enum HttpMethod
     {
-        Get,
-        Post,
-        Put,
-        Patch,
-        Delete
+        GET,
+        POST,
+        PUT,
+        PATCH,
+        DELETE
     }
 }

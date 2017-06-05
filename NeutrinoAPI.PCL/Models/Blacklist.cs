@@ -1,7 +1,7 @@
 /*
  * NeutrinoAPI.PCL
  *
- * This file was automatically generated for NeutrinoAPI.com by APIMATIC BETA v2.0 on 01/07/2016
+ * This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io )
  */
 using System;
 using System.IO;
@@ -12,11 +12,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using NeutrinoAPI.PCL;
+using NeutrinoAPI;
+using NeutrinoAPI.Utilities;
 
-namespace NeutrinoAPI.PCL.Models
+
+namespace NeutrinoAPI.Models
 {
-    public class Blacklist : INotifyPropertyChanged 
+    public class Blacklist : BaseModel 
     {
         // These fields hold the values for the public properties.
         private bool isListed;
@@ -24,6 +26,7 @@ namespace NeutrinoAPI.PCL.Models
         private int listRating;
         private string listName;
         private string txtRecord;
+        private int responseTime;
 
         /// <summary>
         /// true if listed, false if not
@@ -111,19 +114,19 @@ namespace NeutrinoAPI.PCL.Models
         }
 
         /// <summary>
-        /// Property changed event for observer pattern
+        /// the DNSBL server response time in milliseconds
         /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
-        /// Raises event when a property is changed
-        /// </summary>
-        /// <param name="propertyName">Name of the changed property</param>
-        protected void onPropertyChanged(String propertyName)
-        {
-            if (PropertyChanged != null)
+        [JsonProperty("responseTime")]
+        public int ResponseTime 
+        { 
+            get 
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                return this.responseTime; 
+            } 
+            set 
+            {
+                this.responseTime = value;
+                onPropertyChanged("ResponseTime");
             }
         }
     }

@@ -1,7 +1,7 @@
-using NeutrinoAPI.PCL.Http.Request;
-using NeutrinoAPI.PCL.Http.Response;
+using NeutrinoAPI.Http.Request;
+using NeutrinoAPI.Http.Response;
 
-namespace NeutrinoAPI.PCL.Http.Client
+namespace NeutrinoAPI.Http.Client
 {
     /// <summary>
     /// Represents the contextual information of HTTP request and response
@@ -23,7 +23,7 @@ namespace NeutrinoAPI.PCL.Http.Client
         /// </summary>
         /// <param name="request">The http request in the current context</param>
         /// <param name="response">The http response in the current context</param>
-		public HttpContext(HttpRequest request, HttpResponse response)
+        public HttpContext(HttpRequest request, HttpResponse response)
         {
             Request = request;
             Response = response;

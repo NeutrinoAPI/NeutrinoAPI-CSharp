@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace NeutrinoAPI.PCL.Http.Response
+namespace NeutrinoAPI.Http.Response
 {
     public class HttpStringResponse : HttpResponse
     {

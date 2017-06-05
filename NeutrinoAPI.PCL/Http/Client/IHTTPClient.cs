@@ -1,13 +1,32 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using NeutrinoAPI.PCL.Http.Request;
-using NeutrinoAPI.PCL.Http.Response;
+using NeutrinoAPI.Http.Request;
+using NeutrinoAPI.Http.Response;
 
-namespace NeutrinoAPI.PCL.Http.Client
+namespace NeutrinoAPI.Http.Client
 {
     public interface IHttpClient
     {
+        /// <summary>
+        /// Sets the time to wait before the request times out.
+        ///<param name="Timeout"> A timepsan object specifying the time to wait</param>
+        ///
+        void setTimeout(TimeSpan Timeout);
+        /// <summary>
+        /// Event raised before an Http request is sent over the network
+        /// This event can be used for logging, request modification, appending
+        /// additional headers etc.
+        /// </summary>
+        event OnBeforeHttpRequestEventHandler OnBeforeHttpRequestEvent;
+
+        /// <summary>
+        /// Event raised after an Http response is recieved from the network.
+        /// This event can be used for logging, response modification, extracting
+        /// additional information etc.
+        /// </summary>
+        event OnAfterHttpResponseEventHandler OnAfterHttpResponseEvent;
+
         /// <summary>
         /// Execute a given HttpRequest to get string response back
         /// </summary>
@@ -90,7 +109,7 @@ namespace NeutrinoAPI.PCL.Http.Client
         /// <param name="username">Basic Auth username</param>
         /// <param name="password">Basic Auth password</param>
         /// <returns> HttpRequest initialised with the http parameters specified</returns>
-        HttpRequest Post(string queryUrl, Dictionary<string, string> headers, Dictionary<string, Object> formParameters,
+        HttpRequest Post(string queryUrl, Dictionary<string, string> headers, List<KeyValuePair<string, Object>> formParameters,
            string username = null, string password = null);
 
         /// <summary>
@@ -114,7 +133,7 @@ namespace NeutrinoAPI.PCL.Http.Client
         /// <param name="username">Basic Auth username</param>
         /// <param name="password">Basic Auth password</param>
         /// <returns> HttpRequest initialised with the http parameters specified</returns>
-        HttpRequest Put(string queryUrl, Dictionary<string, string> headers, Dictionary<string, Object> formParameters,
+        HttpRequest Put(string queryUrl, Dictionary<string, string> headers, List<KeyValuePair<string, Object>> formParameters,
             string username = null, string password = null);
 
         /// <summary>
@@ -138,7 +157,7 @@ namespace NeutrinoAPI.PCL.Http.Client
         /// <param name="username">Basic Auth username</param>
         /// <param name="password">Basic Auth password</param>
         /// <returns> HttpRequest initialised with the http parameters specified</returns>
-        HttpRequest Patch(string queryUrl, Dictionary<string, string> headers, Dictionary<string, Object> formParameters,
+        HttpRequest Patch(string queryUrl, Dictionary<string, string> headers, List<KeyValuePair<string, Object>> formParameters,
             string username = null, string password = null);
 
         /// <summary>
@@ -162,7 +181,7 @@ namespace NeutrinoAPI.PCL.Http.Client
         /// <param name="username">Basic Auth username</param>
         /// <param name="password">Basic Auth password</param>
         /// <returns> HttpRequest initialised with the http parameters specified</returns>
-        HttpRequest Delete(string queryUrl, Dictionary<string, string> headers, Dictionary<string, Object> formParameters,
+        HttpRequest Delete(string queryUrl, Dictionary<string, string> headers, List<KeyValuePair<string, Object>> formParameters,
             string username = null, string password = null);
 
         /// <summary>

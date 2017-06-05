@@ -1,36 +1,39 @@
 /*
  * NeutrinoAPI.PCL
  *
- * This file was automatically generated for NeutrinoAPI.com by APIMATIC BETA v2.0 on 01/07/2016
+ * This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io )
  */
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NeutrinoAPI.PCL;
-using NeutrinoAPI.PCL.Http.Request;
-using NeutrinoAPI.PCL.Http.Response;
-using NeutrinoAPI.PCL.Http.Client;
+using Newtonsoft.Json.Converters;
+using NeutrinoAPI;
+using NeutrinoAPI.Utilities;
+using NeutrinoAPI.Http.Request;
+using NeutrinoAPI.Http.Response;
+using NeutrinoAPI.Http.Client;
+using NeutrinoAPI.Exceptions;
+using NeutrinoAPI.Models;
 
-using NeutrinoAPI.PCL.Models;
-
-namespace NeutrinoAPI.PCL.Controllers
+namespace NeutrinoAPI.Controllers
 {
-    public partial class ECommerceController: BaseController
+    public partial class ECommerce: BaseController, IECommerce
     {
         #region Singleton Pattern
 
         //private static variables for the singleton pattern
         private static object syncObject = new object();
-        private static ECommerceController instance = null;
+        private static ECommerce instance = null;
 
         /// <summary>
         /// Singleton pattern implementation
         /// </summary>
-        internal static ECommerceController Instance
+        internal static ECommerce Instance
         {
             get
             {
@@ -38,7 +41,7 @@ namespace NeutrinoAPI.PCL.Controllers
                 {
                     if (null == instance)
                     {
-                        instance = new ECommerceController();
+                        instance = new ECommerce();
                     }
                 }
                 return instance;
@@ -52,10 +55,21 @@ namespace NeutrinoAPI.PCL.Controllers
         /// </summary>
         /// <param name="binNumber">Required parameter: The BIN or IIN number (the first 6 digits of a credit card number)</param>
         /// <param name="customerIp">Optional parameter: Pass in a customers remote IP address. The API will then determine the country of the IP address and match it against the BIN country. This feature is designed for fraud prevention and detection checks.</param>
-        /// <return>Returns the BINLookupResponse response from the API call</return>
-        public BINLookupResponse BINLookup(
-                string binNumber,
-                string customerIp = null)
+        /// <return>Returns the Models.BINLookupResponse response from the API call</return>
+        public Models.BINLookupResponse BINLookup(string binNumber, string customerIp = null)
+        {
+            Task<Models.BINLookupResponse> t = BINLookupAsync(binNumber, customerIp);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Perform a BIN (Bank Identification Number) or IIN (Issuer Identification Number) lookup. See: https://www.neutrinoapi.com/api/bin-lookup/
+        /// </summary>
+        /// <param name="binNumber">Required parameter: The BIN or IIN number (the first 6 digits of a credit card number)</param>
+        /// <param name="customerIp">Optional parameter: Pass in a customers remote IP address. The API will then determine the country of the IP address and match it against the BIN country. This feature is designed for fraud prevention and detection checks.</param>
+        /// <return>Returns the Models.BINLookupResponse response from the API call</return>
+        public async Task<Models.BINLookupResponse> BINLookupAsync(string binNumber, string customerIp = null)
         {
             //the base uri for api requestss
             string _baseUri = Configuration.BaseUri;
@@ -64,13 +78,13 @@ namespace NeutrinoAPI.PCL.Controllers
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
             _queryBuilder.Append("/bin-lookup");
 
-
             //process optional query parameters
             APIHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
             {
                 { "user-id", Configuration.UserId },
                 { "api-key", Configuration.ApiKey }
-            });
+            },ArrayDeserializationFormat,ParameterSeparator);
+
 
             //validate and preprocess url
             string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
@@ -83,29 +97,31 @@ namespace NeutrinoAPI.PCL.Controllers
             };
 
             //append form/field parameters
-            var _fields = new Dictionary<string,object>()
+            var _fields = new List<KeyValuePair<string, Object>>()
             {
-                { "bin-number", binNumber },
-                { "output-case", "camel" },
-                { "customer-ip", customerIp }
+                new KeyValuePair<string, object>( "output-case", "camel" ),
+                new KeyValuePair<string, object>( "bin-number", binNumber ),
+                new KeyValuePair<string, object>( "customer-ip", customerIp )
             };
+            //remove null parameters
+            _fields = _fields.Where(kvp => kvp.Value != null).ToList();
 
             //prepare the API call request to fetch the response
             HttpRequest _request = ClientInstance.Post(_queryUrl, _headers, _fields);
 
             //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) ClientInstance.ExecuteAsString(_request);
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
             HttpContext _context = new HttpContext(_request,_response);
             //handle errors defined at the API level
             base.ValidateResponse(_response, _context);
 
             try
             {
-                return APIHelper.JsonDeserialize<BINLookupResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.BINLookupResponse>(_response.Body);
             }
-            catch (Exception ex)
+            catch (Exception _ex)
             {
-                throw new APIException("Failed to parse the response: " + ex.Message, _context);
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
             }
         }
 

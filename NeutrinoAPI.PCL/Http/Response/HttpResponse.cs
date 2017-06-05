@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace NeutrinoAPI.PCL.Http.Response
+namespace NeutrinoAPI.Http.Response
 {
     public class HttpResponse
     {
