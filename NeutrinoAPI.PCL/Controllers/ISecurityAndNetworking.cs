@@ -15,7 +15,6 @@ using NeutrinoAPI.Utilities;
 using NeutrinoAPI.Http.Request;
 using NeutrinoAPI.Http.Response;
 using NeutrinoAPI.Http.Client;
-using NeutrinoAPI.Models;
 
 namespace NeutrinoAPI.Controllers
 {
@@ -36,18 +35,20 @@ namespace NeutrinoAPI.Controllers
         Task<Models.HostReputationResponse> HostReputationAsync(string host);
 
         /// <summary>
-        /// The IP Blocklist API will detect potentially malicious or dangerous IP addresses
+        /// Parse, analyze and retrieve content from the supplied URL
         /// </summary>
-        /// <param name="ip">Required parameter: An IPv4 address</param>
-        /// <return>Returns the Models.IPBlocklistResponse response from the API call</return>
-        Models.IPBlocklistResponse IPBlocklist(string ip);
+        /// <param name="url">Required parameter: The URL to process</param>
+        /// <param name="fetchContent">Required parameter: If this URL responds with html, text, json or xml then return the response. This option is useful if you want to perform further processing on the URL content</param>
+        /// <return>Returns the Models.URLInfoResponse response from the API call</return>
+        Models.URLInfoResponse URLInfo(string url, bool fetchContent);
 
         /// <summary>
-        /// The IP Blocklist API will detect potentially malicious or dangerous IP addresses
+        /// Parse, analyze and retrieve content from the supplied URL
         /// </summary>
-        /// <param name="ip">Required parameter: An IPv4 address</param>
-        /// <return>Returns the Models.IPBlocklistResponse response from the API call</return>
-        Task<Models.IPBlocklistResponse> IPBlocklistAsync(string ip);
+        /// <param name="url">Required parameter: The URL to process</param>
+        /// <param name="fetchContent">Required parameter: If this URL responds with html, text, json or xml then return the response. This option is useful if you want to perform further processing on the URL content</param>
+        /// <return>Returns the Models.URLInfoResponse response from the API call</return>
+        Task<Models.URLInfoResponse> URLInfoAsync(string url, bool fetchContent);
 
         /// <summary>
         /// Analyze and extract provider information for an IP address
@@ -64,20 +65,34 @@ namespace NeutrinoAPI.Controllers
         Task<Models.IPProbeResponse> IPProbeAsync(string ip);
 
         /// <summary>
-        /// Parse, analyze and retrieve content from the supplied URL
+        /// The IP Blocklist API will detect potentially malicious or dangerous IP addresses
         /// </summary>
-        /// <param name="url">Required parameter: The URL to process</param>
-        /// <param name="fetchContent">Required parameter: If this URL responds with html, text, json or xml then return the response. This option is useful if you want to perform further processing on the URL content</param>
-        /// <return>Returns the Models.URLInfoResponse response from the API call</return>
-        Models.URLInfoResponse URLInfo(string url, bool fetchContent);
+        /// <param name="ip">Required parameter: An IPv4 address</param>
+        /// <return>Returns the Models.IPBlocklistResponse response from the API call</return>
+        Models.IPBlocklistResponse IPBlocklist(string ip);
 
         /// <summary>
-        /// Parse, analyze and retrieve content from the supplied URL
+        /// The IP Blocklist API will detect potentially malicious or dangerous IP addresses
         /// </summary>
-        /// <param name="url">Required parameter: The URL to process</param>
-        /// <param name="fetchContent">Required parameter: If this URL responds with html, text, json or xml then return the response. This option is useful if you want to perform further processing on the URL content</param>
-        /// <return>Returns the Models.URLInfoResponse response from the API call</return>
-        Task<Models.URLInfoResponse> URLInfoAsync(string url, bool fetchContent);
+        /// <param name="ip">Required parameter: An IPv4 address</param>
+        /// <return>Returns the Models.IPBlocklistResponse response from the API call</return>
+        Task<Models.IPBlocklistResponse> IPBlocklistAsync(string ip);
+
+        /// <summary>
+        /// SMTP based email address verification
+        /// </summary>
+        /// <param name="email">Required parameter: An email address</param>
+        /// <param name="fixTypos">Optional parameter: Automatically attempt to fix typos in the address</param>
+        /// <return>Returns the Models.EmailVerifyResponse response from the API call</return>
+        Models.EmailVerifyResponse EmailVerify(string email, bool? fixTypos = null);
+
+        /// <summary>
+        /// SMTP based email address verification
+        /// </summary>
+        /// <param name="email">Required parameter: An email address</param>
+        /// <param name="fixTypos">Optional parameter: Automatically attempt to fix typos in the address</param>
+        /// <return>Returns the Models.EmailVerifyResponse response from the API call</return>
+        Task<Models.EmailVerifyResponse> EmailVerifyAsync(string email, bool? fixTypos = null);
 
     }
 } 

@@ -7,6 +7,10 @@ namespace NeutrinoAPI.Utilities
 {
     class ListDateTimeConverter : JsonConverter
     {
+        public ListDateTimeConverter()
+        {
+            Converter = new IsoDateTimeConverter();
+        }
         public ListDateTimeConverter(Type Converter)
         {
             this.Converter = (JsonConverter)Activator.CreateInstance(Converter);
@@ -15,7 +19,7 @@ namespace NeutrinoAPI.Utilities
         {
             this.Converter = (JsonConverter)Activator.CreateInstance(Converter,format);
         }
-        public JsonConverter Converter { get; set; }=new IsoDateTimeConverter();
+        public JsonConverter Converter { get; set; }
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             serializer.Converters.Clear();

@@ -12,24 +12,9 @@ namespace NeutrinoAPI
     {
 
         /// <summary>
-        /// Singleton access to DataTools controller
+        /// Singleton access to Imaging controller
         /// </summary>
-        IDataTools DataTools { get;}
-
-        /// <summary>
-        /// Singleton access to ECommerce controller
-        /// </summary>
-        IECommerce ECommerce { get;}
-
-        /// <summary>
-        /// Singleton access to Geolocation controller
-        /// </summary>
-        IGeolocation Geolocation { get;}
-
-        /// <summary>
-        /// Singleton access to SecurityAndNetworking controller
-        /// </summary>
-        ISecurityAndNetworking SecurityAndNetworking { get;}
+        IImaging Imaging { get;}
 
         /// <summary>
         /// Singleton access to Telephony controller
@@ -37,9 +22,24 @@ namespace NeutrinoAPI
         ITelephony Telephony { get;}
 
         /// <summary>
-        /// Singleton access to Imaging controller
+        /// Singleton access to DataTools controller
         /// </summary>
-        IImaging Imaging { get;}
+        IDataTools DataTools { get;}
+
+        /// <summary>
+        /// Singleton access to SecurityAndNetworking controller
+        /// </summary>
+        ISecurityAndNetworking SecurityAndNetworking { get;}
+
+        /// <summary>
+        /// Singleton access to Geolocation controller
+        /// </summary>
+        IGeolocation Geolocation { get;}
+
+        /// <summary>
+        /// Singleton access to ECommerce controller
+        /// </summary>
+        IECommerce ECommerce { get;}
 
     }
 }

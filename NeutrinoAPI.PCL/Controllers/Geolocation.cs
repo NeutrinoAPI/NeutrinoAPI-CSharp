@@ -18,7 +18,6 @@ using NeutrinoAPI.Http.Request;
 using NeutrinoAPI.Http.Response;
 using NeutrinoAPI.Http.Client;
 using NeutrinoAPI.Exceptions;
-using NeutrinoAPI.Models;
 
 namespace NeutrinoAPI.Controllers
 {
@@ -73,7 +72,7 @@ namespace NeutrinoAPI.Controllers
         /// <return>Returns the Models.GeocodeReverseResponse response from the API call</return>
         public async Task<Models.GeocodeReverseResponse> GeocodeReverseAsync(double latitude, double longitude, string languageCode = "en")
         {
-            //the base uri for api requestss
+            //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
 
             //prepare query string for API call
@@ -129,6 +128,81 @@ namespace NeutrinoAPI.Controllers
         }
 
         /// <summary>
+        /// Get location information about an IP address and do reverse DNS (PTR) lookups.
+        /// </summary>
+        /// <param name="ip">Required parameter: The IP address</param>
+        /// <param name="reverseLookup">Optional parameter: Do a reverse DNS (PTR) lookup. This option can add extra delay to the request so only use it if you need it</param>
+        /// <return>Returns the Models.IPInfoResponse response from the API call</return>
+        public Models.IPInfoResponse IPInfo(string ip, bool? reverseLookup = false)
+        {
+            Task<Models.IPInfoResponse> t = IPInfoAsync(ip, reverseLookup);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Get location information about an IP address and do reverse DNS (PTR) lookups.
+        /// </summary>
+        /// <param name="ip">Required parameter: The IP address</param>
+        /// <param name="reverseLookup">Optional parameter: Do a reverse DNS (PTR) lookup. This option can add extra delay to the request so only use it if you need it</param>
+        /// <return>Returns the Models.IPInfoResponse response from the API call</return>
+        public async Task<Models.IPInfoResponse> IPInfoAsync(string ip, bool? reverseLookup = false)
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/ip-info");
+
+            //process optional query parameters
+            APIHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "user-id", Configuration.UserId },
+                { "api-key", Configuration.ApiKey }
+            },ArrayDeserializationFormat,ParameterSeparator);
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "APIMATIC 2.0" },
+                { "accept", "application/json" }
+            };
+
+            //append form/field parameters
+            var _fields = new List<KeyValuePair<string, Object>>()
+            {
+                new KeyValuePair<string, object>( "output-case", "camel" ),
+                new KeyValuePair<string, object>( "ip", ip ),
+                new KeyValuePair<string, object>( "reverse-lookup", (null != reverseLookup) ? reverseLookup : false )
+            };
+            //remove null parameters
+            _fields = _fields.Where(kvp => kvp.Value != null).ToList();
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.Post(_queryUrl, _headers, _fields);
+
+            //invoke request and get response
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return APIHelper.JsonDeserialize<Models.IPInfoResponse>(_response.Body);
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
         /// Geocode an address, partial address or the name of a location
         /// </summary>
         /// <param name="address">Required parameter: The address or partial address to try and locate</param>
@@ -161,7 +235,7 @@ namespace NeutrinoAPI.Controllers
                 string languageCode = "en",
                 bool? fuzzySearch = false)
         {
-            //the base uri for api requestss
+            //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
 
             //prepare query string for API call
@@ -210,81 +284,6 @@ namespace NeutrinoAPI.Controllers
             try
             {
                 return APIHelper.JsonDeserialize<Models.GeocodeAddressResponse>(_response.Body);
-            }
-            catch (Exception _ex)
-            {
-                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
-            }
-        }
-
-        /// <summary>
-        /// Get location information about an IP address and do reverse DNS (PTR) lookups.
-        /// </summary>
-        /// <param name="ip">Required parameter: The IP address</param>
-        /// <param name="reverseLookup">Optional parameter: Do a reverse DNS (PTR) lookup. This option can add extra delay to the request so only use it if you need it</param>
-        /// <return>Returns the Models.IPInfoResponse response from the API call</return>
-        public Models.IPInfoResponse IPInfo(string ip, bool? reverseLookup = false)
-        {
-            Task<Models.IPInfoResponse> t = IPInfoAsync(ip, reverseLookup);
-            APIHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// Get location information about an IP address and do reverse DNS (PTR) lookups.
-        /// </summary>
-        /// <param name="ip">Required parameter: The IP address</param>
-        /// <param name="reverseLookup">Optional parameter: Do a reverse DNS (PTR) lookup. This option can add extra delay to the request so only use it if you need it</param>
-        /// <return>Returns the Models.IPInfoResponse response from the API call</return>
-        public async Task<Models.IPInfoResponse> IPInfoAsync(string ip, bool? reverseLookup = false)
-        {
-            //the base uri for api requestss
-            string _baseUri = Configuration.BaseUri;
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/ip-info");
-
-            //process optional query parameters
-            APIHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "user-id", Configuration.UserId },
-                { "api-key", Configuration.ApiKey }
-            },ArrayDeserializationFormat,ParameterSeparator);
-
-
-            //validate and preprocess url
-            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
-            {
-                { "user-agent", "APIMATIC 2.0" },
-                { "accept", "application/json" }
-            };
-
-            //append form/field parameters
-            var _fields = new List<KeyValuePair<string, Object>>()
-            {
-                new KeyValuePair<string, object>( "output-case", "camel" ),
-                new KeyValuePair<string, object>( "ip", ip ),
-                new KeyValuePair<string, object>( "reverse-lookup", (null != reverseLookup) ? reverseLookup : false )
-            };
-            //remove null parameters
-            _fields = _fields.Where(kvp => kvp.Value != null).ToList();
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.Post(_queryUrl, _headers, _fields);
-
-            //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request,_response);
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            try
-            {
-                return APIHelper.JsonDeserialize<Models.IPInfoResponse>(_response.Body);
             }
             catch (Exception _ex)
             {

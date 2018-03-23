@@ -18,7 +18,6 @@ using NeutrinoAPI.Http.Request;
 using NeutrinoAPI.Http.Response;
 using NeutrinoAPI.Http.Client;
 using NeutrinoAPI.Exceptions;
-using NeutrinoAPI.Models;
 
 namespace NeutrinoAPI.Controllers
 {
@@ -71,7 +70,7 @@ namespace NeutrinoAPI.Controllers
         /// <return>Returns the Models.BINLookupResponse response from the API call</return>
         public async Task<Models.BINLookupResponse> BINLookupAsync(string binNumber, string customerIp = null)
         {
-            //the base uri for api requestss
+            //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
 
             //prepare query string for API call

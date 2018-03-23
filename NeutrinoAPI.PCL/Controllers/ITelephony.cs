@@ -15,7 +15,6 @@ using NeutrinoAPI.Utilities;
 using NeutrinoAPI.Http.Request;
 using NeutrinoAPI.Http.Response;
 using NeutrinoAPI.Http.Client;
-using NeutrinoAPI.Models;
 
 namespace NeutrinoAPI.Controllers
 {
@@ -36,6 +35,22 @@ namespace NeutrinoAPI.Controllers
         /// <param name="countryCode">Optional parameter: ISO 2-letter country code, assume numbers are based in this country. If not set numbers are assumed to be in international format (with or without the leading + sign)</param>
         /// <return>Returns the Models.HLRLookupResponse response from the API call</return>
         Task<Models.HLRLookupResponse> HLRLookupAsync(string number, string countryCode = null);
+
+        /// <summary>
+        /// Make an automated call to any valid phone number and playback an audio message
+        /// </summary>
+        /// <param name="number">Required parameter: The phone number to call. Must be valid international format</param>
+        /// <param name="audioUrl">Required parameter: A URL to a valid audio file. Accepted audio formats are: MP3, WAV, OGG</param>
+        /// <return>Returns the Models.PhonePlaybackResponse response from the API call</return>
+        Models.PhonePlaybackResponse PhonePlayback(string number, string audioUrl);
+
+        /// <summary>
+        /// Make an automated call to any valid phone number and playback an audio message
+        /// </summary>
+        /// <param name="number">Required parameter: The phone number to call. Must be valid international format</param>
+        /// <param name="audioUrl">Required parameter: A URL to a valid audio file. Accepted audio formats are: MP3, WAV, OGG</param>
+        /// <return>Returns the Models.PhonePlaybackResponse response from the API call</return>
+        Task<Models.PhonePlaybackResponse> PhonePlaybackAsync(string number, string audioUrl);
 
         /// <summary>
         /// Check if a security code from one of the verify APIs is valid
@@ -82,22 +97,6 @@ namespace NeutrinoAPI.Controllers
                 int? securityCode = null,
                 string countryCode = null,
                 string languageCode = "en");
-
-        /// <summary>
-        /// Make an automated call to any valid phone number and playback an audio message
-        /// </summary>
-        /// <param name="number">Required parameter: The phone number to call. Must be valid international format</param>
-        /// <param name="audioUrl">Required parameter: A URL to a valid audio file. Accepted audio formats are: MP3, WAV, OGG</param>
-        /// <return>Returns the Models.PhonePlaybackResponse response from the API call</return>
-        Models.PhonePlaybackResponse PhonePlayback(string number, string audioUrl);
-
-        /// <summary>
-        /// Make an automated call to any valid phone number and playback an audio message
-        /// </summary>
-        /// <param name="number">Required parameter: The phone number to call. Must be valid international format</param>
-        /// <param name="audioUrl">Required parameter: A URL to a valid audio file. Accepted audio formats are: MP3, WAV, OGG</param>
-        /// <return>Returns the Models.PhonePlaybackResponse response from the API call</return>
-        Task<Models.PhonePlaybackResponse> PhonePlaybackAsync(string number, string audioUrl);
 
         /// <summary>
         /// Make an automated call to any valid phone number and playback a unique security code

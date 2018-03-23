@@ -36,6 +36,8 @@ namespace NeutrinoAPI.Models
         private bool isIos;
         private string operatingSystemFamily;
         private string operatingSystemVersion;
+        private string engine;
+        private string engineVersion;
 
         /// <summary>
         /// Mobile device screen width (in px)
@@ -289,6 +291,40 @@ namespace NeutrinoAPI.Models
             {
                 this.operatingSystemVersion = value;
                 onPropertyChanged("OperatingSystemVersion");
+            }
+        }
+
+        /// <summary>
+        /// The browser engine name
+        /// </summary>
+        [JsonProperty("engine")]
+        public string Engine 
+        { 
+            get 
+            {
+                return this.engine; 
+            } 
+            set 
+            {
+                this.engine = value;
+                onPropertyChanged("Engine");
+            }
+        }
+
+        /// <summary>
+        /// The browser engine version (if detectable)
+        /// </summary>
+        [JsonProperty("engineVersion")]
+        public string EngineVersion 
+        { 
+            get 
+            {
+                return this.engineVersion; 
+            } 
+            set 
+            {
+                this.engineVersion = value;
+                onPropertyChanged("EngineVersion");
             }
         }
     }

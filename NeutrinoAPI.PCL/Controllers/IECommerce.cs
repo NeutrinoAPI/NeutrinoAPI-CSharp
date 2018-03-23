@@ -15,7 +15,6 @@ using NeutrinoAPI.Utilities;
 using NeutrinoAPI.Http.Request;
 using NeutrinoAPI.Http.Response;
 using NeutrinoAPI.Http.Client;
-using NeutrinoAPI.Models;
 
 namespace NeutrinoAPI.Controllers
 {

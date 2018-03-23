@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 
 namespace NeutrinoAPI.Http.Request
 {
-    public class HttpRequest
+  public class HttpRequest
     {
         /// <summary>
         /// The HTTP verb to use for this request
@@ -23,12 +24,12 @@ namespace NeutrinoAPI.Http.Request
         /// <summary>
         /// Form parameters for the current http request
         /// </summary>
-        public List<KeyValuePair<string, Object>> FormParameters { get; set; }
+        public List<KeyValuePair<string, object>> FormParameters { get; set; }
 
         /// <summary>
         /// Optional raw string to send as request body
         /// </summary>
-        public string Body { get; set; }
+        public object Body { get; set; }
 
         /// <summary>
         /// Optional username for Basic Auth
@@ -60,7 +61,7 @@ namespace NeutrinoAPI.Http.Request
         /// <param name="username">Basic auth username</param>
         /// <param name="password">Basic auth password</param>
         public HttpRequest(HttpMethod method, string queryUrl, Dictionary<string, string> headers, string username, string password)
-            :this (method,queryUrl)
+            : this(method, queryUrl)
         {
             this.Headers = headers;
             this.Username = username;
@@ -76,7 +77,7 @@ namespace NeutrinoAPI.Http.Request
         /// <param name="body">The string to use as raw body of the http request</param>
         /// <param name="username">Basic auth username</param>
         /// <param name="password">Basic auth password</param>
-        public HttpRequest(HttpMethod method, string queryUrl, Dictionary<string, string> headers, string body, string username, string password)
+        public HttpRequest(HttpMethod method, string queryUrl, Dictionary<string, string> headers, object body, string username, string password)
             : this(method, queryUrl, headers, username, password)
         {
             this.Body = body;

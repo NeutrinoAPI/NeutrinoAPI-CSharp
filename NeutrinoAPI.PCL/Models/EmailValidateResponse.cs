@@ -29,6 +29,8 @@ namespace NeutrinoAPI.Models
         private string email;
         private bool isDisposable;
         private bool typosFixed;
+        private bool isPersonal;
+        private string provider;
 
         /// <summary>
         /// Is this a valid email
@@ -163,6 +165,40 @@ namespace NeutrinoAPI.Models
             {
                 this.typosFixed = value;
                 onPropertyChanged("TyposFixed");
+            }
+        }
+
+        /// <summary>
+        /// True if this address belongs to a person. False if this is a role based address, e.g. admin@, help@, office@, etc.
+        /// </summary>
+        [JsonProperty("isPersonal")]
+        public bool IsPersonal 
+        { 
+            get 
+            {
+                return this.isPersonal; 
+            } 
+            set 
+            {
+                this.isPersonal = value;
+                onPropertyChanged("IsPersonal");
+            }
+        }
+
+        /// <summary>
+        /// The email service provider domain
+        /// </summary>
+        [JsonProperty("provider")]
+        public string Provider 
+        { 
+            get 
+            {
+                return this.provider; 
+            } 
+            set 
+            {
+                this.provider = value;
+                onPropertyChanged("Provider");
             }
         }
     }

@@ -15,7 +15,6 @@ using NeutrinoAPI.Utilities;
 using NeutrinoAPI.Http.Request;
 using NeutrinoAPI.Http.Response;
 using NeutrinoAPI.Http.Client;
-using NeutrinoAPI.Models;
 
 namespace NeutrinoAPI.Controllers
 {
@@ -38,6 +37,22 @@ namespace NeutrinoAPI.Controllers
         /// <param name="languageCode">Optional parameter: The language to display results in, available languages are: de, en, es, fr, it, pt, ru</param>
         /// <return>Returns the Models.GeocodeReverseResponse response from the API call</return>
         Task<Models.GeocodeReverseResponse> GeocodeReverseAsync(double latitude, double longitude, string languageCode = "en");
+
+        /// <summary>
+        /// Get location information about an IP address and do reverse DNS (PTR) lookups.
+        /// </summary>
+        /// <param name="ip">Required parameter: The IP address</param>
+        /// <param name="reverseLookup">Optional parameter: Do a reverse DNS (PTR) lookup. This option can add extra delay to the request so only use it if you need it</param>
+        /// <return>Returns the Models.IPInfoResponse response from the API call</return>
+        Models.IPInfoResponse IPInfo(string ip, bool? reverseLookup = false);
+
+        /// <summary>
+        /// Get location information about an IP address and do reverse DNS (PTR) lookups.
+        /// </summary>
+        /// <param name="ip">Required parameter: The IP address</param>
+        /// <param name="reverseLookup">Optional parameter: Do a reverse DNS (PTR) lookup. This option can add extra delay to the request so only use it if you need it</param>
+        /// <return>Returns the Models.IPInfoResponse response from the API call</return>
+        Task<Models.IPInfoResponse> IPInfoAsync(string ip, bool? reverseLookup = false);
 
         /// <summary>
         /// Geocode an address, partial address or the name of a location
@@ -66,22 +81,6 @@ namespace NeutrinoAPI.Controllers
                 string countryCode = null,
                 string languageCode = "en",
                 bool? fuzzySearch = false);
-
-        /// <summary>
-        /// Get location information about an IP address and do reverse DNS (PTR) lookups.
-        /// </summary>
-        /// <param name="ip">Required parameter: The IP address</param>
-        /// <param name="reverseLookup">Optional parameter: Do a reverse DNS (PTR) lookup. This option can add extra delay to the request so only use it if you need it</param>
-        /// <return>Returns the Models.IPInfoResponse response from the API call</return>
-        Models.IPInfoResponse IPInfo(string ip, bool? reverseLookup = false);
-
-        /// <summary>
-        /// Get location information about an IP address and do reverse DNS (PTR) lookups.
-        /// </summary>
-        /// <param name="ip">Required parameter: The IP address</param>
-        /// <param name="reverseLookup">Optional parameter: Do a reverse DNS (PTR) lookup. This option can add extra delay to the request so only use it if you need it</param>
-        /// <return>Returns the Models.IPInfoResponse response from the API call</return>
-        Task<Models.IPInfoResponse> IPInfoAsync(string ip, bool? reverseLookup = false);
 
     }
 } 

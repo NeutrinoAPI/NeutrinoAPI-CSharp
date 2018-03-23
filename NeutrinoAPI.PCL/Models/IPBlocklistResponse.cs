@@ -21,6 +21,7 @@ namespace NeutrinoAPI.Models
     public class IPBlocklistResponse : BaseModel 
     {
         // These fields hold the values for the public properties.
+        private string ip;
         private bool isBot;
         private bool isExploitBot;
         private bool isMalware;
@@ -35,6 +36,24 @@ namespace NeutrinoAPI.Models
         private bool isListed;
         private bool isVpn;
         private int lastSeen;
+        private List<string> blocklists;
+
+        /// <summary>
+        /// The IP address
+        /// </summary>
+        [JsonProperty("ip")]
+        public string Ip 
+        { 
+            get 
+            {
+                return this.ip; 
+            } 
+            set 
+            {
+                this.ip = value;
+                onPropertyChanged("Ip");
+            }
+        }
 
         /// <summary>
         /// IP is hosting a malicious bot or is part of a botnet
@@ -271,6 +290,23 @@ namespace NeutrinoAPI.Models
             {
                 this.lastSeen = value;
                 onPropertyChanged("LastSeen");
+            }
+        }
+
+        /// <summary>
+        /// An array of strings indicating which blocklists this IP is listed on (empty if not listed)
+        /// </summary>
+        [JsonProperty("blocklists")]
+        public List<string> Blocklists 
+        { 
+            get 
+            {
+                return this.blocklists; 
+            } 
+            set 
+            {
+                this.blocklists = value;
+                onPropertyChanged("Blocklists");
             }
         }
     }

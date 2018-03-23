@@ -29,6 +29,7 @@ namespace NeutrinoAPI.Models
         private double latitude;
         private string region;
         private double longitude;
+        private string continentCode;
 
         /// <summary>
         /// Is this a valid IP address
@@ -163,6 +164,23 @@ namespace NeutrinoAPI.Models
             {
                 this.longitude = value;
                 onPropertyChanged("Longitude");
+            }
+        }
+
+        /// <summary>
+        /// ISO 2-letter continent code
+        /// </summary>
+        [JsonProperty("continentCode")]
+        public string ContinentCode 
+        { 
+            get 
+            {
+                return this.continentCode; 
+            } 
+            set 
+            {
+                this.continentCode = value;
+                onPropertyChanged("ContinentCode");
             }
         }
     }

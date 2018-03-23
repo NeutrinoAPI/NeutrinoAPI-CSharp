@@ -18,7 +18,6 @@ using NeutrinoAPI.Http.Request;
 using NeutrinoAPI.Http.Response;
 using NeutrinoAPI.Http.Client;
 using NeutrinoAPI.Exceptions;
-using NeutrinoAPI.Models;
 
 namespace NeutrinoAPI.Controllers
 {
@@ -83,7 +82,7 @@ namespace NeutrinoAPI.Controllers
                 int height,
                 string format = "png")
         {
-            //the base uri for api requestss
+            //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
 
             //prepare query string for API call
@@ -174,7 +173,7 @@ namespace NeutrinoAPI.Controllers
                 string fgColor = "#000000",
                 string bgColor = "#ffffff")
         {
-            //the base uri for api requestss
+            //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
 
             //prepare query string for API call
@@ -274,7 +273,7 @@ namespace NeutrinoAPI.Controllers
                 int? width = null,
                 int? height = null)
         {
-            //the base uri for api requestss
+            //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
 
             //prepare query string for API call
@@ -352,6 +351,23 @@ namespace NeutrinoAPI.Controllers
         /// <param name="css">Optional parameter: Inject custom CSS into the HTML. e.g. 'body { background-color: red;}'</param>
         /// <param name="imageWidth">Optional parameter: If rendering to an image format (PNG or JPG) use this image width (in pixels)</param>
         /// <param name="imageHeight">Optional parameter: If rendering to an image format (PNG or JPG) use this image height (in pixels). The default is automatic which dynamically sets the image height based on the content</param>
+        /// <param name="renderDelay">Optional parameter: Number of milliseconds to wait before rendering the page (can be useful for pages with animations etc)</param>
+        /// <param name="headerTextLeft">Optional parameter: Text to print to the left-hand side header of each page. e.g. 'My header - Page {page_number} of {total_pages}'</param>
+        /// <param name="headerTextCenter">Optional parameter: Text to print to the center header of each page</param>
+        /// <param name="headerTextRight">Optional parameter: Text to print to the right-hand side header of each page</param>
+        /// <param name="headerSize">Optional parameter: The height of your header (in mm)</param>
+        /// <param name="headerFont">Optional parameter: Set the header font. Fonts available: Times, Courier, Helvetica, Arial</param>
+        /// <param name="headerFontSize">Optional parameter: Set the header font size (in pt)</param>
+        /// <param name="headerLine">Optional parameter: Draw a full page width horizontal line under your header</param>
+        /// <param name="footerTextLeft">Optional parameter: Text to print to the left-hand side footer of each page. e.g. 'My footer - Page {page_number} of {total_pages}'</param>
+        /// <param name="footerTextCenter">Optional parameter: Text to print to the center header of each page</param>
+        /// <param name="footerTextRight">Optional parameter: Text to print to the right-hand side header of each page</param>
+        /// <param name="footerSize">Optional parameter: The height of your footer (in mm)</param>
+        /// <param name="footerFont">Optional parameter: Set the footer font. Fonts available: Times, Courier, Helvetica, Arial</param>
+        /// <param name="footerFontSize">Optional parameter: Set the footer font size (in pt)</param>
+        /// <param name="footerLine">Optional parameter: Draw a full page width horizontal line above your footer</param>
+        /// <param name="pageWidth">Optional parameter: Set the PDF page width explicitly (in mm)</param>
+        /// <param name="pageHeight">Optional parameter: Set the PDF page height explicitly (in mm)</param>
         /// <return>Returns the Stream response from the API call</return>
         public Stream HTML5Render(
                 string content,
@@ -371,9 +387,26 @@ namespace NeutrinoAPI.Controllers
                 bool? forms = false,
                 string css = null,
                 int? imageWidth = 1024,
-                int? imageHeight = null)
+                int? imageHeight = null,
+                int? renderDelay = null,
+                string headerTextLeft = null,
+                string headerTextCenter = null,
+                string headerTextRight = null,
+                int? headerSize = 9,
+                string headerFont = "Courier",
+                string headerFontSize = "11",
+                bool? headerLine = false,
+                string footerTextLeft = null,
+                string footerTextCenter = null,
+                string footerTextRight = null,
+                int? footerSize = 9,
+                string footerFont = "Courier",
+                int? footerFontSize = 11,
+                bool? footerLine = false,
+                int? pageWidth = null,
+                int? pageHeight = null)
         {
-            Task<Stream> t = HTML5RenderAsync(content, format, pageSize, title, margin, marginLeft, marginRight, marginTop, marginBottom, landscape, zoom, grayscale, mediaPrint, mediaQueries, forms, css, imageWidth, imageHeight);
+            Task<Stream> t = HTML5RenderAsync(content, format, pageSize, title, margin, marginLeft, marginRight, marginTop, marginBottom, landscape, zoom, grayscale, mediaPrint, mediaQueries, forms, css, imageWidth, imageHeight, renderDelay, headerTextLeft, headerTextCenter, headerTextRight, headerSize, headerFont, headerFontSize, headerLine, footerTextLeft, footerTextCenter, footerTextRight, footerSize, footerFont, footerFontSize, footerLine, pageWidth, pageHeight);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
@@ -399,6 +432,23 @@ namespace NeutrinoAPI.Controllers
         /// <param name="css">Optional parameter: Inject custom CSS into the HTML. e.g. 'body { background-color: red;}'</param>
         /// <param name="imageWidth">Optional parameter: If rendering to an image format (PNG or JPG) use this image width (in pixels)</param>
         /// <param name="imageHeight">Optional parameter: If rendering to an image format (PNG or JPG) use this image height (in pixels). The default is automatic which dynamically sets the image height based on the content</param>
+        /// <param name="renderDelay">Optional parameter: Number of milliseconds to wait before rendering the page (can be useful for pages with animations etc)</param>
+        /// <param name="headerTextLeft">Optional parameter: Text to print to the left-hand side header of each page. e.g. 'My header - Page {page_number} of {total_pages}'</param>
+        /// <param name="headerTextCenter">Optional parameter: Text to print to the center header of each page</param>
+        /// <param name="headerTextRight">Optional parameter: Text to print to the right-hand side header of each page</param>
+        /// <param name="headerSize">Optional parameter: The height of your header (in mm)</param>
+        /// <param name="headerFont">Optional parameter: Set the header font. Fonts available: Times, Courier, Helvetica, Arial</param>
+        /// <param name="headerFontSize">Optional parameter: Set the header font size (in pt)</param>
+        /// <param name="headerLine">Optional parameter: Draw a full page width horizontal line under your header</param>
+        /// <param name="footerTextLeft">Optional parameter: Text to print to the left-hand side footer of each page. e.g. 'My footer - Page {page_number} of {total_pages}'</param>
+        /// <param name="footerTextCenter">Optional parameter: Text to print to the center header of each page</param>
+        /// <param name="footerTextRight">Optional parameter: Text to print to the right-hand side header of each page</param>
+        /// <param name="footerSize">Optional parameter: The height of your footer (in mm)</param>
+        /// <param name="footerFont">Optional parameter: Set the footer font. Fonts available: Times, Courier, Helvetica, Arial</param>
+        /// <param name="footerFontSize">Optional parameter: Set the footer font size (in pt)</param>
+        /// <param name="footerLine">Optional parameter: Draw a full page width horizontal line above your footer</param>
+        /// <param name="pageWidth">Optional parameter: Set the PDF page width explicitly (in mm)</param>
+        /// <param name="pageHeight">Optional parameter: Set the PDF page height explicitly (in mm)</param>
         /// <return>Returns the Stream response from the API call</return>
         public async Task<Stream> HTML5RenderAsync(
                 string content,
@@ -418,9 +468,26 @@ namespace NeutrinoAPI.Controllers
                 bool? forms = false,
                 string css = null,
                 int? imageWidth = 1024,
-                int? imageHeight = null)
+                int? imageHeight = null,
+                int? renderDelay = null,
+                string headerTextLeft = null,
+                string headerTextCenter = null,
+                string headerTextRight = null,
+                int? headerSize = 9,
+                string headerFont = "Courier",
+                string headerFontSize = "11",
+                bool? headerLine = false,
+                string footerTextLeft = null,
+                string footerTextCenter = null,
+                string footerTextRight = null,
+                int? footerSize = 9,
+                string footerFont = "Courier",
+                int? footerFontSize = 11,
+                bool? footerLine = false,
+                int? pageWidth = null,
+                int? pageHeight = null)
         {
-            //the base uri for api requestss
+            //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
 
             //prepare query string for API call
@@ -465,7 +532,24 @@ namespace NeutrinoAPI.Controllers
                 new KeyValuePair<string, object>( "forms", (null != forms) ? forms : false ),
                 new KeyValuePair<string, object>( "css", css ),
                 new KeyValuePair<string, object>( "image-width", (null != imageWidth) ? imageWidth : 1024 ),
-                new KeyValuePair<string, object>( "image-height", imageHeight )
+                new KeyValuePair<string, object>( "image-height", imageHeight ),
+                new KeyValuePair<string, object>( "render-delay", renderDelay ),
+                new KeyValuePair<string, object>( "header-text-left", headerTextLeft ),
+                new KeyValuePair<string, object>( "header-text-center", headerTextCenter ),
+                new KeyValuePair<string, object>( "header-text-right", headerTextRight ),
+                new KeyValuePair<string, object>( "header-size", (null != headerSize) ? headerSize : 9 ),
+                new KeyValuePair<string, object>( "header-font", (null != headerFont) ? headerFont : "Courier" ),
+                new KeyValuePair<string, object>( "header-font-size", (null != headerFontSize) ? headerFontSize : "11" ),
+                new KeyValuePair<string, object>( "header-line", (null != headerLine) ? headerLine : false ),
+                new KeyValuePair<string, object>( "footer-text-left", footerTextLeft ),
+                new KeyValuePair<string, object>( "footer-text-center", footerTextCenter ),
+                new KeyValuePair<string, object>( "footer-text-right", footerTextRight ),
+                new KeyValuePair<string, object>( "footer-size", (null != footerSize) ? footerSize : 9 ),
+                new KeyValuePair<string, object>( "footer-font", (null != footerFont) ? footerFont : "Courier" ),
+                new KeyValuePair<string, object>( "footer-font-size", (null != footerFontSize) ? footerFontSize : 11 ),
+                new KeyValuePair<string, object>( "footer-line", (null != footerLine) ? footerLine : false ),
+                new KeyValuePair<string, object>( "page-width", pageWidth ),
+                new KeyValuePair<string, object>( "page-height", pageHeight )
             };
             //remove null parameters
             _fields = _fields.Where(kvp => kvp.Value != null).ToList();

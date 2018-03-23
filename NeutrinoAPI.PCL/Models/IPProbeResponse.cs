@@ -32,6 +32,9 @@ namespace NeutrinoAPI.Models
         private string ip;
         private string region;
         private string providerDescription;
+        private string continentCode;
+        private bool isHosting;
+        private bool isIsp;
 
         /// <summary>
         /// Is this a valid IPv4 or IPv6 address
@@ -68,9 +71,9 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// The detected provider type. See API docs for specific provider type details
+        /// The detected provider type. See online API docs for specific provider type details
         /// </summary>
-        [JsonProperty("provider-type")]
+        [JsonProperty("providerType")]
         public string ProviderType 
         { 
             get 
@@ -87,7 +90,7 @@ namespace NeutrinoAPI.Models
         /// <summary>
         /// ISO 2-letter country code
         /// </summary>
-        [JsonProperty("country-code")]
+        [JsonProperty("countryCode")]
         public string CountryCode 
         { 
             get 
@@ -121,7 +124,7 @@ namespace NeutrinoAPI.Models
         /// <summary>
         /// The domain name of the provider
         /// </summary>
-        [JsonProperty("provider-domain")]
+        [JsonProperty("providerDomain")]
         public string ProviderDomain 
         { 
             get 
@@ -155,7 +158,7 @@ namespace NeutrinoAPI.Models
         /// <summary>
         /// The website URL for the provider
         /// </summary>
-        [JsonProperty("provider-website")]
+        [JsonProperty("providerWebsite")]
         public string ProviderWebsite 
         { 
             get 
@@ -206,7 +209,7 @@ namespace NeutrinoAPI.Models
         /// <summary>
         /// A description of the provider, usually extracted from the providers website or WHOIS record
         /// </summary>
-        [JsonProperty("provider-description")]
+        [JsonProperty("providerDescription")]
         public string ProviderDescription 
         { 
             get 
@@ -217,6 +220,57 @@ namespace NeutrinoAPI.Models
             {
                 this.providerDescription = value;
                 onPropertyChanged("ProviderDescription");
+            }
+        }
+
+        /// <summary>
+        /// ISO 2-letter continent code
+        /// </summary>
+        [JsonProperty("continentCode")]
+        public string ContinentCode 
+        { 
+            get 
+            {
+                return this.continentCode; 
+            } 
+            set 
+            {
+                this.continentCode = value;
+                onPropertyChanged("ContinentCode");
+            }
+        }
+
+        /// <summary>
+        /// True if this IP belongs to a hosting company. Note that this can still be true even if the provider type is VPN/proxy, this occurs in the case that the IP is detected as both types
+        /// </summary>
+        [JsonProperty("isHosting")]
+        public bool IsHosting 
+        { 
+            get 
+            {
+                return this.isHosting; 
+            } 
+            set 
+            {
+                this.isHosting = value;
+                onPropertyChanged("IsHosting");
+            }
+        }
+
+        /// <summary>
+        /// True if this IP belongs to an ISP. Note that this can still be true even if the provider type is VPN/proxy, this occurs in the case that the IP is detected as both types
+        /// </summary>
+        [JsonProperty("isIsp")]
+        public bool IsIsp 
+        { 
+            get 
+            {
+                return this.isIsp; 
+            } 
+            set 
+            {
+                this.isIsp = value;
+                onPropertyChanged("IsIsp");
             }
         }
     }

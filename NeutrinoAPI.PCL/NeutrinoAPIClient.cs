@@ -6,6 +6,7 @@
 using System;
 using NeutrinoAPI.Controllers;
 using NeutrinoAPI.Http.Client;
+using NeutrinoAPI.Utilities;
 
 namespace NeutrinoAPI
 {
@@ -13,46 +14,13 @@ namespace NeutrinoAPI
     {
 
         /// <summary>
-        /// Singleton access to DataTools controller
+        /// Singleton access to Imaging controller
         /// </summary>
-        public IDataTools DataTools
+        public IImaging Imaging
         {
             get
             {
-                return NeutrinoAPI.Controllers.DataTools.Instance;
-            }
-        }
-
-        /// <summary>
-        /// Singleton access to ECommerce controller
-        /// </summary>
-        public IECommerce ECommerce
-        {
-            get
-            {
-                return NeutrinoAPI.Controllers.ECommerce.Instance;
-            }
-        }
-
-        /// <summary>
-        /// Singleton access to Geolocation controller
-        /// </summary>
-        public IGeolocation Geolocation
-        {
-            get
-            {
-                return NeutrinoAPI.Controllers.Geolocation.Instance;
-            }
-        }
-
-        /// <summary>
-        /// Singleton access to SecurityAndNetworking controller
-        /// </summary>
-        public ISecurityAndNetworking SecurityAndNetworking
-        {
-            get
-            {
-                return NeutrinoAPI.Controllers.SecurityAndNetworking.Instance;
+                return NeutrinoAPI.Controllers.Imaging.Instance;
             }
         }
 
@@ -68,13 +36,46 @@ namespace NeutrinoAPI
         }
 
         /// <summary>
-        /// Singleton access to Imaging controller
+        /// Singleton access to DataTools controller
         /// </summary>
-        public IImaging Imaging
+        public IDataTools DataTools
         {
             get
             {
-                return NeutrinoAPI.Controllers.Imaging.Instance;
+                return NeutrinoAPI.Controllers.DataTools.Instance;
+            }
+        }
+
+        /// <summary>
+        /// Singleton access to SecurityAndNetworking controller
+        /// </summary>
+        public ISecurityAndNetworking SecurityAndNetworking
+        {
+            get
+            {
+                return NeutrinoAPI.Controllers.SecurityAndNetworking.Instance;
+            }
+        }
+
+        /// <summary>
+        /// Singleton access to Geolocation controller
+        /// </summary>
+        public IGeolocation Geolocation
+        {
+            get
+            {
+                return NeutrinoAPI.Controllers.Geolocation.Instance;
+            }
+        }
+
+        /// <summary>
+        /// Singleton access to ECommerce controller
+        /// </summary>
+        public IECommerce ECommerce
+        {
+            get
+            {
+                return NeutrinoAPI.Controllers.ECommerce.Instance;
             }
         }
         /// <summary>
@@ -91,7 +92,7 @@ namespace NeutrinoAPI
                 BaseController.ClientInstance = value;
             }        
         }
-        
+        #region Constructors
         /// <summary>
         /// Default constructor
         /// </summary>
@@ -105,5 +106,6 @@ namespace NeutrinoAPI
             Configuration.UserId = userId;
             Configuration.ApiKey = apiKey;
         }
+        #endregion
     }
 }

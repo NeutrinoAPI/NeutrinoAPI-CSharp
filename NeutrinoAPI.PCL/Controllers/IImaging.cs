@@ -15,7 +15,6 @@ using NeutrinoAPI.Utilities;
 using NeutrinoAPI.Http.Request;
 using NeutrinoAPI.Http.Response;
 using NeutrinoAPI.Http.Client;
-using NeutrinoAPI.Models;
 
 namespace NeutrinoAPI.Controllers
 {
@@ -142,6 +141,23 @@ namespace NeutrinoAPI.Controllers
         /// <param name="css">Optional parameter: Inject custom CSS into the HTML. e.g. 'body { background-color: red;}'</param>
         /// <param name="imageWidth">Optional parameter: If rendering to an image format (PNG or JPG) use this image width (in pixels)</param>
         /// <param name="imageHeight">Optional parameter: If rendering to an image format (PNG or JPG) use this image height (in pixels). The default is automatic which dynamically sets the image height based on the content</param>
+        /// <param name="renderDelay">Optional parameter: Number of milliseconds to wait before rendering the page (can be useful for pages with animations etc)</param>
+        /// <param name="headerTextLeft">Optional parameter: Text to print to the left-hand side header of each page. e.g. 'My header - Page {page_number} of {total_pages}'</param>
+        /// <param name="headerTextCenter">Optional parameter: Text to print to the center header of each page</param>
+        /// <param name="headerTextRight">Optional parameter: Text to print to the right-hand side header of each page</param>
+        /// <param name="headerSize">Optional parameter: The height of your header (in mm)</param>
+        /// <param name="headerFont">Optional parameter: Set the header font. Fonts available: Times, Courier, Helvetica, Arial</param>
+        /// <param name="headerFontSize">Optional parameter: Set the header font size (in pt)</param>
+        /// <param name="headerLine">Optional parameter: Draw a full page width horizontal line under your header</param>
+        /// <param name="footerTextLeft">Optional parameter: Text to print to the left-hand side footer of each page. e.g. 'My footer - Page {page_number} of {total_pages}'</param>
+        /// <param name="footerTextCenter">Optional parameter: Text to print to the center header of each page</param>
+        /// <param name="footerTextRight">Optional parameter: Text to print to the right-hand side header of each page</param>
+        /// <param name="footerSize">Optional parameter: The height of your footer (in mm)</param>
+        /// <param name="footerFont">Optional parameter: Set the footer font. Fonts available: Times, Courier, Helvetica, Arial</param>
+        /// <param name="footerFontSize">Optional parameter: Set the footer font size (in pt)</param>
+        /// <param name="footerLine">Optional parameter: Draw a full page width horizontal line above your footer</param>
+        /// <param name="pageWidth">Optional parameter: Set the PDF page width explicitly (in mm)</param>
+        /// <param name="pageHeight">Optional parameter: Set the PDF page height explicitly (in mm)</param>
         /// <return>Returns the Stream response from the API call</return>
         Stream HTML5Render(
                 string content,
@@ -161,7 +177,24 @@ namespace NeutrinoAPI.Controllers
                 bool? forms = false,
                 string css = null,
                 int? imageWidth = 1024,
-                int? imageHeight = null);
+                int? imageHeight = null,
+                int? renderDelay = null,
+                string headerTextLeft = null,
+                string headerTextCenter = null,
+                string headerTextRight = null,
+                int? headerSize = 9,
+                string headerFont = "Courier",
+                string headerFontSize = "11",
+                bool? headerLine = false,
+                string footerTextLeft = null,
+                string footerTextCenter = null,
+                string footerTextRight = null,
+                int? footerSize = 9,
+                string footerFont = "Courier",
+                int? footerFontSize = 11,
+                bool? footerLine = false,
+                int? pageWidth = null,
+                int? pageHeight = null);
 
         /// <summary>
         /// Render HTML and HTML5 content to PDF, JPG or PNG
@@ -184,6 +217,23 @@ namespace NeutrinoAPI.Controllers
         /// <param name="css">Optional parameter: Inject custom CSS into the HTML. e.g. 'body { background-color: red;}'</param>
         /// <param name="imageWidth">Optional parameter: If rendering to an image format (PNG or JPG) use this image width (in pixels)</param>
         /// <param name="imageHeight">Optional parameter: If rendering to an image format (PNG or JPG) use this image height (in pixels). The default is automatic which dynamically sets the image height based on the content</param>
+        /// <param name="renderDelay">Optional parameter: Number of milliseconds to wait before rendering the page (can be useful for pages with animations etc)</param>
+        /// <param name="headerTextLeft">Optional parameter: Text to print to the left-hand side header of each page. e.g. 'My header - Page {page_number} of {total_pages}'</param>
+        /// <param name="headerTextCenter">Optional parameter: Text to print to the center header of each page</param>
+        /// <param name="headerTextRight">Optional parameter: Text to print to the right-hand side header of each page</param>
+        /// <param name="headerSize">Optional parameter: The height of your header (in mm)</param>
+        /// <param name="headerFont">Optional parameter: Set the header font. Fonts available: Times, Courier, Helvetica, Arial</param>
+        /// <param name="headerFontSize">Optional parameter: Set the header font size (in pt)</param>
+        /// <param name="headerLine">Optional parameter: Draw a full page width horizontal line under your header</param>
+        /// <param name="footerTextLeft">Optional parameter: Text to print to the left-hand side footer of each page. e.g. 'My footer - Page {page_number} of {total_pages}'</param>
+        /// <param name="footerTextCenter">Optional parameter: Text to print to the center header of each page</param>
+        /// <param name="footerTextRight">Optional parameter: Text to print to the right-hand side header of each page</param>
+        /// <param name="footerSize">Optional parameter: The height of your footer (in mm)</param>
+        /// <param name="footerFont">Optional parameter: Set the footer font. Fonts available: Times, Courier, Helvetica, Arial</param>
+        /// <param name="footerFontSize">Optional parameter: Set the footer font size (in pt)</param>
+        /// <param name="footerLine">Optional parameter: Draw a full page width horizontal line above your footer</param>
+        /// <param name="pageWidth">Optional parameter: Set the PDF page width explicitly (in mm)</param>
+        /// <param name="pageHeight">Optional parameter: Set the PDF page height explicitly (in mm)</param>
         /// <return>Returns the Stream response from the API call</return>
         Task<Stream> HTML5RenderAsync(
                 string content,
@@ -203,7 +253,24 @@ namespace NeutrinoAPI.Controllers
                 bool? forms = false,
                 string css = null,
                 int? imageWidth = 1024,
-                int? imageHeight = null);
+                int? imageHeight = null,
+                int? renderDelay = null,
+                string headerTextLeft = null,
+                string headerTextCenter = null,
+                string headerTextRight = null,
+                int? headerSize = 9,
+                string headerFont = "Courier",
+                string headerFontSize = "11",
+                bool? headerLine = false,
+                string footerTextLeft = null,
+                string footerTextCenter = null,
+                string footerTextRight = null,
+                int? footerSize = 9,
+                string footerFont = "Courier",
+                int? footerFontSize = 11,
+                bool? footerLine = false,
+                int? pageWidth = null,
+                int? pageHeight = null);
 
     }
 } 

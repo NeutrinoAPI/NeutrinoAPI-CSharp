@@ -16,7 +16,6 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
-using unirest_net.request;
 
 namespace NeutrinoAPI.Utilities
 {
@@ -220,15 +219,15 @@ namespace NeutrinoAPI.Utilities
 
             string format = string.Empty;
             if (fmt == ArrayDeserialization.UnIndexed)
-                format = $"{key}[]={{0}}{{1}}";
+                format = String.Format("{0}[]={{0}}{{1}}", key);
             else if (fmt == ArrayDeserialization.Indexed)
-                format = $"{key}[{{2}}]={{0}}{{1}}";
+                format = String.Format("{0}[{{2}}]={{0}}{{1}}", key);
             else if (fmt == ArrayDeserialization.Plain)
-                format = $"{key}={{0}}{{1}}";
+                format = String.Format("{0}={{0}}{{1}}", key);
             else if (fmt == ArrayDeserialization.Csv || fmt == ArrayDeserialization.Psv ||
                      fmt == ArrayDeserialization.Tsv)
             {
-                builder.Append($"{key}=");
+                builder.Append(String.Format("{0}=", key));
                 format = "{0}{1}";
             }
             else
@@ -312,7 +311,7 @@ namespace NeutrinoAPI.Utilities
             }
             else if (value is Enum)
             {
-#if WINDOWS_UWP
+#if WINDOWS_UWP || NETSTANDARD1_3
                 Assembly thisAssembly = typeof(APIHelper).GetTypeInfo().Assembly;
 #else
                 Assembly thisAssembly = Assembly.GetExecutingAssembly();
@@ -324,7 +323,11 @@ namespace NeutrinoAPI.Utilities
                 if (enumHelperType != null)
                 {
                     //this enum has an associated helper, use that to load the value
-                    MethodInfo enumHelperMethod = enumHelperType.GetMethod("ToValue", new[] {value.GetType()});
+#if NETSTANDARD1_3
+                    MethodInfo enumHelperMethod = enumHelperType.GetRuntimeMethod("ToValue", new[] { value.GetType() });
+#else
+                    MethodInfo enumHelperMethod = enumHelperType.GetMethod("ToValue", new[] { value.GetType() });
+#endif
                     if (enumHelperMethod != null)
                         enumValue = enumHelperMethod.Invoke(null, new object[] {value});
                 }
@@ -345,7 +348,11 @@ namespace NeutrinoAPI.Utilities
             else if (!(value.GetType().Namespace.StartsWith("System")))
             {
                 //Custom object Iterate through its properties
-                var enumerator = value.GetType().GetProperties().GetEnumerator();
+#if NETSTANDARD1_3
+                var enumerator = value.GetType().GetRuntimeProperties().GetEnumerator();
+#else
+                var enumerator = value.GetType().GetProperties().GetEnumerator();;
+#endif
                 PropertyInfo pInfo = null;
                 var t = new JsonPropertyAttribute().GetType();
                 while (enumerator.MoveNext())
@@ -362,7 +369,13 @@ namespace NeutrinoAPI.Utilities
             else if (value is DateTime)
             {
                 string convertedValue = null;
-                var pInfo = propInfo?.GetCustomAttributes(true);
+#if NETSTANDARD1_3
+                IEnumerable<Attribute> pInfo = null;
+#else
+                object[] pInfo = null;
+#endif
+                if(propInfo!=null)
+                    pInfo = propInfo.GetCustomAttributes(true);
                 if (pInfo != null)
                 {
                     foreach (object attr in pInfo)
