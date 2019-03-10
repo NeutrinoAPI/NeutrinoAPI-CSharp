@@ -1,7 +1,7 @@
 /*
  * NeutrinoAPI.PCL
  *
- * This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io )
+ * This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io ).
  */
 using System;
 using NeutrinoAPI;
@@ -28,7 +28,7 @@ namespace NeutrinoAPI.Controllers
                     {
                         clientInstance = new HTTPClient()
 ;
-                        clientInstance.setTimeout(TimeSpan.FromMilliseconds(30000));
+                        clientInstance.setTimeout(TimeSpan.FromMilliseconds(45000));
                     }
                     return clientInstance;
                 }

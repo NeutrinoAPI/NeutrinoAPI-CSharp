@@ -1,7 +1,7 @@
 /*
  * NeutrinoAPI.PCL
  *
- * This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io )
+ * This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io ).
  */
 using System;
 using System.IO;
@@ -25,6 +25,7 @@ namespace NeutrinoAPI.Models
         private string address;
         private string city;
         private string countryCode;
+        private string countryCode3;
         private double latitude;
         private string postalCode;
         private double longitude;
@@ -96,6 +97,23 @@ namespace NeutrinoAPI.Models
             {
                 this.countryCode = value;
                 onPropertyChanged("CountryCode");
+            }
+        }
+
+        /// <summary>
+        /// The ISO 3-letter country code of the location
+        /// </summary>
+        [JsonProperty("countryCode3")]
+        public string CountryCode3 
+        { 
+            get 
+            {
+                return this.countryCode3; 
+            } 
+            set 
+            {
+                this.countryCode3 = value;
+                onPropertyChanged("CountryCode3");
             }
         }
 

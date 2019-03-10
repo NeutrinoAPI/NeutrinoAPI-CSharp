@@ -1,7 +1,7 @@
 /*
  * NeutrinoAPI.PCL
  *
- * This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io )
+ * This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io ).
  */
 using System;
 using System.IO;
@@ -26,6 +26,7 @@ namespace NeutrinoAPI.Models
         private int listRating;
         private string listName;
         private string txtRecord;
+        private string returnCode;
         private int responseTime;
 
         /// <summary>
@@ -110,6 +111,23 @@ namespace NeutrinoAPI.Models
             {
                 this.txtRecord = value;
                 onPropertyChanged("TxtRecord");
+            }
+        }
+
+        /// <summary>
+        /// the specific return code for this listing (if listed)
+        /// </summary>
+        [JsonProperty("returnCode")]
+        public string ReturnCode 
+        { 
+            get 
+            {
+                return this.returnCode; 
+            } 
+            set 
+            {
+                this.returnCode = value;
+                onPropertyChanged("ReturnCode");
             }
         }
 

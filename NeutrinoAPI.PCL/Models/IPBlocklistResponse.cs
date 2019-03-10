@@ -1,7 +1,7 @@
 /*
  * NeutrinoAPI.PCL
  *
- * This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io )
+ * This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io ).
  */
 using System;
 using System.IO;
@@ -56,7 +56,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// IP is hosting a malicious bot or is part of a botnet
+        /// IP is hosting a malicious bot or is part of a botnet. Includes brute-force crackers
         /// </summary>
         [JsonProperty("isBot")]
         public bool IsBot 
@@ -73,7 +73,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// IP is hosting an exploit finding bot or exploit scanning software
+        /// IP is hosting an exploit finding bot or is running exploit scanning software
         /// </summary>
         [JsonProperty("isExploitBot")]
         public bool IsExploitBot 
@@ -90,7 +90,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// IP is involved in distributing malware
+        /// IP is involved in distributing or is running malware
         /// </summary>
         [JsonProperty("isMalware")]
         public bool IsMalware 
@@ -107,7 +107,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// IP is a hostile spider or crawler
+        /// IP is running a hostile web spider / web crawler
         /// </summary>
         [JsonProperty("isSpider")]
         public bool IsSpider 
@@ -124,7 +124,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// IP has been flagged on DShield (dshield.org)
+        /// IP has been flagged as an attack source on DShield (dshield.org)
         /// </summary>
         [JsonProperty("isDshield")]
         public bool IsDshield 
@@ -175,7 +175,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// hijacked netblocks or netblocks controlled by criminal organizations
+        /// IP is part of a hijacked netblock or a netblock controlled by a criminal organization
         /// </summary>
         [JsonProperty("isHijacked")]
         public bool IsHijacked 
@@ -192,7 +192,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// IP is coming from a Tor node
+        /// IP is a Tor node or running a Tor related service
         /// </summary>
         [JsonProperty("isTor")]
         public bool IsTor 
@@ -209,7 +209,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// IP is being used by spyware, malware, botnets or for other malicious activities
+        /// IP is involved in distributing or is running spyware
         /// </summary>
         [JsonProperty("isSpyware")]
         public bool IsSpyware 
@@ -226,7 +226,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// IP address is hosting a spam bot, comment spamming or other spamming software
+        /// IP address is hosting a spam bot, comment spamming or any other spamming type software
         /// </summary>
         [JsonProperty("isSpamBot")]
         public bool IsSpamBot 
@@ -260,7 +260,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// IP has been detected as coming from a VPN hosting provider
+        /// IP has been detected as belonging to a VPN provider
         /// </summary>
         [JsonProperty("isVpn")]
         public bool IsVpn 

@@ -1,7 +1,7 @@
 /*
  * NeutrinoAPI.PCL
  *
- * This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io )
+ * This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io ).
  */
 using System;
 using System.IO;
@@ -28,7 +28,7 @@ namespace NeutrinoAPI.Models
         private string fromType;
 
         /// <summary>
-        /// Was the coversion successful and produced a valid result
+        /// True if the coversion was successful and produced a valid result
         /// </summary>
         [JsonProperty("valid")]
         public bool Valid 

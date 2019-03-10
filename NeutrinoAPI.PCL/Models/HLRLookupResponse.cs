@@ -1,7 +1,7 @@
 /*
  * NeutrinoAPI.PCL
  *
- * This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io )
+ * This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io ).
  */
 using System;
 using System.IO;
@@ -22,7 +22,7 @@ namespace NeutrinoAPI.Models
     {
         // These fields hold the values for the public properties.
         private bool numberValid;
-        private string internationalCallingCode;
+        private int internationalCallingCode;
         private string mnc;
         private string numberType;
         private bool hlrValid;
@@ -40,9 +40,12 @@ namespace NeutrinoAPI.Models
         private bool isMobile;
         private bool isRoaming;
         private string country;
+        private string countryCode3;
+        private string currencyCode;
+        private string roamingCountryCode;
 
         /// <summary>
-        /// Is this a valid phone number (mobile or otherwise)
+        /// True if this a valid phone number
         /// </summary>
         [JsonProperty("numberValid")]
         public bool NumberValid 
@@ -59,10 +62,10 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// Numbers international calling code
+        /// The numbers international calling code
         /// </summary>
         [JsonProperty("internationalCallingCode")]
-        public string InternationalCallingCode 
+        public int InternationalCallingCode 
         { 
             get 
             {
@@ -76,7 +79,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// The mobile MNC number (only set if HLR lookup valid)
+        /// The mobile MNC number
         /// </summary>
         [JsonProperty("mnc")]
         public string Mnc 
@@ -93,7 +96,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// The number type, possible values are: mobile, fixed-line, premium-rate, toll-free, voip, unknown
+        /// The number type, possible values are:<br/><ul><li>mobile</li><li>fixed-line</li><li>premium-rate</li><li>toll-free</li><li>voip</li><li>unknown</li></ul>
         /// </summary>
         [JsonProperty("numberType")]
         public string NumberType 
@@ -127,7 +130,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// The HLR lookup status. See API docs for specific status details
+        /// The HLR lookup status, possible values are:<br/><ul><li>ok - the HLR lookup was successful and the device is connected</li><li>absent - the number was once registered but the device has been switched off or out of network range for some time</li><li>unknown - the number is not known by the mobile network</li><li>invalid  - the number is not a valid mobile MSISDN number</li><li>fixed-line - the number is a registered fixed-line not mobile</li><li>voip - the number has been detected as a VOIP line</li><li>failed - the HLR lookup has failed, we could not determine the real status of this number</li></ul>
         /// </summary>
         [JsonProperty("hlrStatus")]
         public string HlrStatus 
@@ -144,7 +147,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// If the number has been ported, the ported to mobile carrier name (only set if HLR lookup valid)
+        /// If the number has been ported, the ported to carrier name
         /// </summary>
         [JsonProperty("portedNetwork")]
         public string PortedNetwork 
@@ -161,7 +164,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// The mobile IMSI number (only set if HLR lookup valid)
+        /// The mobile IMSI number
         /// </summary>
         [JsonProperty("imsi")]
         public string Imsi 
@@ -178,7 +181,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// The mobile MCC number (only set if HLR lookup valid)
+        /// The mobile MCC number
         /// </summary>
         [JsonProperty("mcc")]
         public string Mcc 
@@ -195,7 +198,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// Number represented in international format
+        /// The number represented in full international format
         /// </summary>
         [JsonProperty("internationalNumber")]
         public string InternationalNumber 
@@ -212,7 +215,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// Number represented in local format
+        /// The number represented in local dialing format
         /// </summary>
         [JsonProperty("localNumber")]
         public string LocalNumber 
@@ -229,7 +232,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// Number location ISO 2-letter country code
+        /// The number location as an ISO 2-letter country code
         /// </summary>
         [JsonProperty("countryCode")]
         public string CountryCode 
@@ -263,7 +266,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// The mobile MSIN number (only set if HLR lookup valid)
+        /// The mobile MSIN number
         /// </summary>
         [JsonProperty("msin")]
         public string Msin 
@@ -280,7 +283,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// Number location (could be a city, region or country)
+        /// The number location. Could be a city, region or country depending on the type of number
         /// </summary>
         [JsonProperty("location")]
         public string Location 
@@ -297,7 +300,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// The origin mobile carrier name (only set if HLR lookup valid)
+        /// The origin mobile carrier name
         /// </summary>
         [JsonProperty("originNetwork")]
         public string OriginNetwork 
@@ -314,7 +317,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// Is this a mobile number
+        /// True if this is a mobile number (only true with 100% certainty, if the number type is unknown this value will be false)
         /// </summary>
         [JsonProperty("isMobile")]
         public bool IsMobile 
@@ -361,6 +364,57 @@ namespace NeutrinoAPI.Models
             {
                 this.country = value;
                 onPropertyChanged("Country");
+            }
+        }
+
+        /// <summary>
+        /// The number location as an ISO 3-letter country code
+        /// </summary>
+        [JsonProperty("countryCode3")]
+        public string CountryCode3 
+        { 
+            get 
+            {
+                return this.countryCode3; 
+            } 
+            set 
+            {
+                this.countryCode3 = value;
+                onPropertyChanged("CountryCode3");
+            }
+        }
+
+        /// <summary>
+        /// ISO 4217 currency code associated with the country
+        /// </summary>
+        [JsonProperty("currencyCode")]
+        public string CurrencyCode 
+        { 
+            get 
+            {
+                return this.currencyCode; 
+            } 
+            set 
+            {
+                this.currencyCode = value;
+                onPropertyChanged("CurrencyCode");
+            }
+        }
+
+        /// <summary>
+        /// If the number is currently roaming, the ISO 2-letter country code of the roaming in country
+        /// </summary>
+        [JsonProperty("roamingCountryCode")]
+        public string RoamingCountryCode 
+        { 
+            get 
+            {
+                return this.roamingCountryCode; 
+            } 
+            set 
+            {
+                this.roamingCountryCode = value;
+                onPropertyChanged("RoamingCountryCode");
             }
         }
     }

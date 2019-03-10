@@ -1,7 +1,7 @@
 /*
  * NeutrinoAPI.PCL
  *
- * This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io )
+ * This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io ).
  */
 using System;
 using System.IO;
@@ -26,7 +26,7 @@ namespace NeutrinoAPI.Models
         private string securityCode;
 
         /// <summary>
-        /// Is this a valid phone number
+        /// True if this a valid phone number
         /// </summary>
         [JsonProperty("numberValid")]
         public bool NumberValid 
@@ -60,7 +60,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// The security code generated, you can save this code to perform your own verification or you can use the Verify Security Code API
+        /// The security code generated, you can save this code to perform your own verification or you can use the <a href='https://www.neutrinoapi.com/api/verify-security-code/'>Verify Security Code API</a>
         /// </summary>
         [JsonProperty("securityCode")]
         public string SecurityCode 

@@ -1,7 +1,7 @@
 /*
  * NeutrinoAPI.PCL
  *
- * This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io )
+ * This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io ).
  */
 using System;
 using System.IO;
@@ -21,9 +21,9 @@ namespace NeutrinoAPI.Models
     public class URLInfoResponse : BaseModel 
     {
         // These fields hold the values for the public properties.
-        private string httpStatusMessage;
+        private int httpStatusMessage;
         private string serverRegion;
-        private object query;
+        private Dictionary<string, string> query;
         private string serverName;
         private int urlPort;
         private string serverCountry;
@@ -33,7 +33,7 @@ namespace NeutrinoAPI.Models
         private string url;
         private bool valid;
         private string serverHostname;
-        private double loadTime;
+        private int loadTime;
         private bool httpOk;
         private int contentSize;
         private int httpStatus;
@@ -49,7 +49,7 @@ namespace NeutrinoAPI.Models
         /// The HTTP status message assoicated with the status code
         /// </summary>
         [JsonProperty("httpStatusMessage")]
-        public string HttpStatusMessage 
+        public int HttpStatusMessage 
         { 
             get 
             {
@@ -63,7 +63,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// Server IP geo-location: full region name (if detectable)
+        /// The servers IP geo-location: full region name (if detectable)
         /// </summary>
         [JsonProperty("serverRegion")]
         public string ServerRegion 
@@ -80,10 +80,10 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// A key:value map of the URL query paramaters
+        /// A key-value map of the URL query paramaters
         /// </summary>
         [JsonProperty("query")]
-        public object Query 
+        public Dictionary<string, string> Query 
         { 
             get 
             {
@@ -131,7 +131,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// Server IP geo-location: full country name
+        /// The servers IP geo-location: full country name
         /// </summary>
         [JsonProperty("serverCountry")]
         public string ServerCountry 
@@ -165,7 +165,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// Server IP geo-location: full city name (if detectable)
+        /// The servers IP geo-location: full city name (if detectable)
         /// </summary>
         [JsonProperty("serverCity")]
         public string ServerCity 
@@ -199,7 +199,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// The fully qualified URL. This may be different to the URL requested if http-redirect is True
+        /// The fully qualified URL. This may be different to the URL requested if http-redirect is true
         /// </summary>
         [JsonProperty("url")]
         public string Url 
@@ -233,7 +233,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// The server hostname (PTR)
+        /// The servers hostname (PTR record)
         /// </summary>
         [JsonProperty("serverHostname")]
         public string ServerHostname 
@@ -250,10 +250,10 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// The time taken to load the URL content (in seconds)
+        /// The time taken to load the URL content in seconds
         /// </summary>
         [JsonProperty("loadTime")]
-        public double LoadTime 
+        public int LoadTime 
         { 
             get 
             {
@@ -301,7 +301,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// The HTTP status code this URL responded with
+        /// The HTTP status code this URL responded with. An HTTP status of 0 indicates a network level issue
         /// </summary>
         [JsonProperty("httpStatus")]
         public int HttpStatus 
@@ -318,7 +318,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// Server IP geo-location: ISO 2-letter country code
+        /// The servers IP geo-location: ISO 2-letter country code
         /// </summary>
         [JsonProperty("serverCountryCode")]
         public string ServerCountryCode 
@@ -335,7 +335,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// The encoding type the URL uses
+        /// The encoding format the URL uses
         /// </summary>
         [JsonProperty("contentEncoding")]
         public string ContentEncoding 
@@ -369,7 +369,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// The URL protocol (usually http or https)
+        /// The URL protocol, usually http or https
         /// </summary>
         [JsonProperty("urlProtocol")]
         public string UrlProtocol 
@@ -386,7 +386,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// The content-type the URL points to
+        /// The content-type this URL serves
         /// </summary>
         [JsonProperty("contentType")]
         public string ContentType 
@@ -403,7 +403,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// True if this URL responded with a HTTP redirect
+        /// True if this URL responded with an HTTP redirect
         /// </summary>
         [JsonProperty("httpRedirect")]
         public bool HttpRedirect 

@@ -1,7 +1,7 @@
 /*
  * NeutrinoAPI.PCL
  *
- * This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io )
+ * This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io ).
  */
 using System;
 using System.Collections.Generic;
@@ -21,78 +21,64 @@ namespace NeutrinoAPI.Controllers
     public partial interface ISecurityAndNetworking
     {
         /// <summary>
-        /// Check the reputation of an IP address or domain against a comprehensive list of blacklists and blocklists (DNSBLs)
+        /// Check the reputation of an IP address, domain name, FQDN or URL against a comprehensive list of blacklists and blocklists. See: https://www.neutrinoapi.com/api/host-reputation/
         /// </summary>
-        /// <param name="host">Required parameter: An IPv4 address or a domain name. If you supply a domain name it will be checked against the URI DNSBL list</param>
+        /// <param name="host">Required parameter: An IP address, domain name, FQDN or URL.<br/>If you supply a domain/URL it will be checked against the URI DNSBL lists</param>
+        /// <param name="listRating">Optional parameter: Only check lists with this rating or better</param>
         /// <return>Returns the Models.HostReputationResponse response from the API call</return>
-        Models.HostReputationResponse HostReputation(string host);
+        Models.HostReputationResponse HostReputation(string host, int? listRating = 3);
 
         /// <summary>
-        /// Check the reputation of an IP address or domain against a comprehensive list of blacklists and blocklists (DNSBLs)
+        /// Check the reputation of an IP address, domain name, FQDN or URL against a comprehensive list of blacklists and blocklists. See: https://www.neutrinoapi.com/api/host-reputation/
         /// </summary>
-        /// <param name="host">Required parameter: An IPv4 address or a domain name. If you supply a domain name it will be checked against the URI DNSBL list</param>
+        /// <param name="host">Required parameter: An IP address, domain name, FQDN or URL.<br/>If you supply a domain/URL it will be checked against the URI DNSBL lists</param>
+        /// <param name="listRating">Optional parameter: Only check lists with this rating or better</param>
         /// <return>Returns the Models.HostReputationResponse response from the API call</return>
-        Task<Models.HostReputationResponse> HostReputationAsync(string host);
+        Task<Models.HostReputationResponse> HostReputationAsync(string host, int? listRating = 3);
 
         /// <summary>
-        /// Parse, analyze and retrieve content from the supplied URL
-        /// </summary>
-        /// <param name="url">Required parameter: The URL to process</param>
-        /// <param name="fetchContent">Required parameter: If this URL responds with html, text, json or xml then return the response. This option is useful if you want to perform further processing on the URL content</param>
-        /// <return>Returns the Models.URLInfoResponse response from the API call</return>
-        Models.URLInfoResponse URLInfo(string url, bool fetchContent);
-
-        /// <summary>
-        /// Parse, analyze and retrieve content from the supplied URL
-        /// </summary>
-        /// <param name="url">Required parameter: The URL to process</param>
-        /// <param name="fetchContent">Required parameter: If this URL responds with html, text, json or xml then return the response. This option is useful if you want to perform further processing on the URL content</param>
-        /// <return>Returns the Models.URLInfoResponse response from the API call</return>
-        Task<Models.URLInfoResponse> URLInfoAsync(string url, bool fetchContent);
-
-        /// <summary>
-        /// Analyze and extract provider information for an IP address
+        /// Analyze and extract provider information for an IP address. See: https://www.neutrinoapi.com/api/ip-probe/
         /// </summary>
         /// <param name="ip">Required parameter: IPv4 or IPv6 address</param>
         /// <return>Returns the Models.IPProbeResponse response from the API call</return>
         Models.IPProbeResponse IPProbe(string ip);
 
         /// <summary>
-        /// Analyze and extract provider information for an IP address
+        /// Analyze and extract provider information for an IP address. See: https://www.neutrinoapi.com/api/ip-probe/
         /// </summary>
         /// <param name="ip">Required parameter: IPv4 or IPv6 address</param>
         /// <return>Returns the Models.IPProbeResponse response from the API call</return>
         Task<Models.IPProbeResponse> IPProbeAsync(string ip);
 
         /// <summary>
-        /// The IP Blocklist API will detect potentially malicious or dangerous IP addresses
+        /// The IP Blocklist API will detect potentially malicious or dangerous IP addresses. See: https://www.neutrinoapi.com/api/ip-blocklist/
         /// </summary>
-        /// <param name="ip">Required parameter: An IPv4 address</param>
+        /// <param name="ip">Required parameter: An IPv4 or IPv6 address</param>
         /// <return>Returns the Models.IPBlocklistResponse response from the API call</return>
         Models.IPBlocklistResponse IPBlocklist(string ip);
 
         /// <summary>
-        /// The IP Blocklist API will detect potentially malicious or dangerous IP addresses
+        /// The IP Blocklist API will detect potentially malicious or dangerous IP addresses. See: https://www.neutrinoapi.com/api/ip-blocklist/
         /// </summary>
-        /// <param name="ip">Required parameter: An IPv4 address</param>
+        /// <param name="ip">Required parameter: An IPv4 or IPv6 address</param>
         /// <return>Returns the Models.IPBlocklistResponse response from the API call</return>
         Task<Models.IPBlocklistResponse> IPBlocklistAsync(string ip);
 
         /// <summary>
-        /// SMTP based email address verification
+        /// SMTP based email address verification. See: https://www.neutrinoapi.com/api/email-verify/
         /// </summary>
         /// <param name="email">Required parameter: An email address</param>
         /// <param name="fixTypos">Optional parameter: Automatically attempt to fix typos in the address</param>
         /// <return>Returns the Models.EmailVerifyResponse response from the API call</return>
-        Models.EmailVerifyResponse EmailVerify(string email, bool? fixTypos = null);
+        Models.EmailVerifyResponse EmailVerify(string email, bool? fixTypos = false);
 
         /// <summary>
-        /// SMTP based email address verification
+        /// SMTP based email address verification. See: https://www.neutrinoapi.com/api/email-verify/
         /// </summary>
         /// <param name="email">Required parameter: An email address</param>
         /// <param name="fixTypos">Optional parameter: Automatically attempt to fix typos in the address</param>
         /// <return>Returns the Models.EmailVerifyResponse response from the API call</return>
-        Task<Models.EmailVerifyResponse> EmailVerifyAsync(string email, bool? fixTypos = null);
+        Task<Models.EmailVerifyResponse> EmailVerifyAsync(string email, bool? fixTypos = false);
 
     }
 } 

@@ -1,7 +1,7 @@
 /*
  * NeutrinoAPI.PCL
  *
- * This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io )
+ * This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io ).
  */
 using System;
 using System.IO;
@@ -22,7 +22,7 @@ namespace NeutrinoAPI.Models
     {
         // These fields hold the values for the public properties.
         private bool valid;
-        private string internationalCallingCode;
+        private int internationalCallingCode;
         private string countryCode;
         private string location;
         private bool isMobile;
@@ -30,6 +30,8 @@ namespace NeutrinoAPI.Models
         private string internationalNumber;
         private string localNumber;
         private string country;
+        private string countryCode3;
+        private string currencyCode;
 
         /// <summary>
         /// Is this a valid phone number
@@ -49,10 +51,10 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// Numbers international calling code
+        /// The international calling code
         /// </summary>
         [JsonProperty("internationalCallingCode")]
-        public string InternationalCallingCode 
+        public int InternationalCallingCode 
         { 
             get 
             {
@@ -66,7 +68,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// Number location ISO 2-letter country code
+        /// The phone number country as an ISO 2-letter country code
         /// </summary>
         [JsonProperty("countryCode")]
         public string CountryCode 
@@ -83,7 +85,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// Number location (could be a city, region or country)
+        /// The phone number location. Could be a city, region or country depending on the type of number
         /// </summary>
         [JsonProperty("location")]
         public string Location 
@@ -100,7 +102,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// Is this a mobile number
+        /// True if this is a mobile number (only true with 100% certainty, if the number type is unknown this value will be false)
         /// </summary>
         [JsonProperty("isMobile")]
         public bool IsMobile 
@@ -117,7 +119,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// The number type, possible values are: mobile, fixed-line, premium-rate, toll-free, voip, unknown
+        /// The predicted number type.<br/>Note: type detection is not possible in some countries which have no predictable prefix pattern (you can use the HLR Lookup API in these cases)<br/> Possible values are:<br/><ul><li>mobile</li><li>fixed-line</li><li>premium-rate</li><li>toll-free</li><li>voip</li><li>unknown (use HLR lookup instead)</li></ul>
         /// </summary>
         [JsonProperty("type")]
         public string Type 
@@ -134,7 +136,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// Number represented in international format
+        /// The number represented in full international format (E.164)
         /// </summary>
         [JsonProperty("internationalNumber")]
         public string InternationalNumber 
@@ -151,7 +153,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// Number represented in local format
+        /// The number represented in local dialing format
         /// </summary>
         [JsonProperty("localNumber")]
         public string LocalNumber 
@@ -181,6 +183,40 @@ namespace NeutrinoAPI.Models
             {
                 this.country = value;
                 onPropertyChanged("Country");
+            }
+        }
+
+        /// <summary>
+        /// The phone number country as an ISO 3-letter country code
+        /// </summary>
+        [JsonProperty("countryCode3")]
+        public string CountryCode3 
+        { 
+            get 
+            {
+                return this.countryCode3; 
+            } 
+            set 
+            {
+                this.countryCode3 = value;
+                onPropertyChanged("CountryCode3");
+            }
+        }
+
+        /// <summary>
+        /// ISO 4217 currency code associated with the country
+        /// </summary>
+        [JsonProperty("currencyCode")]
+        public string CurrencyCode 
+        { 
+            get 
+            {
+                return this.currencyCode; 
+            } 
+            set 
+            {
+                this.currencyCode = value;
+                onPropertyChanged("CurrencyCode");
             }
         }
     }

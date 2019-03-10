@@ -2,7 +2,7 @@
 <!--
  - NeutrinoAPI.PCL
  -
- - This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io )
+ - This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io ).
 -->
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
@@ -10,7 +10,7 @@
     <AssemblyName>NeutrinoAPI.PCL</AssemblyName>
     <OutputType>Library</OutputType>
     <OutputPath>bin/DEBUG/</OutputPath>
-    <ProjectGuid>{c8032655-e61b-4845-924f-79cc313c8e68}</ProjectGuid>
+    <ProjectGuid>{8bb66aa7-3f95-4d5f-acd1-dbf7095337bc}</ProjectGuid>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
     <NuGetPackageImportStamp>ee2bb91c</NuGetPackageImportStamp>
@@ -71,26 +71,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\BINLookupResponse.cs" />
+    <Compile Include="Models\IPProbeResponse.cs" />
     <Compile Include="Models\EmailVerifyResponse.cs" />
     <Compile Include="Models\IPBlocklistResponse.cs" />
     <Compile Include="Models\IPInfoResponse.cs" />
     <Compile Include="Models\PhoneValidateResponse.cs" />
     <Compile Include="Models\EmailValidateResponse.cs" />
     <Compile Include="Models\URLInfoResponse.cs" />
-    <Compile Include="Models\HTMLExtractResponse.cs" />
     <Compile Include="Models\HLRLookupResponse.cs" />
-    <Compile Include="Models\IPProbeResponse.cs" />
     <Compile Include="Models\Location.cs" />
-    <Compile Include="Models\GeocodeAddressResponse.cs" />
+    <Compile Include="Models\BrowserBotResponse.cs" />
+    <Compile Include="Models\ConvertResponse.cs" />
     <Compile Include="Models\BadWordFilterResponse.cs" />
     <Compile Include="Models\PhonePlaybackResponse.cs" />
     <Compile Include="Models\GeocodeReverseResponse.cs" />
     <Compile Include="Models\Blacklist.cs" />
+    <Compile Include="Models\SMSMessageResponse.cs" />
     <Compile Include="Models\SMSVerifyResponse.cs" />
     <Compile Include="Models\HostReputationResponse.cs" />
     <Compile Include="Models\PhoneVerifyResponse.cs" />
     <Compile Include="Models\VerifySecurityCodeResponse.cs" />
-    <Compile Include="Models\ConvertResponse.cs" />
+    <Compile Include="Models\GeocodeAddressResponse.cs" />
     <Compile Include="Models\UserAgentInfoResponse.cs" />
     <Compile Include="Exceptions\APIErrorException.cs" />
     <Compile Include="Controllers\Imaging.cs" />
@@ -105,6 +106,8 @@
     <Compile Include="Controllers\IGeolocation.cs" />
     <Compile Include="Controllers\ECommerce.cs" />
     <Compile Include="Controllers\IECommerce.cs" />
+    <Compile Include="Controllers\WWW.cs" />
+    <Compile Include="Controllers\IWWW.cs" />
     <Compile Include="Http\Client\IHTTPClient.cs" />
     <Compile Include="Http\Client\HTTPClient.cs" />
     <Compile Include="Http\Client\HttpEventHandlers.cs" />

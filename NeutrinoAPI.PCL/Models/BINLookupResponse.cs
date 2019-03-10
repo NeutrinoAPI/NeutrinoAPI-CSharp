@@ -1,7 +1,7 @@
 /*
  * NeutrinoAPI.PCL
  *
- * This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io )
+ * This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io ).
  */
 using System;
 using System.IO;
@@ -37,9 +37,12 @@ namespace NeutrinoAPI.Models
         private string ipRegion;
         private string cardBrand;
         private string issuerPhone;
+        private string countryCode3;
+        private string currencyCode;
+        private string ipCountryCode3;
 
         /// <summary>
-        /// Full country name of the issuer
+        /// The full country name of the issuer
         /// </summary>
         [JsonProperty("country")]
         public string Country 
@@ -56,7 +59,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// The city name (if detectable) from the customer IP
+        /// The city of the customers IP (if detectable)
         /// </summary>
         [JsonProperty("ipCity")]
         public string IpCity 
@@ -73,7 +76,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// True if the customer IP address country matches the BIN country
+        /// True if the customers IP country matches the BIN country
         /// </summary>
         [JsonProperty("ipMatchesBin")]
         public bool IpMatchesBin 
@@ -107,7 +110,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// The card category (if known)
+        /// The card category. There are many different card categories the most common card categories are: CLASSIC, BUSINESS, CORPORATE, PLATINUM, PREPAID
         /// </summary>
         [JsonProperty("cardCategory")]
         public string CardCategory 
@@ -124,7 +127,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// The ISO 2-letter country code detected from the customer IP
+        /// The ISO 2-letter country code of the customers IP
         /// </summary>
         [JsonProperty("ipCountryCode")]
         public string IpCountryCode 
@@ -141,7 +144,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// The country detected from the customer IP
+        /// The country of the customers IP
         /// </summary>
         [JsonProperty("ipCountry")]
         public string IpCountry 
@@ -158,7 +161,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// The card issuer (if known)
+        /// The card issuer
         /// </summary>
         [JsonProperty("issuer")]
         public string Issuer 
@@ -175,7 +178,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// True if the customer IP is listed on one of our blocklists, see the IP Blocklist API for more details
+        /// True if the customers IP is listed on one of our blocklists, see the <a href="http://www.neutrinoapi.com/api/ip-blocklist/">IP Blocklist API</a>
         /// </summary>
         [JsonProperty("ipBlocklisted")]
         public bool IpBlocklisted 
@@ -226,7 +229,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// The card issuer website (if known)
+        /// The card issuers website
         /// </summary>
         [JsonProperty("issuerWebsite")]
         public string IssuerWebsite 
@@ -243,7 +246,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// ISO 2-letter country code of the issuer
+        /// The ISO 2-letter country code of the issuer
         /// </summary>
         [JsonProperty("countryCode")]
         public string CountryCode 
@@ -260,7 +263,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// The region name (if detectable) from the customer IP
+        /// The region of the customers IP (if detectable)
         /// </summary>
         [JsonProperty("ipRegion")]
         public string IpRegion 
@@ -294,7 +297,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// The card issuer phone number (if known)
+        /// The card issuers phone number
         /// </summary>
         [JsonProperty("issuerPhone")]
         public string IssuerPhone 
@@ -307,6 +310,57 @@ namespace NeutrinoAPI.Models
             {
                 this.issuerPhone = value;
                 onPropertyChanged("IssuerPhone");
+            }
+        }
+
+        /// <summary>
+        /// The ISO 3-letter country code of the issuer
+        /// </summary>
+        [JsonProperty("countryCode3")]
+        public string CountryCode3 
+        { 
+            get 
+            {
+                return this.countryCode3; 
+            } 
+            set 
+            {
+                this.countryCode3 = value;
+                onPropertyChanged("CountryCode3");
+            }
+        }
+
+        /// <summary>
+        /// ISO 4217 currency code associated with the country of the issuer
+        /// </summary>
+        [JsonProperty("currencyCode")]
+        public string CurrencyCode 
+        { 
+            get 
+            {
+                return this.currencyCode; 
+            } 
+            set 
+            {
+                this.currencyCode = value;
+                onPropertyChanged("CurrencyCode");
+            }
+        }
+
+        /// <summary>
+        /// The ISO 3-letter country code of the customers IP
+        /// </summary>
+        [JsonProperty("ipCountryCode3")]
+        public string IpCountryCode3 
+        { 
+            get 
+            {
+                return this.ipCountryCode3; 
+            } 
+            set 
+            {
+                this.ipCountryCode3 = value;
+                onPropertyChanged("IpCountryCode3");
             }
         }
     }

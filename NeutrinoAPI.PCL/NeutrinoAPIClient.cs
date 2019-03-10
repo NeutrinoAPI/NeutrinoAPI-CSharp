@@ -1,7 +1,7 @@
 /*
  * NeutrinoAPI.PCL
  *
- * This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io )
+ * This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io ).
  */
 using System;
 using NeutrinoAPI.Controllers;
@@ -76,6 +76,17 @@ namespace NeutrinoAPI
             get
             {
                 return NeutrinoAPI.Controllers.ECommerce.Instance;
+            }
+        }
+
+        /// <summary>
+        /// Singleton access to WWW controller
+        /// </summary>
+        public IWWW WWW
+        {
+            get
+            {
+                return NeutrinoAPI.Controllers.WWW.Instance;
             }
         }
         /// <summary>

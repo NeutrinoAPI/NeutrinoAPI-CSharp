@@ -1,7 +1,7 @@
 /*
  * NeutrinoAPI.PCL
  *
- * This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io )
+ * This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io ).
  */
 using System;
 using System.IO;
@@ -42,9 +42,9 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// Is this a valid phone number
+        /// True if this a valid phone number
         /// </summary>
-        [JsonProperty("number-valid")]
+        [JsonProperty("numberValid")]
         public bool NumberValid 
         { 
             get 

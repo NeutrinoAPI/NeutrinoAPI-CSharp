@@ -1,7 +1,7 @@
 /*
  * NeutrinoAPI.PCL
  *
- * This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io )
+ * This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io ).
  */
 using System;
 using System.Collections.Generic;
@@ -53,8 +53,8 @@ namespace NeutrinoAPI.Controllers
         /// Resize an image and output as either JPEG or PNG. See: https://www.neutrinoapi.com/api/image-resize/
         /// </summary>
         /// <param name="imageUrl">Required parameter: The URL to the source image</param>
-        /// <param name="width">Required parameter: Width to resize to (in px)</param>
-        /// <param name="height">Required parameter: Height to resize to (in px)</param>
+        /// <param name="width">Required parameter: The width to resize to (in px) while preserving aspect ratio</param>
+        /// <param name="height">Required parameter: The height to resize to (in px) while preserving aspect ratio</param>
         /// <param name="format">Optional parameter: The output image format, can be either png or jpg</param>
         /// <return>Returns the Stream response from the API call</return>
         public Stream ImageResize(
@@ -72,8 +72,8 @@ namespace NeutrinoAPI.Controllers
         /// Resize an image and output as either JPEG or PNG. See: https://www.neutrinoapi.com/api/image-resize/
         /// </summary>
         /// <param name="imageUrl">Required parameter: The URL to the source image</param>
-        /// <param name="width">Required parameter: Width to resize to (in px)</param>
-        /// <param name="height">Required parameter: Height to resize to (in px)</param>
+        /// <param name="width">Required parameter: The width to resize to (in px) while preserving aspect ratio</param>
+        /// <param name="height">Required parameter: The height to resize to (in px) while preserving aspect ratio</param>
         /// <param name="format">Optional parameter: The output image format, can be either png or jpg</param>
         /// <return>Returns the Stream response from the API call</return>
         public async Task<Stream> ImageResizeAsync(
@@ -142,13 +142,13 @@ namespace NeutrinoAPI.Controllers
         /// <param name="content">Required parameter: The content to encode into the QR code (e.g. a URL or a phone number)</param>
         /// <param name="width">Optional parameter: The width of the QR code (in px)</param>
         /// <param name="height">Optional parameter: The height of the QR code (in px)</param>
-        /// <param name="fgColor">Optional parameter: The QR code foreground color (you should always use a dark color for this)</param>
-        /// <param name="bgColor">Optional parameter: The QR code background color (you should always use a light color for this)</param>
+        /// <param name="fgColor">Optional parameter: The QR code foreground color</param>
+        /// <param name="bgColor">Optional parameter: The QR code background color</param>
         /// <return>Returns the Stream response from the API call</return>
         public Stream QRCode(
                 string content,
-                int? width = 250,
-                int? height = 250,
+                int? width = 256,
+                int? height = 256,
                 string fgColor = "#000000",
                 string bgColor = "#ffffff")
         {
@@ -163,13 +163,13 @@ namespace NeutrinoAPI.Controllers
         /// <param name="content">Required parameter: The content to encode into the QR code (e.g. a URL or a phone number)</param>
         /// <param name="width">Optional parameter: The width of the QR code (in px)</param>
         /// <param name="height">Optional parameter: The height of the QR code (in px)</param>
-        /// <param name="fgColor">Optional parameter: The QR code foreground color (you should always use a dark color for this)</param>
-        /// <param name="bgColor">Optional parameter: The QR code background color (you should always use a light color for this)</param>
+        /// <param name="fgColor">Optional parameter: The QR code foreground color</param>
+        /// <param name="bgColor">Optional parameter: The QR code background color</param>
         /// <return>Returns the Stream response from the API call</return>
         public async Task<Stream> QRCodeAsync(
                 string content,
-                int? width = 250,
-                int? height = 250,
+                int? width = 256,
+                int? height = 256,
                 string fgColor = "#000000",
                 string bgColor = "#ffffff")
         {
@@ -183,7 +183,7 @@ namespace NeutrinoAPI.Controllers
             //process optional query parameters
             APIHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
             {
-                { "width", (null != width) ? width : 250 },
+                { "width", (null != width) ? width : 256 },
                 { "user-id", Configuration.UserId },
                 { "api-key", Configuration.ApiKey }
             },ArrayDeserializationFormat,ParameterSeparator);
@@ -202,7 +202,7 @@ namespace NeutrinoAPI.Controllers
             var _fields = new List<KeyValuePair<string, Object>>()
             {
                 new KeyValuePair<string, object>( "content", content ),
-                new KeyValuePair<string, object>( "height", (null != height) ? height : 250 ),
+                new KeyValuePair<string, object>( "height", (null != height) ? height : 256 ),
                 new KeyValuePair<string, object>( "fg-color", (null != fgColor) ? fgColor : "#000000" ),
                 new KeyValuePair<string, object>( "bg-color", (null != bgColor) ? bgColor : "#ffffff" )
             };
@@ -235,9 +235,9 @@ namespace NeutrinoAPI.Controllers
         /// <param name="watermarkUrl">Required parameter: The URL to the watermark image</param>
         /// <param name="opacity">Optional parameter: The opacity of the watermark (0 to 100)</param>
         /// <param name="format">Optional parameter: The output image format, can be either png or jpg</param>
-        /// <param name="position">Optional parameter: The position of the watermark image, possible values are: center, top-left, top-center, top-right, bottom-left, bottom-center, bottom-right</param>
-        /// <param name="width">Optional parameter: If set resize the resulting image to this width (preserving aspect ratio)</param>
-        /// <param name="height">Optional parameter: If set resize the resulting image to this height (preserving aspect ratio)</param>
+        /// <param name="position">Optional parameter: The position of the watermark image, possible values are:<br/>center, top-left, top-center, top-right, bottom-left, bottom-center, bottom-right</param>
+        /// <param name="width">Optional parameter: If set resize the resulting image to this width (in px) while preserving aspect ratio</param>
+        /// <param name="height">Optional parameter: If set resize the resulting image to this height (in px) while preserving aspect ratio</param>
         /// <return>Returns the Stream response from the API call</return>
         public Stream ImageWatermark(
                 string imageUrl,
@@ -260,9 +260,9 @@ namespace NeutrinoAPI.Controllers
         /// <param name="watermarkUrl">Required parameter: The URL to the watermark image</param>
         /// <param name="opacity">Optional parameter: The opacity of the watermark (0 to 100)</param>
         /// <param name="format">Optional parameter: The output image format, can be either png or jpg</param>
-        /// <param name="position">Optional parameter: The position of the watermark image, possible values are: center, top-left, top-center, top-right, bottom-left, bottom-center, bottom-right</param>
-        /// <param name="width">Optional parameter: If set resize the resulting image to this width (preserving aspect ratio)</param>
-        /// <param name="height">Optional parameter: If set resize the resulting image to this height (preserving aspect ratio)</param>
+        /// <param name="position">Optional parameter: The position of the watermark image, possible values are:<br/>center, top-left, top-center, top-right, bottom-left, bottom-center, bottom-right</param>
+        /// <param name="width">Optional parameter: If set resize the resulting image to this width (in px) while preserving aspect ratio</param>
+        /// <param name="height">Optional parameter: If set resize the resulting image to this height (in px) while preserving aspect ratio</param>
         /// <return>Returns the Stream response from the API call</return>
         public async Task<Stream> ImageWatermarkAsync(
                 string imageUrl,
@@ -331,7 +331,7 @@ namespace NeutrinoAPI.Controllers
         }
 
         /// <summary>
-        /// Render HTML and HTML5 content to PDF, JPG or PNG
+        /// Render HTML content to PDF, JPG or PNG. See: https://www.neutrinoapi.com/api/html5-render/
         /// </summary>
         /// <param name="content">Required parameter: The HTML content. This can be either a URL to load HTML from or an actual HTML content string</param>
         /// <param name="format">Optional parameter: Which format to output, available options are: PDF, PNG, JPG</param>
@@ -380,7 +380,7 @@ namespace NeutrinoAPI.Controllers
                 int? marginTop = 0,
                 int? marginBottom = 0,
                 bool? landscape = false,
-                double? zoom = 1.0,
+                int? zoom = 1.0,
                 bool? grayscale = false,
                 bool? mediaPrint = false,
                 bool? mediaQueries = false,
@@ -388,13 +388,13 @@ namespace NeutrinoAPI.Controllers
                 string css = null,
                 int? imageWidth = 1024,
                 int? imageHeight = null,
-                int? renderDelay = null,
+                int? renderDelay = 0,
                 string headerTextLeft = null,
                 string headerTextCenter = null,
                 string headerTextRight = null,
                 int? headerSize = 9,
                 string headerFont = "Courier",
-                string headerFontSize = "11",
+                int? headerFontSize = 11,
                 bool? headerLine = false,
                 string footerTextLeft = null,
                 string footerTextCenter = null,
@@ -412,7 +412,7 @@ namespace NeutrinoAPI.Controllers
         }
 
         /// <summary>
-        /// Render HTML and HTML5 content to PDF, JPG or PNG
+        /// Render HTML content to PDF, JPG or PNG. See: https://www.neutrinoapi.com/api/html5-render/
         /// </summary>
         /// <param name="content">Required parameter: The HTML content. This can be either a URL to load HTML from or an actual HTML content string</param>
         /// <param name="format">Optional parameter: Which format to output, available options are: PDF, PNG, JPG</param>
@@ -461,7 +461,7 @@ namespace NeutrinoAPI.Controllers
                 int? marginTop = 0,
                 int? marginBottom = 0,
                 bool? landscape = false,
-                double? zoom = 1.0,
+                int? zoom = 1.0,
                 bool? grayscale = false,
                 bool? mediaPrint = false,
                 bool? mediaQueries = false,
@@ -469,13 +469,13 @@ namespace NeutrinoAPI.Controllers
                 string css = null,
                 int? imageWidth = 1024,
                 int? imageHeight = null,
-                int? renderDelay = null,
+                int? renderDelay = 0,
                 string headerTextLeft = null,
                 string headerTextCenter = null,
                 string headerTextRight = null,
                 int? headerSize = 9,
                 string headerFont = "Courier",
-                string headerFontSize = "11",
+                int? headerFontSize = 11,
                 bool? headerLine = false,
                 string footerTextLeft = null,
                 string footerTextCenter = null,
@@ -533,13 +533,13 @@ namespace NeutrinoAPI.Controllers
                 new KeyValuePair<string, object>( "css", css ),
                 new KeyValuePair<string, object>( "image-width", (null != imageWidth) ? imageWidth : 1024 ),
                 new KeyValuePair<string, object>( "image-height", imageHeight ),
-                new KeyValuePair<string, object>( "render-delay", renderDelay ),
+                new KeyValuePair<string, object>( "render-delay", (null != renderDelay) ? renderDelay : 0 ),
                 new KeyValuePair<string, object>( "header-text-left", headerTextLeft ),
                 new KeyValuePair<string, object>( "header-text-center", headerTextCenter ),
                 new KeyValuePair<string, object>( "header-text-right", headerTextRight ),
                 new KeyValuePair<string, object>( "header-size", (null != headerSize) ? headerSize : 9 ),
                 new KeyValuePair<string, object>( "header-font", (null != headerFont) ? headerFont : "Courier" ),
-                new KeyValuePair<string, object>( "header-font-size", (null != headerFontSize) ? headerFontSize : "11" ),
+                new KeyValuePair<string, object>( "header-font-size", (null != headerFontSize) ? headerFontSize : 11 ),
                 new KeyValuePair<string, object>( "header-line", (null != headerLine) ? headerLine : false ),
                 new KeyValuePair<string, object>( "footer-text-left", footerTextLeft ),
                 new KeyValuePair<string, object>( "footer-text-center", footerTextCenter ),

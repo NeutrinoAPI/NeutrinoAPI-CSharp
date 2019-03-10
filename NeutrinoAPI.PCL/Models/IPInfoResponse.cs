@@ -1,7 +1,7 @@
 /*
  * NeutrinoAPI.PCL
  *
- * This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io )
+ * This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io ).
  */
 using System;
 using System.IO;
@@ -26,13 +26,16 @@ namespace NeutrinoAPI.Models
         private string hostname;
         private string city;
         private string countryCode;
-        private double latitude;
+        private int latitude;
         private string region;
-        private double longitude;
+        private int longitude;
         private string continentCode;
+        private string ip;
+        private string countryCode3;
+        private string currencyCode;
 
         /// <summary>
-        /// Is this a valid IP address
+        /// Is this a valid IPv4 or IPv6 address
         /// </summary>
         [JsonProperty("valid")]
         public bool Valid 
@@ -120,7 +123,7 @@ namespace NeutrinoAPI.Models
         /// Location latitude
         /// </summary>
         [JsonProperty("latitude")]
-        public double Latitude 
+        public int Latitude 
         { 
             get 
             {
@@ -154,7 +157,7 @@ namespace NeutrinoAPI.Models
         /// Location longitude
         /// </summary>
         [JsonProperty("longitude")]
-        public double Longitude 
+        public int Longitude 
         { 
             get 
             {
@@ -181,6 +184,57 @@ namespace NeutrinoAPI.Models
             {
                 this.continentCode = value;
                 onPropertyChanged("ContinentCode");
+            }
+        }
+
+        /// <summary>
+        /// The IP address
+        /// </summary>
+        [JsonProperty("ip")]
+        public string Ip 
+        { 
+            get 
+            {
+                return this.ip; 
+            } 
+            set 
+            {
+                this.ip = value;
+                onPropertyChanged("Ip");
+            }
+        }
+
+        /// <summary>
+        /// ISO 3-letter country code
+        /// </summary>
+        [JsonProperty("countryCode3")]
+        public string CountryCode3 
+        { 
+            get 
+            {
+                return this.countryCode3; 
+            } 
+            set 
+            {
+                this.countryCode3 = value;
+                onPropertyChanged("CountryCode3");
+            }
+        }
+
+        /// <summary>
+        /// ISO 4217 currency code associated with the country
+        /// </summary>
+        [JsonProperty("currencyCode")]
+        public string CurrencyCode 
+        { 
+            get 
+            {
+                return this.currencyCode; 
+            } 
+            set 
+            {
+                this.currencyCode = value;
+                onPropertyChanged("CurrencyCode");
             }
         }
     }

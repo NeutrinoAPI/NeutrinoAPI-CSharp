@@ -94,6 +94,7 @@ NeutrinoAPIClient client = new NeutrinoAPIClient(userId, apiKey);
 * [SecurityAndNetworking](#security_and_networking)
 * [Geolocation](#geolocation)
 * [ECommerce](#e_commerce)
+* [WWW](#www)
 
 ## <a name="imaging"></a>![Class: ](https://apidocs.io/img/class.png "NeutrinoAPI.Controllers.Imaging") Imaging
 
@@ -123,8 +124,8 @@ Task<Stream> ImageResize(
 | Parameter | Tags | Description |
 |-----------|------|-------------|
 | imageUrl |  ``` Required ```  | The URL to the source image |
-| width |  ``` Required ```  | Width to resize to (in px) |
-| height |  ``` Required ```  | Height to resize to (in px) |
+| width |  ``` Required ```  | The width to resize to (in px) while preserving aspect ratio |
+| height |  ``` Required ```  | The height to resize to (in px) while preserving aspect ratio |
 | format |  ``` Optional ```  ``` DefaultValue ```  | The output image format, can be either png or jpg |
 
 
@@ -132,8 +133,8 @@ Task<Stream> ImageResize(
 
 ```csharp
 string imageUrl = "image-url";
-int width = 136;
-int height = 136;
+int width = 176;
+int height = 176;
 string format = "png";
 
 Stream result = await imaging.ImageResize(imageUrl, width, height, format);
@@ -149,8 +150,8 @@ Stream result = await imaging.ImageResize(imageUrl, width, height, format);
 ```csharp
 Task<Stream> QRCode(
         string content,
-        int? width = 250,
-        int? height = 250,
+        int? width = 256,
+        int? height = 256,
         string fgColor = "#000000",
         string bgColor = "#ffffff")
 ```
@@ -162,16 +163,16 @@ Task<Stream> QRCode(
 | content |  ``` Required ```  | The content to encode into the QR code (e.g. a URL or a phone number) |
 | width |  ``` Optional ```  ``` DefaultValue ```  | The width of the QR code (in px) |
 | height |  ``` Optional ```  ``` DefaultValue ```  | The height of the QR code (in px) |
-| fgColor |  ``` Optional ```  ``` DefaultValue ```  | The QR code foreground color (you should always use a dark color for this) |
-| bgColor |  ``` Optional ```  ``` DefaultValue ```  | The QR code background color (you should always use a light color for this) |
+| fgColor |  ``` Optional ```  ``` DefaultValue ```  | The QR code foreground color |
+| bgColor |  ``` Optional ```  ``` DefaultValue ```  | The QR code background color |
 
 
 #### Example Usage
 
 ```csharp
 string content = "content";
-int? width = 250;
-int? height = 250;
+int? width = 256;
+int? height = 256;
 string fgColor = "#000000";
 string bgColor = "#ffffff";
 
@@ -204,9 +205,9 @@ Task<Stream> ImageWatermark(
 | watermarkUrl |  ``` Required ```  | The URL to the watermark image |
 | opacity |  ``` Optional ```  ``` DefaultValue ```  | The opacity of the watermark (0 to 100) |
 | format |  ``` Optional ```  ``` DefaultValue ```  | The output image format, can be either png or jpg |
-| position |  ``` Optional ```  ``` DefaultValue ```  | The position of the watermark image, possible values are: center, top-left, top-center, top-right, bottom-left, bottom-center, bottom-right |
-| width |  ``` Optional ```  | If set resize the resulting image to this width (preserving aspect ratio) |
-| height |  ``` Optional ```  | If set resize the resulting image to this height (preserving aspect ratio) |
+| position |  ``` Optional ```  ``` DefaultValue ```  | The position of the watermark image, possible values are:<br/>center, top-left, top-center, top-right, bottom-left, bottom-center, bottom-right |
+| width |  ``` Optional ```  | If set resize the resulting image to this width (in px) while preserving aspect ratio |
+| height |  ``` Optional ```  | If set resize the resulting image to this height (in px) while preserving aspect ratio |
 
 
 #### Example Usage
@@ -217,8 +218,8 @@ string watermarkUrl = "watermark-url";
 int? opacity = 50;
 string format = "png";
 string position = "center";
-int? width = 136;
-int? height = 136;
+int? width = 176;
+int? height = 176;
 
 Stream result = await imaging.ImageWatermark(imageUrl, watermarkUrl, opacity, format, position, width, height);
 
@@ -227,7 +228,7 @@ Stream result = await imaging.ImageWatermark(imageUrl, watermarkUrl, opacity, fo
 
 ### <a name="html5_render"></a>![Method: ](https://apidocs.io/img/method.png "NeutrinoAPI.Controllers.Imaging.HTML5Render") HTML5Render
 
-> Render HTML and HTML5 content to PDF, JPG or PNG
+> Render HTML content to PDF, JPG or PNG. See: https://www.neutrinoapi.com/api/html5-render/
 
 
 ```csharp
@@ -242,7 +243,7 @@ Task<Stream> HTML5Render(
         int? marginTop = 0,
         int? marginBottom = 0,
         bool? landscape = false,
-        double? zoom = 1.0,
+        int? zoom = 1.0,
         bool? grayscale = false,
         bool? mediaPrint = false,
         bool? mediaQueries = false,
@@ -250,13 +251,13 @@ Task<Stream> HTML5Render(
         string css = null,
         int? imageWidth = 1024,
         int? imageHeight = null,
-        int? renderDelay = null,
+        int? renderDelay = 0,
         string headerTextLeft = null,
         string headerTextCenter = null,
         string headerTextRight = null,
         int? headerSize = 9,
         string headerFont = "Courier",
-        string headerFontSize = "11",
+        int? headerFontSize = 11,
         bool? headerLine = false,
         string footerTextLeft = null,
         string footerTextCenter = null,
@@ -291,7 +292,7 @@ Task<Stream> HTML5Render(
 | css |  ``` Optional ```  | Inject custom CSS into the HTML. e.g. 'body { background-color: red;}' |
 | imageWidth |  ``` Optional ```  ``` DefaultValue ```  | If rendering to an image format (PNG or JPG) use this image width (in pixels) |
 | imageHeight |  ``` Optional ```  | If rendering to an image format (PNG or JPG) use this image height (in pixels). The default is automatic which dynamically sets the image height based on the content |
-| renderDelay |  ``` Optional ```  | Number of milliseconds to wait before rendering the page (can be useful for pages with animations etc) |
+| renderDelay |  ``` Optional ```  ``` DefaultValue ```  | Number of milliseconds to wait before rendering the page (can be useful for pages with animations etc) |
 | headerTextLeft |  ``` Optional ```  | Text to print to the left-hand side header of each page. e.g. 'My header - Page {page_number} of {total_pages}' |
 | headerTextCenter |  ``` Optional ```  | Text to print to the center header of each page |
 | headerTextRight |  ``` Optional ```  | Text to print to the right-hand side header of each page |
@@ -323,21 +324,21 @@ int? marginRight = 0;
 int? marginTop = 0;
 int? marginBottom = 0;
 bool? landscape = false;
-double? zoom = 1.0;
+int? zoom = 1.0;
 bool? grayscale = false;
 bool? mediaPrint = false;
 bool? mediaQueries = false;
 bool? forms = false;
 string css = "css";
 int? imageWidth = 1024;
-int? imageHeight = 94;
-int? renderDelay = 94;
+int? imageHeight = 134;
+int? renderDelay = 0;
 string headerTextLeft = "header-text-left";
 string headerTextCenter = "header-text-center";
 string headerTextRight = "header-text-right";
 int? headerSize = 9;
 string headerFont = "Courier";
-string headerFontSize = "11";
+int? headerFontSize = 11;
 bool? headerLine = false;
 string footerTextLeft = "footer-text-left";
 string footerTextCenter = "footer-text-center";
@@ -346,8 +347,8 @@ int? footerSize = 9;
 string footerFont = "Courier";
 int? footerFontSize = 11;
 bool? footerLine = false;
-int? pageWidth = 94;
-int? pageHeight = 94;
+int? pageWidth = 134;
+int? pageHeight = 134;
 
 Stream result = await imaging.HTML5Render(content, format, pageSize, title, margin, marginLeft, marginRight, marginTop, marginBottom, landscape, zoom, grayscale, mediaPrint, mediaQueries, forms, css, imageWidth, imageHeight, renderDelay, headerTextLeft, headerTextCenter, headerTextRight, headerSize, headerFont, headerFontSize, headerLine, footerTextLeft, footerTextCenter, footerTextRight, footerSize, footerFont, footerFontSize, footerLine, pageWidth, pageHeight);
 
@@ -368,7 +369,7 @@ ITelephony telephony = client.Telephony;
 
 ### <a name="hlr_lookup"></a>![Method: ](https://apidocs.io/img/method.png "NeutrinoAPI.Controllers.Telephony.HLRLookup") HLRLookup
 
-> Connect to the global mobile cellular network and retrieve the status of a mobile device
+> Connect to the global mobile cellular network and retrieve the status of a mobile device. See: https://www.neutrinoapi.com/api/hlr-lookup/
 
 
 ```csharp
@@ -380,7 +381,7 @@ Task<Models.HLRLookupResponse> HLRLookup(string number, string countryCode = nul
 | Parameter | Tags | Description |
 |-----------|------|-------------|
 | number |  ``` Required ```  | A phone number |
-| countryCode |  ``` Optional ```  | ISO 2-letter country code, assume numbers are based in this country. If not set numbers are assumed to be in international format (with or without the leading + sign) |
+| countryCode |  ``` Optional ```  | ISO 2-letter country code, assume numbers are based in this country.<br/>If not set numbers are assumed to be in international format (with or without the leading + sign) |
 
 
 #### Example Usage
@@ -396,7 +397,7 @@ Models.HLRLookupResponse result = await telephony.HLRLookup(number, countryCode)
 
 ### <a name="phone_playback"></a>![Method: ](https://apidocs.io/img/method.png "NeutrinoAPI.Controllers.Telephony.PhonePlayback") PhonePlayback
 
-> Make an automated call to any valid phone number and playback an audio message
+> Make an automated call to any valid phone number and playback an audio message. See: https://www.neutrinoapi.com/api/phone-playback/
 
 
 ```csharp
@@ -407,8 +408,8 @@ Task<Models.PhonePlaybackResponse> PhonePlayback(string number, string audioUrl)
 
 | Parameter | Tags | Description |
 |-----------|------|-------------|
-| number |  ``` Required ```  | The phone number to call. Must be valid international format |
-| audioUrl |  ``` Required ```  | A URL to a valid audio file. Accepted audio formats are: MP3, WAV, OGG |
+| number |  ``` Required ```  | The phone number to call. Must be in valid international format |
+| audioUrl |  ``` Required ```  | A URL to a valid audio file. Accepted audio formats are:<ul><li>MP3</li><li>WAV</li><li>OGG</ul></ul>You can use the following MP3 URL for testing:<br/>https://www.neutrinoapi.com/test-files/test1.mp3 |
 
 
 #### Example Usage
@@ -424,11 +425,11 @@ Models.PhonePlaybackResponse result = await telephony.PhonePlayback(number, audi
 
 ### <a name="verify_security_code"></a>![Method: ](https://apidocs.io/img/method.png "NeutrinoAPI.Controllers.Telephony.VerifySecurityCode") VerifySecurityCode
 
-> Check if a security code from one of the verify APIs is valid
+> Check if a security code from one of the verify APIs is valid. See: https://www.neutrinoapi.com/api/verify-security-code/
 
 
 ```csharp
-Task<Models.VerifySecurityCodeResponse> VerifySecurityCode(int securityCode)
+Task<Models.VerifySecurityCodeResponse> VerifySecurityCode(string securityCode)
 ```
 
 #### Parameters
@@ -441,7 +442,7 @@ Task<Models.VerifySecurityCodeResponse> VerifySecurityCode(int securityCode)
 #### Example Usage
 
 ```csharp
-int securityCode = 94;
+string securityCode = "security-code";
 
 Models.VerifySecurityCodeResponse result = await telephony.VerifySecurityCode(securityCode);
 
@@ -450,7 +451,7 @@ Models.VerifySecurityCodeResponse result = await telephony.VerifySecurityCode(se
 
 ### <a name="sms_verify"></a>![Method: ](https://apidocs.io/img/method.png "NeutrinoAPI.Controllers.Telephony.SMSVerify") SMSVerify
 
-> Send a unique security code to any mobile device via SMS
+> Send a unique security code to any mobile device via SMS. See: https://www.neutrinoapi.com/api/sms-verify/
 
 
 ```csharp
@@ -468,9 +469,9 @@ Task<Models.SMSVerifyResponse> SMSVerify(
 |-----------|------|-------------|
 | number |  ``` Required ```  | The phone number to send a verification code to |
 | codeLength |  ``` Optional ```  ``` DefaultValue ```  | The number of digits to use in the security code (must be between 4 and 12) |
-| securityCode |  ``` Optional ```  | ass in your own security code. This is useful if you have implemented TOTP or similar 2FA methods. If not set then we will generate a secure random code (only numerical security codes are currently supported) |
-| countryCode |  ``` Optional ```  | ISO 2-letter country code, assume numbers are based in this country. If not set numbers are assumed to be in international format (with or without the leading + sign) |
-| languageCode |  ``` Optional ```  ``` DefaultValue ```  | The language to send the verification code in, available languages are: de - German, en - English, es - Spanish, fr - Fench, it - Italian, pt - Portuguese, ru - Russian |
+| securityCode |  ``` Optional ```  | Pass in your own security code. This is useful if you have implemented TOTP or similar 2FA methods. If not set then we will generate a secure random code |
+| countryCode |  ``` Optional ```  | ISO 2-letter country code, assume numbers are based in this country.<br/>If not set numbers are assumed to be in international format (with or without the leading + sign) |
+| languageCode |  ``` Optional ```  ``` DefaultValue ```  | The language to send the verification code in, available languages are:<ul><li>de - German</li><li>en - English</li><li>es - Spanish</li><li>fr - French</li><li>it - Italian</li><li>pt - Portuguese</li><li>ru - Russian</li></ul> |
 
 
 #### Example Usage
@@ -478,7 +479,7 @@ Task<Models.SMSVerifyResponse> SMSVerify(
 ```csharp
 string number = "number";
 int? codeLength = 5;
-int? securityCode = 94;
+int? securityCode = 134;
 string countryCode = "country-code";
 string languageCode = "en";
 
@@ -487,9 +488,39 @@ Models.SMSVerifyResponse result = await telephony.SMSVerify(number, codeLength, 
 ```
 
 
+### <a name="sms_message"></a>![Method: ](https://apidocs.io/img/method.png "NeutrinoAPI.Controllers.Telephony.SMSMessage") SMSMessage
+
+> Send a free-form message to any mobile device via SMS. See: https://www.neutrinoapi.com/api/sms-message/
+
+
+```csharp
+Task<Models.SMSMessageResponse> SMSMessage(string number, string message, string countryCode = null)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| number |  ``` Required ```  | The phone number to send a message to |
+| message |  ``` Required ```  | The SMS message to send. Messages are truncated to a maximum of 150 characters for ASCII content OR 70 characters for UTF content |
+| countryCode |  ``` Optional ```  | ISO 2-letter country code, assume numbers are based in this country.<br/>If not set numbers are assumed to be in international format (with or without the leading + sign) |
+
+
+#### Example Usage
+
+```csharp
+string number = "number";
+string message = "message";
+string countryCode = "country-code";
+
+Models.SMSMessageResponse result = await telephony.SMSMessage(number, message, countryCode);
+
+```
+
+
 ### <a name="phone_verify"></a>![Method: ](https://apidocs.io/img/method.png "NeutrinoAPI.Controllers.Telephony.PhoneVerify") PhoneVerify
 
-> Make an automated call to any valid phone number and playback a unique security code
+> Make an automated call to any valid phone number and playback a unique security code. See: https://www.neutrinoapi.com/api/phone-verify/
 
 
 ```csharp
@@ -508,10 +539,10 @@ Task<Models.PhoneVerifyResponse> PhoneVerify(
 |-----------|------|-------------|
 | number |  ``` Required ```  | The phone number to send the verification code to |
 | codeLength |  ``` Optional ```  ``` DefaultValue ```  | The number of digits to use in the security code (between 4 and 12) |
-| securityCode |  ``` Optional ```  | Pass in your own security code. This is useful if you have implemented TOTP or similar 2FA methods. If not set then we will generate a secure random code (only numerical security codes are currently supported) |
+| securityCode |  ``` Optional ```  | Pass in your own security code. This is useful if you have implemented TOTP or similar 2FA methods. If not set then we will generate a secure random code |
 | playbackDelay |  ``` Optional ```  ``` DefaultValue ```  | The delay in milliseconds between the playback of each security code |
-| countryCode |  ``` Optional ```  | ISO 2-letter country code, assume numbers are based in this country. If not set numbers are assumed to be in international format (with or without the leading + sign) |
-| languageCode |  ``` Optional ```  ``` DefaultValue ```  | The language to playback the verification code in, available languages are: de - German, en - English, es - Spanish, fr - Fench, it - Italian, pt - Portuguese, ru - Russian |
+| countryCode |  ``` Optional ```  | ISO 2-letter country code, assume numbers are based in this country.<br/>If not set numbers are assumed to be in international format (with or without the leading + sign) |
+| languageCode |  ``` Optional ```  ``` DefaultValue ```  | The language to playback the verification code in, available languages are:<ul><li>de - German</li><li>en - English</li><li>es - Spanish</li><li>fr - French</li><li>it - Italian</li><li>pt - Portuguese</li><li>ru - Russian</li></ul> |
 
 
 #### Example Usage
@@ -519,7 +550,7 @@ Task<Models.PhoneVerifyResponse> PhoneVerify(
 ```csharp
 string number = "number";
 int? codeLength = 6;
-int? securityCode = 94;
+int? securityCode = 134;
 int? playbackDelay = 800;
 string countryCode = "country-code";
 string languageCode = "en";
@@ -543,7 +574,7 @@ IDataTools dataTools = client.DataTools;
 
 ### <a name="email_validate"></a>![Method: ](https://apidocs.io/img/method.png "NeutrinoAPI.Controllers.DataTools.EmailValidate") EmailValidate
 
-> Parse, validate and clean an email address
+> Parse, validate and clean an email address. See: https://www.neutrinoapi.com/api/email-validate/
 
 
 ```csharp
@@ -554,7 +585,7 @@ Task<Models.EmailValidateResponse> EmailValidate(string email, bool? fixTypos = 
 
 | Parameter | Tags | Description |
 |-----------|------|-------------|
-| email |  ``` Required ```  | The email address |
+| email |  ``` Required ```  | An email address |
 | fixTypos |  ``` Optional ```  ``` DefaultValue ```  | Automatically attempt to fix typos in the address |
 
 
@@ -571,7 +602,7 @@ Models.EmailValidateResponse result = await dataTools.EmailValidate(email, fixTy
 
 ### <a name="bad_word_filter"></a>![Method: ](https://apidocs.io/img/method.png "NeutrinoAPI.Controllers.DataTools.BadWordFilter") BadWordFilter
 
-> Detect bad words, swear words and profanity in a given text
+> Detect bad words, swear words and profanity in a given text. See: https://www.neutrinoapi.com/api/bad-word-filter/
 
 
 ```csharp
@@ -582,7 +613,7 @@ Task<Models.BadWordFilterResponse> BadWordFilter(string content, string censorCh
 
 | Parameter | Tags | Description |
 |-----------|------|-------------|
-| content |  ``` Required ```  | The text content to check. This can be either a URL to load content from or an actual content string |
+| content |  ``` Required ```  | The content to scan. This can be either a URL to load content from or an actual content string |
 | censorCharacter |  ``` Optional ```  | The character to use to censor out the bad words found |
 
 
@@ -599,7 +630,7 @@ Models.BadWordFilterResponse result = await dataTools.BadWordFilter(content, cen
 
 ### <a name="convert"></a>![Method: ](https://apidocs.io/img/method.png "NeutrinoAPI.Controllers.DataTools.Convert") Convert
 
-> A powerful unit and currency conversion tool
+> A powerful unit conversion tool. See: https://www.neutrinoapi.com/api/convert/
 
 
 ```csharp
@@ -610,9 +641,9 @@ Task<Models.ConvertResponse> Convert(string fromValue, string fromType, string t
 
 | Parameter | Tags | Description |
 |-----------|------|-------------|
-| fromValue |  ``` Required ```  | The value to convert from |
-| fromType |  ``` Required ```  | The type of the value to convert from |
-| toType |  ``` Required ```  | The type to convert to |
+| fromValue |  ``` Required ```  | The value to convert from (e.g. 10.95) |
+| fromType |  ``` Required ```  | The type of the value to convert from (e.g. USD) |
+| toType |  ``` Required ```  | The type to convert to (e.g. EUR) |
 
 
 #### Example Usage
@@ -629,7 +660,7 @@ Models.ConvertResponse result = await dataTools.Convert(fromValue, fromType, toT
 
 ### <a name="phone_validate"></a>![Method: ](https://apidocs.io/img/method.png "NeutrinoAPI.Controllers.DataTools.PhoneValidate") PhoneValidate
 
-> Parse, validate and get location information about a phone number
+> Parse, validate and get location information about a phone number. See: https://www.neutrinoapi.com/api/phone-validate/
 
 
 ```csharp
@@ -640,8 +671,8 @@ Task<Models.PhoneValidateResponse> PhoneValidate(string number, string countryCo
 
 | Parameter | Tags | Description |
 |-----------|------|-------------|
-| number |  ``` Required ```  | The phone number |
-| countryCode |  ``` Optional ```  | ISO 2-letter country code, assume numbers are based in this country. If not set numbers are assumed to be in international format (with or without the leading + sign) |
+| number |  ``` Required ```  | A phone number. This can be in international format (E.164) or local format. If passing local format you should use the 'country-code' or 'ip' options as well |
+| countryCode |  ``` Optional ```  | ISO 2-letter country code, assume numbers are based in this country.<br/>If not set numbers are assumed to be in international format (with or without the leading + sign) |
 | ip |  ``` Optional ```  | Pass in a users IP address and we will assume numbers are based in the country of the IP address |
 
 
@@ -659,7 +690,7 @@ Models.PhoneValidateResponse result = await dataTools.PhoneValidate(number, coun
 
 ### <a name="user_agent_info"></a>![Method: ](https://apidocs.io/img/method.png "NeutrinoAPI.Controllers.DataTools.UserAgentInfo") UserAgentInfo
 
-> Parse, validate and get detailed user-agent information from a user agent string
+> Parse, validate and get detailed user-agent information from a user agent string. See: https://www.neutrinoapi.com/api/user-agent-info/
 
 
 ```csharp
@@ -670,7 +701,7 @@ Task<Models.UserAgentInfoResponse> UserAgentInfo(string userAgent)
 
 | Parameter | Tags | Description |
 |-----------|------|-------------|
-| userAgent |  ``` Required ```  | A user-agent string |
+| userAgent |  ``` Required ```  | A user agent string |
 
 
 #### Example Usage
@@ -679,70 +710,6 @@ Task<Models.UserAgentInfoResponse> UserAgentInfo(string userAgent)
 string userAgent = "user-agent";
 
 Models.UserAgentInfoResponse result = await dataTools.UserAgentInfo(userAgent);
-
-```
-
-
-### <a name="html_clean"></a>![Method: ](https://apidocs.io/img/method.png "NeutrinoAPI.Controllers.DataTools.HTMLClean") HTMLClean
-
-> Clean and sanitize untrusted HTML
-
-
-```csharp
-Task<Stream> HTMLClean(string content, string outputType)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| content |  ``` Required ```  | The HTML content. This can be either a URL to load HTML from or an actual HTML content string |
-| outputType |  ``` Required ```  | The level of sanitization, possible values are: plain-text, simple-text, basic-html, basic-html-with-images, advanced-html |
-
-
-#### Example Usage
-
-```csharp
-string content = "content";
-string outputType = "output-type";
-
-Stream result = await dataTools.HTMLClean(content, outputType);
-
-```
-
-
-### <a name="html_extract"></a>![Method: ](https://apidocs.io/img/method.png "NeutrinoAPI.Controllers.DataTools.HTMLExtract") HTMLExtract
-
-> Extract specific HTML tag contents or attributes from complex HTML or XHTML content
-
-
-```csharp
-Task<Models.HTMLExtractResponse> HTMLExtract(
-        string content,
-        string tag,
-        string attribute = null,
-        string baseUrl = null)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| content |  ``` Required ```  | The HTML content. This can be either a URL to load HTML from or an actual HTML content string |
-| tag |  ``` Required ```  | The HTML tag(s) to extract data from. This can just be a simple tag name like 'img' OR a CSS/jQuery style selector |
-| attribute |  ``` Optional ```  | If set, then extract data from the specified tag attribute. If not set, then data will be extracted from the tags inner content |
-| baseUrl |  ``` Optional ```  | The base URL to replace into realive links |
-
-
-#### Example Usage
-
-```csharp
-string content = "content";
-string tag = "tag";
-string attribute = "attribute";
-string baseUrl = "base-url";
-
-Models.HTMLExtractResponse result = await dataTools.HTMLExtract(content, tag, attribute, baseUrl);
 
 ```
 
@@ -761,61 +728,35 @@ ISecurityAndNetworking securityAndNetworking = client.SecurityAndNetworking;
 
 ### <a name="host_reputation"></a>![Method: ](https://apidocs.io/img/method.png "NeutrinoAPI.Controllers.SecurityAndNetworking.HostReputation") HostReputation
 
-> Check the reputation of an IP address or domain against a comprehensive list of blacklists and blocklists (DNSBLs)
+> Check the reputation of an IP address, domain name, FQDN or URL against a comprehensive list of blacklists and blocklists. See: https://www.neutrinoapi.com/api/host-reputation/
 
 
 ```csharp
-Task<Models.HostReputationResponse> HostReputation(string host)
+Task<Models.HostReputationResponse> HostReputation(string host, int? listRating = 3)
 ```
 
 #### Parameters
 
 | Parameter | Tags | Description |
 |-----------|------|-------------|
-| host |  ``` Required ```  | An IPv4 address or a domain name. If you supply a domain name it will be checked against the URI DNSBL list |
+| host |  ``` Required ```  | An IP address, domain name, FQDN or URL.<br/>If you supply a domain/URL it will be checked against the URI DNSBL lists |
+| listRating |  ``` Optional ```  ``` DefaultValue ```  | Only check lists with this rating or better |
 
 
 #### Example Usage
 
 ```csharp
 string host = "host";
+int? listRating = 3;
 
-Models.HostReputationResponse result = await securityAndNetworking.HostReputation(host);
-
-```
-
-
-### <a name="url_info"></a>![Method: ](https://apidocs.io/img/method.png "NeutrinoAPI.Controllers.SecurityAndNetworking.URLInfo") URLInfo
-
-> Parse, analyze and retrieve content from the supplied URL
-
-
-```csharp
-Task<Models.URLInfoResponse> URLInfo(string url, bool fetchContent)
-```
-
-#### Parameters
-
-| Parameter | Tags | Description |
-|-----------|------|-------------|
-| url |  ``` Required ```  | The URL to process |
-| fetchContent |  ``` Required ```  | If this URL responds with html, text, json or xml then return the response. This option is useful if you want to perform further processing on the URL content |
-
-
-#### Example Usage
-
-```csharp
-string url = "url";
-bool fetchContent = false;
-
-Models.URLInfoResponse result = await securityAndNetworking.URLInfo(url, fetchContent);
+Models.HostReputationResponse result = await securityAndNetworking.HostReputation(host, listRating);
 
 ```
 
 
 ### <a name="ip_probe"></a>![Method: ](https://apidocs.io/img/method.png "NeutrinoAPI.Controllers.SecurityAndNetworking.IPProbe") IPProbe
 
-> Analyze and extract provider information for an IP address
+> Analyze and extract provider information for an IP address. See: https://www.neutrinoapi.com/api/ip-probe/
 
 
 ```csharp
@@ -841,7 +782,7 @@ Models.IPProbeResponse result = await securityAndNetworking.IPProbe(ip);
 
 ### <a name="ip_blocklist"></a>![Method: ](https://apidocs.io/img/method.png "NeutrinoAPI.Controllers.SecurityAndNetworking.IPBlocklist") IPBlocklist
 
-> The IP Blocklist API will detect potentially malicious or dangerous IP addresses
+> The IP Blocklist API will detect potentially malicious or dangerous IP addresses. See: https://www.neutrinoapi.com/api/ip-blocklist/
 
 
 ```csharp
@@ -852,7 +793,7 @@ Task<Models.IPBlocklistResponse> IPBlocklist(string ip)
 
 | Parameter | Tags | Description |
 |-----------|------|-------------|
-| ip |  ``` Required ```  | An IPv4 address |
+| ip |  ``` Required ```  | An IPv4 or IPv6 address |
 
 
 #### Example Usage
@@ -867,11 +808,11 @@ Models.IPBlocklistResponse result = await securityAndNetworking.IPBlocklist(ip);
 
 ### <a name="email_verify"></a>![Method: ](https://apidocs.io/img/method.png "NeutrinoAPI.Controllers.SecurityAndNetworking.EmailVerify") EmailVerify
 
-> SMTP based email address verification
+> SMTP based email address verification. See: https://www.neutrinoapi.com/api/email-verify/
 
 
 ```csharp
-Task<Models.EmailVerifyResponse> EmailVerify(string email, bool? fixTypos = null)
+Task<Models.EmailVerifyResponse> EmailVerify(string email, bool? fixTypos = false)
 ```
 
 #### Parameters
@@ -879,7 +820,7 @@ Task<Models.EmailVerifyResponse> EmailVerify(string email, bool? fixTypos = null
 | Parameter | Tags | Description |
 |-----------|------|-------------|
 | email |  ``` Required ```  | An email address |
-| fixTypos |  ``` Optional ```  | Automatically attempt to fix typos in the address |
+| fixTypos |  ``` Optional ```  ``` DefaultValue ```  | Automatically attempt to fix typos in the address |
 
 
 #### Example Usage
@@ -907,27 +848,27 @@ IGeolocation geolocation = client.Geolocation;
 
 ### <a name="geocode_reverse"></a>![Method: ](https://apidocs.io/img/method.png "NeutrinoAPI.Controllers.Geolocation.GeocodeReverse") GeocodeReverse
 
-> Convert a geographic coordinate (latitude and longitude) into a real world address or location.
+> Convert a geographic coordinate (latitude and longitude) into a real world address or location. See: https://www.neutrinoapi.com/api/geocode-reverse/
 
 
 ```csharp
-Task<Models.GeocodeReverseResponse> GeocodeReverse(double latitude, double longitude, string languageCode = "en")
+Task<Models.GeocodeReverseResponse> GeocodeReverse(string latitude, string longitude, string languageCode = "en")
 ```
 
 #### Parameters
 
 | Parameter | Tags | Description |
 |-----------|------|-------------|
-| latitude |  ``` Required ```  | The location latitude |
-| longitude |  ``` Required ```  | The location longitude |
-| languageCode |  ``` Optional ```  ``` DefaultValue ```  | The language to display results in, available languages are: de, en, es, fr, it, pt, ru |
+| latitude |  ``` Required ```  | The location latitude in decimal degrees format |
+| longitude |  ``` Required ```  | The location longitude in decimal degrees format |
+| languageCode |  ``` Optional ```  ``` DefaultValue ```  | The language to display results in, available languages are:<ul><li>de, en, es, fr, it, pt, ru</li></ul> |
 
 
 #### Example Usage
 
 ```csharp
-double latitude = 94.8287157224625;
-double longitude = 94.8287157224625;
+string latitude = "latitude";
+string longitude = "longitude";
 string languageCode = "en";
 
 Models.GeocodeReverseResponse result = await geolocation.GeocodeReverse(latitude, longitude, languageCode);
@@ -937,7 +878,7 @@ Models.GeocodeReverseResponse result = await geolocation.GeocodeReverse(latitude
 
 ### <a name="ip_info"></a>![Method: ](https://apidocs.io/img/method.png "NeutrinoAPI.Controllers.Geolocation.IPInfo") IPInfo
 
-> Get location information about an IP address and do reverse DNS (PTR) lookups.
+> Get location information about an IP address and do reverse DNS (PTR) lookups. See: https://www.neutrinoapi.com/api/ip-info/
 
 
 ```csharp
@@ -948,7 +889,7 @@ Task<Models.IPInfoResponse> IPInfo(string ip, bool? reverseLookup = false)
 
 | Parameter | Tags | Description |
 |-----------|------|-------------|
-| ip |  ``` Required ```  | The IP address |
+| ip |  ``` Required ```  | IPv4 or IPv6 address |
 | reverseLookup |  ``` Optional ```  ``` DefaultValue ```  | Do a reverse DNS (PTR) lookup. This option can add extra delay to the request so only use it if you need it |
 
 
@@ -965,7 +906,7 @@ Models.IPInfoResponse result = await geolocation.IPInfo(ip, reverseLookup);
 
 ### <a name="geocode_address"></a>![Method: ](https://apidocs.io/img/method.png "NeutrinoAPI.Controllers.Geolocation.GeocodeAddress") GeocodeAddress
 
-> Geocode an address, partial address or the name of a location
+> Geocode an address, partial address or just the name of a place. See: https://www.neutrinoapi.com/api/geocode-address/
 
 
 ```csharp
@@ -980,9 +921,9 @@ Task<Models.GeocodeAddressResponse> GeocodeAddress(
 
 | Parameter | Tags | Description |
 |-----------|------|-------------|
-| address |  ``` Required ```  | The address or partial address to try and locate |
-| countryCode |  ``` Optional ```  | The ISO 2-letter country code to be biased towards (default is no country bias) |
-| languageCode |  ``` Optional ```  ``` DefaultValue ```  | The language to display results in, available languages are: de, en, es, fr, it, pt, ru |
+| address |  ``` Required ```  | The address, partial address or name of a place to try and locate |
+| countryCode |  ``` Optional ```  | The ISO 2-letter country code to be biased towards (the default is no country bias) |
+| languageCode |  ``` Optional ```  ``` DefaultValue ```  | The language to display results in, available languages are:<ul><li>de, en, es, fr, it, pt, ru</li></ul> |
 | fuzzySearch |  ``` Optional ```  ``` DefaultValue ```  | If no matches are found for the given address, start performing a recursive fuzzy search until a geolocation is found. We use a combination of approximate string matching and data cleansing to find possible location matches |
 
 
@@ -1025,7 +966,7 @@ Task<Models.BINLookupResponse> BINLookup(string binNumber, string customerIp = n
 | Parameter | Tags | Description |
 |-----------|------|-------------|
 | binNumber |  ``` Required ```  | The BIN or IIN number (the first 6 digits of a credit card number) |
-| customerIp |  ``` Optional ```  | Pass in a customers remote IP address. The API will then determine the country of the IP address and match it against the BIN country. This feature is designed for fraud prevention and detection checks. |
+| customerIp |  ``` Optional ```  | Pass in the customers IP address and we will return some extra information about them |
 
 
 #### Example Usage
@@ -1035,6 +976,120 @@ string binNumber = "bin-number";
 string customerIp = "customer-ip";
 
 Models.BINLookupResponse result = await eCommerce.BINLookup(binNumber, customerIp);
+
+```
+
+
+[Back to List of Controllers](#list_of_controllers)
+
+## <a name="www"></a>![Class: ](https://apidocs.io/img/class.png "NeutrinoAPI.Controllers.WWW") WWW
+
+### Get singleton instance
+
+The singleton instance of the ``` WWW ``` class can be accessed from the API Client.
+
+```csharp
+IWWW wWW = client.WWW;
+```
+
+### <a name="url_info"></a>![Method: ](https://apidocs.io/img/method.png "NeutrinoAPI.Controllers.WWW.URLInfo") URLInfo
+
+> Parse, analyze and retrieve content from the supplied URL. See: https://www.neutrinoapi.com/api/url-info/
+
+
+```csharp
+Task<Models.URLInfoResponse> URLInfo(string url, bool? fetchContent = false)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| url |  ``` Required ```  | The URL to probe |
+| fetchContent |  ``` Optional ```  ``` DefaultValue ```  | If this URL responds with html, text, json or xml then return the response. This option is useful if you want to perform further processing on the URL content (e.g. with the HTML Extract or HTML Clean APIs) |
+
+
+#### Example Usage
+
+```csharp
+string url = "url";
+bool? fetchContent = false;
+
+Models.URLInfoResponse result = await wWW.URLInfo(url, fetchContent);
+
+```
+
+
+### <a name="browser_bot"></a>![Method: ](https://apidocs.io/img/method.png "NeutrinoAPI.Controllers.WWW.BrowserBot") BrowserBot
+
+> Browser bot can extract content, interact with keyboard and mouse events, and execute JavaScript on a website. See: https://www.neutrinoapi.com/api/browser-bot/
+
+
+```csharp
+Task<Models.BrowserBotResponse> BrowserBot(
+        string url,
+        int? timeout = 30,
+        int? delay = 2,
+        string selector = null,
+        List<string> exec,
+        string userAgent = null,
+        bool? ignoreCertificateErrors = false)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| url |  ``` Required ```  | The URL to load |
+| timeout |  ``` Optional ```  ``` DefaultValue ```  | Timeout in seconds. Give up if still trying to load the page after this number of seconds |
+| delay |  ``` Optional ```  ``` DefaultValue ```  | Delay in seconds to wait before executing any selectors or JavaScript |
+| selector |  ``` Optional ```  | Extract content from the page DOM using this selector. Commonly known as a CSS selector, you can find a good reference <a href="https://www.w3schools.com/cssref/css_selectors.asp" target="_blank">here</a> |
+| exec |  ``` Optional ```  ``` Collection ```  ``` DefaultValue ```  | Execute JavaScript on the page. Each array element should contain a valid JavaScript statement in string form. If a statement returns any kind of value it will be returned in the 'exec-results' response.<br/><br/>For your convenience you can also use the following special shortcut functions:<br/><div style='padding-left:32px; font-family:inherit; font-size:inherit;'>sleep(seconds); Just wait/sleep for the specified number of seconds.<br/>click('selector'); Click on the first element matching the given selector.<br/>focus('selector'); Focus on the first element matching the given selector.<br/>keys('characters'); Send the specified keyboard characters. Use click() or focus() first to send keys to a specific element.<br/>enter(); Send the Enter key.<br/>tab(); Send the Tab key.<br/></div><br/>Example:<br/><div style='padding-left:32px; font-family:inherit; font-size:inherit;'>[ "click('#button-id')", "sleep(1)", "click('.field-class')", "keys('1234')", "enter()" ]</div> |
+| userAgent |  ``` Optional ```  | Override the browsers default user-agent string with this one |
+| ignoreCertificateErrors |  ``` Optional ```  ``` DefaultValue ```  | Ignore any TLS/SSL certificate errors and load the page anyway |
+
+
+#### Example Usage
+
+```csharp
+string url = "url";
+int? timeout = 30;
+int? delay = 2;
+string selector = "selector";
+string execValue = "[]";
+var exec = Newtonsoft.Json.JsonConvert.DeserializeObject<List<string>>(execValue);
+string userAgent = "user-agent";
+bool? ignoreCertificateErrors = false;
+
+Models.BrowserBotResponse result = await wWW.BrowserBot(url, timeout, delay, selector, exec, userAgent, ignoreCertificateErrors);
+
+```
+
+
+### <a name="html_clean"></a>![Method: ](https://apidocs.io/img/method.png "NeutrinoAPI.Controllers.WWW.HTMLClean") HTMLClean
+
+> Clean and sanitize untrusted HTML. See: https://www.neutrinoapi.com/api/html-clean/
+
+
+```csharp
+Task<Stream> HTMLClean(string content, string outputType)
+```
+
+#### Parameters
+
+| Parameter | Tags | Description |
+|-----------|------|-------------|
+| content |  ``` Required ```  | The HTML content. This can be either a URL to load HTML from or an actual HTML content string |
+| outputType |  ``` Required ```  | The level of sanitization, possible values are:<br/><b>plain-text</b>: reduce the content to plain text only (no HTML tags at all)<br/><br/><b>simple-text</b>: allow only very basic text formatting tags like b, em, i, strong, u<br/><br/><b>basic-html</b>: allow advanced text formatting and hyper links<br/><br/><b>basic-html-with-images</b>: same as basic html but also allows image tags<br/><br/><b>advanced-html</b>: same as basic html with images but also allows many more common HTML tags like table, ul, dl, pre<br/> |
+
+
+#### Example Usage
+
+```csharp
+string content = "content";
+string outputType = "output-type";
+
+Stream result = await wWW.HTMLClean(content, outputType);
 
 ```
 

@@ -1,7 +1,7 @@
 /*
  * NeutrinoAPI.PCL
  *
- * This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io )
+ * This file was automatically generated for NeutrinoAPI by APIMATIC v2.0 ( https://apimatic.io ).
  */
 using System;
 using System.IO;
@@ -40,7 +40,7 @@ namespace NeutrinoAPI.Models
         private string engineVersion;
 
         /// <summary>
-        /// Mobile device screen width (in px)
+        /// The estimated mobile device screen width in CSS 'px'
         /// </summary>
         [JsonProperty("mobileScreenWidth")]
         public int MobileScreenWidth 
@@ -57,7 +57,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// Mobile device brand
+        /// The mobile device brand
         /// </summary>
         [JsonProperty("mobileBrand")]
         public string MobileBrand 
@@ -74,7 +74,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// Mobile device model
+        /// The mobile device model
         /// </summary>
         [JsonProperty("mobileModel")]
         public string MobileModel 
@@ -91,7 +91,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// Producer or manufacturer
+        /// The producer or manufacturer of the user agent
         /// </summary>
         [JsonProperty("producer")]
         public string Producer 
@@ -108,7 +108,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// Browser software name
+        /// The browser software name
         /// </summary>
         [JsonProperty("browserName")]
         public string BrowserName 
@@ -125,7 +125,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// Mobile device screen height (in px)
+        /// The estimated mobile device screen height in CSS 'px'
         /// </summary>
         [JsonProperty("mobileScreenHeight")]
         public int MobileScreenHeight 
@@ -142,7 +142,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// True if this is a mobile user-agent
+        /// True if this is a mobile user agent
         /// </summary>
         [JsonProperty("isMobile")]
         public bool IsMobile 
@@ -159,7 +159,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// The user-agent type, possible values are: desktop-browser, email-client, feed-reader, software-library, media-player, mobile-browser, robot, unknown
+        /// The user agent type, possible values are:<br/><ul><li>desktop-browser</li><li>mobile-browser</li><li>email-client</li><li>feed-reader</li><li>software-library</li><li>media-player (includes smart TVs)</li><li>robot</li><li>unknown</li></ul>
         /// </summary>
         [JsonProperty("type")]
         public string Type 
@@ -176,7 +176,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// Software version
+        /// The browser software version
         /// </summary>
         [JsonProperty("version")]
         public string Version 
@@ -193,7 +193,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// Operating system
+        /// The full operating system name which may include the major version number or code name
         /// </summary>
         [JsonProperty("operatingSystem")]
         public string OperatingSystem 
@@ -210,7 +210,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// Mobile device browser
+        /// The mobile device browser name (this is usually the same as the browser name)
         /// </summary>
         [JsonProperty("mobileBrowser")]
         public string MobileBrowser 

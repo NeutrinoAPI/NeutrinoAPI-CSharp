@@ -18,11 +18,10 @@ using NeutrinoAPI.Utilities;
 
 namespace NeutrinoAPI.Models
 {
-    public class SMSVerifyResponse : BaseModel 
+    public class SMSMessageResponse : BaseModel 
     {
         // These fields hold the values for the public properties.
         private bool numberValid;
-        private string securityCode;
         private bool sent;
 
         /// <summary>
@@ -39,23 +38,6 @@ namespace NeutrinoAPI.Models
             {
                 this.numberValid = value;
                 onPropertyChanged("NumberValid");
-            }
-        }
-
-        /// <summary>
-        /// The security code generated, you can save this code to perform your own verification or you can use the <a href='https://www.neutrinoapi.com/api/verify-security-code/'>Verify Security Code API</a>
-        /// </summary>
-        [JsonProperty("securityCode")]
-        public string SecurityCode 
-        { 
-            get 
-            {
-                return this.securityCode; 
-            } 
-            set 
-            {
-                this.securityCode = value;
-                onPropertyChanged("SecurityCode");
             }
         }
 
