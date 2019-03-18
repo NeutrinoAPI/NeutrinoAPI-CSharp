@@ -50,81 +50,6 @@ namespace NeutrinoAPI.Controllers
         #endregion Singleton Pattern
 
         /// <summary>
-        /// Parse, analyze and retrieve content from the supplied URL. See: https://www.neutrinoapi.com/api/url-info/
-        /// </summary>
-        /// <param name="url">Required parameter: The URL to probe</param>
-        /// <param name="fetchContent">Optional parameter: If this URL responds with html, text, json or xml then return the response. This option is useful if you want to perform further processing on the URL content (e.g. with the HTML Extract or HTML Clean APIs)</param>
-        /// <return>Returns the Models.URLInfoResponse response from the API call</return>
-        public Models.URLInfoResponse URLInfo(string url, bool? fetchContent = false)
-        {
-            Task<Models.URLInfoResponse> t = URLInfoAsync(url, fetchContent);
-            APIHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// Parse, analyze and retrieve content from the supplied URL. See: https://www.neutrinoapi.com/api/url-info/
-        /// </summary>
-        /// <param name="url">Required parameter: The URL to probe</param>
-        /// <param name="fetchContent">Optional parameter: If this URL responds with html, text, json or xml then return the response. This option is useful if you want to perform further processing on the URL content (e.g. with the HTML Extract or HTML Clean APIs)</param>
-        /// <return>Returns the Models.URLInfoResponse response from the API call</return>
-        public async Task<Models.URLInfoResponse> URLInfoAsync(string url, bool? fetchContent = false)
-        {
-            //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/url-info");
-
-            //process optional query parameters
-            APIHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "user-id", Configuration.UserId },
-                { "api-key", Configuration.ApiKey }
-            },ArrayDeserializationFormat,ParameterSeparator);
-
-
-            //validate and preprocess url
-            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
-            {
-                { "user-agent", "APIMATIC 2.0" },
-                { "accept", "application/json" }
-            };
-
-            //append form/field parameters
-            var _fields = new List<KeyValuePair<string, Object>>()
-            {
-                new KeyValuePair<string, object>( "output-case", "camel" ),
-                new KeyValuePair<string, object>( "url", url ),
-                new KeyValuePair<string, object>( "fetch-content", (null != fetchContent) ? fetchContent : false )
-            };
-            //remove null parameters
-            _fields = _fields.Where(kvp => kvp.Value != null).ToList();
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.Post(_queryUrl, _headers, _fields);
-
-            //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request,_response);
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            try
-            {
-                return APIHelper.JsonDeserialize<Models.URLInfoResponse>(_response.Body);
-            }
-            catch (Exception _ex)
-            {
-                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
-            }
-        }
-
-        /// <summary>
         /// Browser bot can extract content, interact with keyboard and mouse events, and execute JavaScript on a website. See: https://www.neutrinoapi.com/api/browser-bot/
         /// </summary>
         /// <param name="url">Required parameter: The URL to load</param>
@@ -294,6 +219,81 @@ namespace NeutrinoAPI.Controllers
             try
             {
                 return _response.RawBody;
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
+        /// Parse, analyze and retrieve content from the supplied URL. See: https://www.neutrinoapi.com/api/url-info/
+        /// </summary>
+        /// <param name="url">Required parameter: The URL to probe</param>
+        /// <param name="fetchContent">Optional parameter: If this URL responds with html, text, json or xml then return the response. This option is useful if you want to perform further processing on the URL content (e.g. with the HTML Extract or HTML Clean APIs)</param>
+        /// <return>Returns the Models.URLInfoResponse response from the API call</return>
+        public Models.URLInfoResponse URLInfo(string url, bool? fetchContent = false)
+        {
+            Task<Models.URLInfoResponse> t = URLInfoAsync(url, fetchContent);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Parse, analyze and retrieve content from the supplied URL. See: https://www.neutrinoapi.com/api/url-info/
+        /// </summary>
+        /// <param name="url">Required parameter: The URL to probe</param>
+        /// <param name="fetchContent">Optional parameter: If this URL responds with html, text, json or xml then return the response. This option is useful if you want to perform further processing on the URL content (e.g. with the HTML Extract or HTML Clean APIs)</param>
+        /// <return>Returns the Models.URLInfoResponse response from the API call</return>
+        public async Task<Models.URLInfoResponse> URLInfoAsync(string url, bool? fetchContent = false)
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/url-info");
+
+            //process optional query parameters
+            APIHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "user-id", Configuration.UserId },
+                { "api-key", Configuration.ApiKey }
+            },ArrayDeserializationFormat,ParameterSeparator);
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "APIMATIC 2.0" },
+                { "accept", "application/json" }
+            };
+
+            //append form/field parameters
+            var _fields = new List<KeyValuePair<string, Object>>()
+            {
+                new KeyValuePair<string, object>( "output-case", "camel" ),
+                new KeyValuePair<string, object>( "url", url ),
+                new KeyValuePair<string, object>( "fetch-content", (null != fetchContent) ? fetchContent : false )
+            };
+            //remove null parameters
+            _fields = _fields.Where(kvp => kvp.Value != null).ToList();
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.Post(_queryUrl, _headers, _fields);
+
+            //invoke request and get response
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return APIHelper.JsonDeserialize<Models.URLInfoResponse>(_response.Body);
             }
             catch (Exception _ex)
             {

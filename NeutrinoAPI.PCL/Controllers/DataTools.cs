@@ -50,32 +50,30 @@ namespace NeutrinoAPI.Controllers
         #endregion Singleton Pattern
 
         /// <summary>
-        /// Parse, validate and clean an email address. See: https://www.neutrinoapi.com/api/email-validate/
+        /// Parse, validate and get detailed user-agent information from a user agent string. See: https://www.neutrinoapi.com/api/user-agent-info/
         /// </summary>
-        /// <param name="email">Required parameter: An email address</param>
-        /// <param name="fixTypos">Optional parameter: Automatically attempt to fix typos in the address</param>
-        /// <return>Returns the Models.EmailValidateResponse response from the API call</return>
-        public Models.EmailValidateResponse EmailValidate(string email, bool? fixTypos = false)
+        /// <param name="userAgent">Required parameter: A user agent string</param>
+        /// <return>Returns the Models.UserAgentInfoResponse response from the API call</return>
+        public Models.UserAgentInfoResponse UserAgentInfo(string userAgent)
         {
-            Task<Models.EmailValidateResponse> t = EmailValidateAsync(email, fixTypos);
+            Task<Models.UserAgentInfoResponse> t = UserAgentInfoAsync(userAgent);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
 
         /// <summary>
-        /// Parse, validate and clean an email address. See: https://www.neutrinoapi.com/api/email-validate/
+        /// Parse, validate and get detailed user-agent information from a user agent string. See: https://www.neutrinoapi.com/api/user-agent-info/
         /// </summary>
-        /// <param name="email">Required parameter: An email address</param>
-        /// <param name="fixTypos">Optional parameter: Automatically attempt to fix typos in the address</param>
-        /// <return>Returns the Models.EmailValidateResponse response from the API call</return>
-        public async Task<Models.EmailValidateResponse> EmailValidateAsync(string email, bool? fixTypos = false)
+        /// <param name="userAgent">Required parameter: A user agent string</param>
+        /// <return>Returns the Models.UserAgentInfoResponse response from the API call</return>
+        public async Task<Models.UserAgentInfoResponse> UserAgentInfoAsync(string userAgent)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
 
             //prepare query string for API call
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/email-validate");
+            _queryBuilder.Append("/user-agent-info");
 
             //process optional query parameters
             APIHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
@@ -99,8 +97,7 @@ namespace NeutrinoAPI.Controllers
             var _fields = new List<KeyValuePair<string, Object>>()
             {
                 new KeyValuePair<string, object>( "output-case", "camel" ),
-                new KeyValuePair<string, object>( "email", email ),
-                new KeyValuePair<string, object>( "fix-typos", (null != fixTypos) ? fixTypos : false )
+                new KeyValuePair<string, object>( "user-agent", userAgent )
             };
             //remove null parameters
             _fields = _fields.Where(kvp => kvp.Value != null).ToList();
@@ -116,160 +113,7 @@ namespace NeutrinoAPI.Controllers
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.EmailValidateResponse>(_response.Body);
-            }
-            catch (Exception _ex)
-            {
-                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
-            }
-        }
-
-        /// <summary>
-        /// Detect bad words, swear words and profanity in a given text. See: https://www.neutrinoapi.com/api/bad-word-filter/
-        /// </summary>
-        /// <param name="content">Required parameter: The content to scan. This can be either a URL to load content from or an actual content string</param>
-        /// <param name="censorCharacter">Optional parameter: The character to use to censor out the bad words found</param>
-        /// <return>Returns the Models.BadWordFilterResponse response from the API call</return>
-        public Models.BadWordFilterResponse BadWordFilter(string content, string censorCharacter = null)
-        {
-            Task<Models.BadWordFilterResponse> t = BadWordFilterAsync(content, censorCharacter);
-            APIHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// Detect bad words, swear words and profanity in a given text. See: https://www.neutrinoapi.com/api/bad-word-filter/
-        /// </summary>
-        /// <param name="content">Required parameter: The content to scan. This can be either a URL to load content from or an actual content string</param>
-        /// <param name="censorCharacter">Optional parameter: The character to use to censor out the bad words found</param>
-        /// <return>Returns the Models.BadWordFilterResponse response from the API call</return>
-        public async Task<Models.BadWordFilterResponse> BadWordFilterAsync(string content, string censorCharacter = null)
-        {
-            //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/bad-word-filter");
-
-            //process optional query parameters
-            APIHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "user-id", Configuration.UserId },
-                { "api-key", Configuration.ApiKey }
-            },ArrayDeserializationFormat,ParameterSeparator);
-
-
-            //validate and preprocess url
-            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
-            {
-                { "user-agent", "APIMATIC 2.0" },
-                { "accept", "application/json" }
-            };
-
-            //append form/field parameters
-            var _fields = new List<KeyValuePair<string, Object>>()
-            {
-                new KeyValuePair<string, object>( "output-case", "camel" ),
-                new KeyValuePair<string, object>( "content", content ),
-                new KeyValuePair<string, object>( "censor-character", censorCharacter )
-            };
-            //remove null parameters
-            _fields = _fields.Where(kvp => kvp.Value != null).ToList();
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.Post(_queryUrl, _headers, _fields);
-
-            //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request,_response);
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            try
-            {
-                return APIHelper.JsonDeserialize<Models.BadWordFilterResponse>(_response.Body);
-            }
-            catch (Exception _ex)
-            {
-                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
-            }
-        }
-
-        /// <summary>
-        /// A powerful unit conversion tool. See: https://www.neutrinoapi.com/api/convert/
-        /// </summary>
-        /// <param name="fromValue">Required parameter: The value to convert from (e.g. 10.95)</param>
-        /// <param name="fromType">Required parameter: The type of the value to convert from (e.g. USD)</param>
-        /// <param name="toType">Required parameter: The type to convert to (e.g. EUR)</param>
-        /// <return>Returns the Models.ConvertResponse response from the API call</return>
-        public Models.ConvertResponse Convert(string fromValue, string fromType, string toType)
-        {
-            Task<Models.ConvertResponse> t = ConvertAsync(fromValue, fromType, toType);
-            APIHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// A powerful unit conversion tool. See: https://www.neutrinoapi.com/api/convert/
-        /// </summary>
-        /// <param name="fromValue">Required parameter: The value to convert from (e.g. 10.95)</param>
-        /// <param name="fromType">Required parameter: The type of the value to convert from (e.g. USD)</param>
-        /// <param name="toType">Required parameter: The type to convert to (e.g. EUR)</param>
-        /// <return>Returns the Models.ConvertResponse response from the API call</return>
-        public async Task<Models.ConvertResponse> ConvertAsync(string fromValue, string fromType, string toType)
-        {
-            //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/convert");
-
-            //process optional query parameters
-            APIHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "user-id", Configuration.UserId },
-                { "api-key", Configuration.ApiKey }
-            },ArrayDeserializationFormat,ParameterSeparator);
-
-
-            //validate and preprocess url
-            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
-            {
-                { "user-agent", "APIMATIC 2.0" },
-                { "accept", "application/json" }
-            };
-
-            //append form/field parameters
-            var _fields = new List<KeyValuePair<string, Object>>()
-            {
-                new KeyValuePair<string, object>( "output-case", "camel" ),
-                new KeyValuePair<string, object>( "from-value", fromValue ),
-                new KeyValuePair<string, object>( "from-type", fromType ),
-                new KeyValuePair<string, object>( "to-type", toType )
-            };
-            //remove null parameters
-            _fields = _fields.Where(kvp => kvp.Value != null).ToList();
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.Post(_queryUrl, _headers, _fields);
-
-            //invoke request and get response
-            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request,_response);
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            try
-            {
-                return APIHelper.JsonDeserialize<Models.ConvertResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.UserAgentInfoResponse>(_response.Body);
             }
             catch (Exception _ex)
             {
@@ -356,30 +200,34 @@ namespace NeutrinoAPI.Controllers
         }
 
         /// <summary>
-        /// Parse, validate and get detailed user-agent information from a user agent string. See: https://www.neutrinoapi.com/api/user-agent-info/
+        /// A powerful unit conversion tool. See: https://www.neutrinoapi.com/api/convert/
         /// </summary>
-        /// <param name="userAgent">Required parameter: A user agent string</param>
-        /// <return>Returns the Models.UserAgentInfoResponse response from the API call</return>
-        public Models.UserAgentInfoResponse UserAgentInfo(string userAgent)
+        /// <param name="fromValue">Required parameter: The value to convert from (e.g. 10.95)</param>
+        /// <param name="fromType">Required parameter: The type of the value to convert from (e.g. USD)</param>
+        /// <param name="toType">Required parameter: The type to convert to (e.g. EUR)</param>
+        /// <return>Returns the Models.ConvertResponse response from the API call</return>
+        public Models.ConvertResponse Convert(string fromValue, string fromType, string toType)
         {
-            Task<Models.UserAgentInfoResponse> t = UserAgentInfoAsync(userAgent);
+            Task<Models.ConvertResponse> t = ConvertAsync(fromValue, fromType, toType);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
 
         /// <summary>
-        /// Parse, validate and get detailed user-agent information from a user agent string. See: https://www.neutrinoapi.com/api/user-agent-info/
+        /// A powerful unit conversion tool. See: https://www.neutrinoapi.com/api/convert/
         /// </summary>
-        /// <param name="userAgent">Required parameter: A user agent string</param>
-        /// <return>Returns the Models.UserAgentInfoResponse response from the API call</return>
-        public async Task<Models.UserAgentInfoResponse> UserAgentInfoAsync(string userAgent)
+        /// <param name="fromValue">Required parameter: The value to convert from (e.g. 10.95)</param>
+        /// <param name="fromType">Required parameter: The type of the value to convert from (e.g. USD)</param>
+        /// <param name="toType">Required parameter: The type to convert to (e.g. EUR)</param>
+        /// <return>Returns the Models.ConvertResponse response from the API call</return>
+        public async Task<Models.ConvertResponse> ConvertAsync(string fromValue, string fromType, string toType)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
 
             //prepare query string for API call
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/user-agent-info");
+            _queryBuilder.Append("/convert");
 
             //process optional query parameters
             APIHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
@@ -403,7 +251,9 @@ namespace NeutrinoAPI.Controllers
             var _fields = new List<KeyValuePair<string, Object>>()
             {
                 new KeyValuePair<string, object>( "output-case", "camel" ),
-                new KeyValuePair<string, object>( "user-agent", userAgent )
+                new KeyValuePair<string, object>( "from-value", fromValue ),
+                new KeyValuePair<string, object>( "from-type", fromType ),
+                new KeyValuePair<string, object>( "to-type", toType )
             };
             //remove null parameters
             _fields = _fields.Where(kvp => kvp.Value != null).ToList();
@@ -419,7 +269,157 @@ namespace NeutrinoAPI.Controllers
 
             try
             {
-                return APIHelper.JsonDeserialize<Models.UserAgentInfoResponse>(_response.Body);
+                return APIHelper.JsonDeserialize<Models.ConvertResponse>(_response.Body);
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
+        /// Detect bad words, swear words and profanity in a given text. See: https://www.neutrinoapi.com/api/bad-word-filter/
+        /// </summary>
+        /// <param name="content">Required parameter: The content to scan. This can be either a URL to load content from or an actual content string</param>
+        /// <param name="censorCharacter">Optional parameter: The character to use to censor out the bad words found</param>
+        /// <return>Returns the Models.BadWordFilterResponse response from the API call</return>
+        public Models.BadWordFilterResponse BadWordFilter(string content, string censorCharacter = null)
+        {
+            Task<Models.BadWordFilterResponse> t = BadWordFilterAsync(content, censorCharacter);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Detect bad words, swear words and profanity in a given text. See: https://www.neutrinoapi.com/api/bad-word-filter/
+        /// </summary>
+        /// <param name="content">Required parameter: The content to scan. This can be either a URL to load content from or an actual content string</param>
+        /// <param name="censorCharacter">Optional parameter: The character to use to censor out the bad words found</param>
+        /// <return>Returns the Models.BadWordFilterResponse response from the API call</return>
+        public async Task<Models.BadWordFilterResponse> BadWordFilterAsync(string content, string censorCharacter = null)
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/bad-word-filter");
+
+            //process optional query parameters
+            APIHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "user-id", Configuration.UserId },
+                { "api-key", Configuration.ApiKey }
+            },ArrayDeserializationFormat,ParameterSeparator);
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "APIMATIC 2.0" },
+                { "accept", "application/json" }
+            };
+
+            //append form/field parameters
+            var _fields = new List<KeyValuePair<string, Object>>()
+            {
+                new KeyValuePair<string, object>( "output-case", "camel" ),
+                new KeyValuePair<string, object>( "content", content ),
+                new KeyValuePair<string, object>( "censor-character", censorCharacter )
+            };
+            //remove null parameters
+            _fields = _fields.Where(kvp => kvp.Value != null).ToList();
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.Post(_queryUrl, _headers, _fields);
+
+            //invoke request and get response
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return APIHelper.JsonDeserialize<Models.BadWordFilterResponse>(_response.Body);
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
+        /// Parse, validate and clean an email address. See: https://www.neutrinoapi.com/api/email-validate/
+        /// </summary>
+        /// <param name="email">Required parameter: An email address</param>
+        /// <param name="fixTypos">Optional parameter: Automatically attempt to fix typos in the address</param>
+        /// <return>Returns the Models.EmailValidateResponse response from the API call</return>
+        public Models.EmailValidateResponse EmailValidate(string email, bool? fixTypos = false)
+        {
+            Task<Models.EmailValidateResponse> t = EmailValidateAsync(email, fixTypos);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Parse, validate and clean an email address. See: https://www.neutrinoapi.com/api/email-validate/
+        /// </summary>
+        /// <param name="email">Required parameter: An email address</param>
+        /// <param name="fixTypos">Optional parameter: Automatically attempt to fix typos in the address</param>
+        /// <return>Returns the Models.EmailValidateResponse response from the API call</return>
+        public async Task<Models.EmailValidateResponse> EmailValidateAsync(string email, bool? fixTypos = false)
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/email-validate");
+
+            //process optional query parameters
+            APIHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "user-id", Configuration.UserId },
+                { "api-key", Configuration.ApiKey }
+            },ArrayDeserializationFormat,ParameterSeparator);
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "APIMATIC 2.0" },
+                { "accept", "application/json" }
+            };
+
+            //append form/field parameters
+            var _fields = new List<KeyValuePair<string, Object>>()
+            {
+                new KeyValuePair<string, object>( "output-case", "camel" ),
+                new KeyValuePair<string, object>( "email", email ),
+                new KeyValuePair<string, object>( "fix-typos", (null != fixTypos) ? fixTypos : false )
+            };
+            //remove null parameters
+            _fields = _fields.Where(kvp => kvp.Value != null).ToList();
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.Post(_queryUrl, _headers, _fields);
+
+            //invoke request and get response
+            HttpStringResponse _response = (HttpStringResponse) await ClientInstance.ExecuteAsStringAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return APIHelper.JsonDeserialize<Models.EmailValidateResponse>(_response.Body);
             }
             catch (Exception _ex)
             {

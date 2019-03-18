@@ -14,6 +14,17 @@ namespace NeutrinoAPI
     {
 
         /// <summary>
+        /// Singleton access to WWW controller
+        /// </summary>
+        public IWWW WWW
+        {
+            get
+            {
+                return NeutrinoAPI.Controllers.WWW.Instance;
+            }
+        }
+
+        /// <summary>
         /// Singleton access to Imaging controller
         /// </summary>
         public IImaging Imaging
@@ -36,24 +47,13 @@ namespace NeutrinoAPI
         }
 
         /// <summary>
-        /// Singleton access to DataTools controller
+        /// Singleton access to ECommerce controller
         /// </summary>
-        public IDataTools DataTools
+        public IECommerce ECommerce
         {
             get
             {
-                return NeutrinoAPI.Controllers.DataTools.Instance;
-            }
-        }
-
-        /// <summary>
-        /// Singleton access to SecurityAndNetworking controller
-        /// </summary>
-        public ISecurityAndNetworking SecurityAndNetworking
-        {
-            get
-            {
-                return NeutrinoAPI.Controllers.SecurityAndNetworking.Instance;
+                return NeutrinoAPI.Controllers.ECommerce.Instance;
             }
         }
 
@@ -69,24 +69,24 @@ namespace NeutrinoAPI
         }
 
         /// <summary>
-        /// Singleton access to ECommerce controller
+        /// Singleton access to SecurityAndNetworking controller
         /// </summary>
-        public IECommerce ECommerce
+        public ISecurityAndNetworking SecurityAndNetworking
         {
             get
             {
-                return NeutrinoAPI.Controllers.ECommerce.Instance;
+                return NeutrinoAPI.Controllers.SecurityAndNetworking.Instance;
             }
         }
 
         /// <summary>
-        /// Singleton access to WWW controller
+        /// Singleton access to DataTools controller
         /// </summary>
-        public IWWW WWW
+        public IDataTools DataTools
         {
             get
             {
-                return NeutrinoAPI.Controllers.WWW.Instance;
+                return NeutrinoAPI.Controllers.DataTools.Instance;
             }
         }
         /// <summary>

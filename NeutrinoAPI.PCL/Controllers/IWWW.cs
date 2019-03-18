@@ -21,22 +21,6 @@ namespace NeutrinoAPI.Controllers
     public partial interface IWWW
     {
         /// <summary>
-        /// Parse, analyze and retrieve content from the supplied URL. See: https://www.neutrinoapi.com/api/url-info/
-        /// </summary>
-        /// <param name="url">Required parameter: The URL to probe</param>
-        /// <param name="fetchContent">Optional parameter: If this URL responds with html, text, json or xml then return the response. This option is useful if you want to perform further processing on the URL content (e.g. with the HTML Extract or HTML Clean APIs)</param>
-        /// <return>Returns the Models.URLInfoResponse response from the API call</return>
-        Models.URLInfoResponse URLInfo(string url, bool? fetchContent = false);
-
-        /// <summary>
-        /// Parse, analyze and retrieve content from the supplied URL. See: https://www.neutrinoapi.com/api/url-info/
-        /// </summary>
-        /// <param name="url">Required parameter: The URL to probe</param>
-        /// <param name="fetchContent">Optional parameter: If this URL responds with html, text, json or xml then return the response. This option is useful if you want to perform further processing on the URL content (e.g. with the HTML Extract or HTML Clean APIs)</param>
-        /// <return>Returns the Models.URLInfoResponse response from the API call</return>
-        Task<Models.URLInfoResponse> URLInfoAsync(string url, bool? fetchContent = false);
-
-        /// <summary>
         /// Browser bot can extract content, interact with keyboard and mouse events, and execute JavaScript on a website. See: https://www.neutrinoapi.com/api/browser-bot/
         /// </summary>
         /// <param name="url">Required parameter: The URL to load</param>
@@ -91,6 +75,22 @@ namespace NeutrinoAPI.Controllers
         /// <param name="outputType">Required parameter: The level of sanitization, possible values are:<br/><b>plain-text</b>: reduce the content to plain text only (no HTML tags at all)<br/><br/><b>simple-text</b>: allow only very basic text formatting tags like b, em, i, strong, u<br/><br/><b>basic-html</b>: allow advanced text formatting and hyper links<br/><br/><b>basic-html-with-images</b>: same as basic html but also allows image tags<br/><br/><b>advanced-html</b>: same as basic html with images but also allows many more common HTML tags like table, ul, dl, pre<br/></param>
         /// <return>Returns the Stream response from the API call</return>
         Task<Stream> HTMLCleanAsync(string content, string outputType);
+
+        /// <summary>
+        /// Parse, analyze and retrieve content from the supplied URL. See: https://www.neutrinoapi.com/api/url-info/
+        /// </summary>
+        /// <param name="url">Required parameter: The URL to probe</param>
+        /// <param name="fetchContent">Optional parameter: If this URL responds with html, text, json or xml then return the response. This option is useful if you want to perform further processing on the URL content (e.g. with the HTML Extract or HTML Clean APIs)</param>
+        /// <return>Returns the Models.URLInfoResponse response from the API call</return>
+        Models.URLInfoResponse URLInfo(string url, bool? fetchContent = false);
+
+        /// <summary>
+        /// Parse, analyze and retrieve content from the supplied URL. See: https://www.neutrinoapi.com/api/url-info/
+        /// </summary>
+        /// <param name="url">Required parameter: The URL to probe</param>
+        /// <param name="fetchContent">Optional parameter: If this URL responds with html, text, json or xml then return the response. This option is useful if you want to perform further processing on the URL content (e.g. with the HTML Extract or HTML Clean APIs)</param>
+        /// <return>Returns the Models.URLInfoResponse response from the API call</return>
+        Task<Models.URLInfoResponse> URLInfoAsync(string url, bool? fetchContent = false);
 
     }
 } 

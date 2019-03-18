@@ -50,185 +50,6 @@ namespace NeutrinoAPI.Controllers
         #endregion Singleton Pattern
 
         /// <summary>
-        /// Resize an image and output as either JPEG or PNG. See: https://www.neutrinoapi.com/api/image-resize/
-        /// </summary>
-        /// <param name="imageUrl">Required parameter: The URL to the source image</param>
-        /// <param name="width">Required parameter: The width to resize to (in px) while preserving aspect ratio</param>
-        /// <param name="height">Required parameter: The height to resize to (in px) while preserving aspect ratio</param>
-        /// <param name="format">Optional parameter: The output image format, can be either png or jpg</param>
-        /// <return>Returns the Stream response from the API call</return>
-        public Stream ImageResize(
-                string imageUrl,
-                int width,
-                int height,
-                string format = "png")
-        {
-            Task<Stream> t = ImageResizeAsync(imageUrl, width, height, format);
-            APIHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// Resize an image and output as either JPEG or PNG. See: https://www.neutrinoapi.com/api/image-resize/
-        /// </summary>
-        /// <param name="imageUrl">Required parameter: The URL to the source image</param>
-        /// <param name="width">Required parameter: The width to resize to (in px) while preserving aspect ratio</param>
-        /// <param name="height">Required parameter: The height to resize to (in px) while preserving aspect ratio</param>
-        /// <param name="format">Optional parameter: The output image format, can be either png or jpg</param>
-        /// <return>Returns the Stream response from the API call</return>
-        public async Task<Stream> ImageResizeAsync(
-                string imageUrl,
-                int width,
-                int height,
-                string format = "png")
-        {
-            //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/image-resize");
-
-            //process optional query parameters
-            APIHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "user-id", Configuration.UserId },
-                { "api-key", Configuration.ApiKey }
-            },ArrayDeserializationFormat,ParameterSeparator);
-
-
-            //validate and preprocess url
-            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
-            {
-                { "user-agent", "APIMATIC 2.0" }
-            };
-
-            //append form/field parameters
-            var _fields = new List<KeyValuePair<string, Object>>()
-            {
-                new KeyValuePair<string, object>( "image-url", imageUrl ),
-                new KeyValuePair<string, object>( "width", width ),
-                new KeyValuePair<string, object>( "height", height ),
-                new KeyValuePair<string, object>( "format", (null != format) ? format : "png" )
-            };
-            //remove null parameters
-            _fields = _fields.Where(kvp => kvp.Value != null).ToList();
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.Post(_queryUrl, _headers, _fields);
-
-            //invoke request and get response
-            HttpResponse _response = await ClientInstance.ExecuteAsBinaryAsync(_request).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request,_response);
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            try
-            {
-                return _response.RawBody;
-            }
-            catch (Exception _ex)
-            {
-                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
-            }
-        }
-
-        /// <summary>
-        /// Generate a QR code as a PNG image. See: https://www.neutrinoapi.com/api/qr-code/
-        /// </summary>
-        /// <param name="content">Required parameter: The content to encode into the QR code (e.g. a URL or a phone number)</param>
-        /// <param name="width">Optional parameter: The width of the QR code (in px)</param>
-        /// <param name="height">Optional parameter: The height of the QR code (in px)</param>
-        /// <param name="fgColor">Optional parameter: The QR code foreground color</param>
-        /// <param name="bgColor">Optional parameter: The QR code background color</param>
-        /// <return>Returns the Stream response from the API call</return>
-        public Stream QRCode(
-                string content,
-                int? width = 256,
-                int? height = 256,
-                string fgColor = "#000000",
-                string bgColor = "#ffffff")
-        {
-            Task<Stream> t = QRCodeAsync(content, width, height, fgColor, bgColor);
-            APIHelper.RunTaskSynchronously(t);
-            return t.Result;
-        }
-
-        /// <summary>
-        /// Generate a QR code as a PNG image. See: https://www.neutrinoapi.com/api/qr-code/
-        /// </summary>
-        /// <param name="content">Required parameter: The content to encode into the QR code (e.g. a URL or a phone number)</param>
-        /// <param name="width">Optional parameter: The width of the QR code (in px)</param>
-        /// <param name="height">Optional parameter: The height of the QR code (in px)</param>
-        /// <param name="fgColor">Optional parameter: The QR code foreground color</param>
-        /// <param name="bgColor">Optional parameter: The QR code background color</param>
-        /// <return>Returns the Stream response from the API call</return>
-        public async Task<Stream> QRCodeAsync(
-                string content,
-                int? width = 256,
-                int? height = 256,
-                string fgColor = "#000000",
-                string bgColor = "#ffffff")
-        {
-            //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
-
-            //prepare query string for API call
-            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/qr-code");
-
-            //process optional query parameters
-            APIHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
-            {
-                { "width", (null != width) ? width : 256 },
-                { "user-id", Configuration.UserId },
-                { "api-key", Configuration.ApiKey }
-            },ArrayDeserializationFormat,ParameterSeparator);
-
-
-            //validate and preprocess url
-            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
-
-            //append request with appropriate headers and parameters
-            var _headers = new Dictionary<string,string>()
-            {
-                { "user-agent", "APIMATIC 2.0" }
-            };
-
-            //append form/field parameters
-            var _fields = new List<KeyValuePair<string, Object>>()
-            {
-                new KeyValuePair<string, object>( "content", content ),
-                new KeyValuePair<string, object>( "height", (null != height) ? height : 256 ),
-                new KeyValuePair<string, object>( "fg-color", (null != fgColor) ? fgColor : "#000000" ),
-                new KeyValuePair<string, object>( "bg-color", (null != bgColor) ? bgColor : "#ffffff" )
-            };
-            //remove null parameters
-            _fields = _fields.Where(kvp => kvp.Value != null).ToList();
-
-            //prepare the API call request to fetch the response
-            HttpRequest _request = ClientInstance.Post(_queryUrl, _headers, _fields);
-
-            //invoke request and get response
-            HttpResponse _response = await ClientInstance.ExecuteAsBinaryAsync(_request).ConfigureAwait(false);
-            HttpContext _context = new HttpContext(_request,_response);
-            //handle errors defined at the API level
-            base.ValidateResponse(_response, _context);
-
-            try
-            {
-                return _response.RawBody;
-            }
-            catch (Exception _ex)
-            {
-                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
-            }
-        }
-
-        /// <summary>
         /// Watermark one image with another image. See: https://www.neutrinoapi.com/api/image-watermark/
         /// </summary>
         /// <param name="imageUrl">Required parameter: The URL to the source image</param>
@@ -331,6 +152,185 @@ namespace NeutrinoAPI.Controllers
         }
 
         /// <summary>
+        /// Generate a QR code as a PNG image. See: https://www.neutrinoapi.com/api/qr-code/
+        /// </summary>
+        /// <param name="content">Required parameter: The content to encode into the QR code (e.g. a URL or a phone number)</param>
+        /// <param name="width">Optional parameter: The width of the QR code (in px)</param>
+        /// <param name="height">Optional parameter: The height of the QR code (in px)</param>
+        /// <param name="fgColor">Optional parameter: The QR code foreground color</param>
+        /// <param name="bgColor">Optional parameter: The QR code background color</param>
+        /// <return>Returns the Stream response from the API call</return>
+        public Stream QRCode(
+                string content,
+                int? width = 256,
+                int? height = 256,
+                string fgColor = "#000000",
+                string bgColor = "#ffffff")
+        {
+            Task<Stream> t = QRCodeAsync(content, width, height, fgColor, bgColor);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Generate a QR code as a PNG image. See: https://www.neutrinoapi.com/api/qr-code/
+        /// </summary>
+        /// <param name="content">Required parameter: The content to encode into the QR code (e.g. a URL or a phone number)</param>
+        /// <param name="width">Optional parameter: The width of the QR code (in px)</param>
+        /// <param name="height">Optional parameter: The height of the QR code (in px)</param>
+        /// <param name="fgColor">Optional parameter: The QR code foreground color</param>
+        /// <param name="bgColor">Optional parameter: The QR code background color</param>
+        /// <return>Returns the Stream response from the API call</return>
+        public async Task<Stream> QRCodeAsync(
+                string content,
+                int? width = 256,
+                int? height = 256,
+                string fgColor = "#000000",
+                string bgColor = "#ffffff")
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/qr-code");
+
+            //process optional query parameters
+            APIHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "user-id", Configuration.UserId },
+                { "api-key", Configuration.ApiKey }
+            },ArrayDeserializationFormat,ParameterSeparator);
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "APIMATIC 2.0" }
+            };
+
+            //append form/field parameters
+            var _fields = new List<KeyValuePair<string, Object>>()
+            {
+                new KeyValuePair<string, object>( "content", content ),
+                new KeyValuePair<string, object>( "width", (null != width) ? width : 256 ),
+                new KeyValuePair<string, object>( "height", (null != height) ? height : 256 ),
+                new KeyValuePair<string, object>( "fg-color", (null != fgColor) ? fgColor : "#000000" ),
+                new KeyValuePair<string, object>( "bg-color", (null != bgColor) ? bgColor : "#ffffff" )
+            };
+            //remove null parameters
+            _fields = _fields.Where(kvp => kvp.Value != null).ToList();
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.Post(_queryUrl, _headers, _fields);
+
+            //invoke request and get response
+            HttpResponse _response = await ClientInstance.ExecuteAsBinaryAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return _response.RawBody;
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
+        /// Resize an image and output as either JPEG or PNG. See: https://www.neutrinoapi.com/api/image-resize/
+        /// </summary>
+        /// <param name="imageUrl">Required parameter: The URL to the source image</param>
+        /// <param name="width">Required parameter: The width to resize to (in px) while preserving aspect ratio</param>
+        /// <param name="height">Required parameter: The height to resize to (in px) while preserving aspect ratio</param>
+        /// <param name="format">Optional parameter: The output image format, can be either png or jpg</param>
+        /// <return>Returns the Stream response from the API call</return>
+        public Stream ImageResize(
+                string imageUrl,
+                int width,
+                int height,
+                string format = "png")
+        {
+            Task<Stream> t = ImageResizeAsync(imageUrl, width, height, format);
+            APIHelper.RunTaskSynchronously(t);
+            return t.Result;
+        }
+
+        /// <summary>
+        /// Resize an image and output as either JPEG or PNG. See: https://www.neutrinoapi.com/api/image-resize/
+        /// </summary>
+        /// <param name="imageUrl">Required parameter: The URL to the source image</param>
+        /// <param name="width">Required parameter: The width to resize to (in px) while preserving aspect ratio</param>
+        /// <param name="height">Required parameter: The height to resize to (in px) while preserving aspect ratio</param>
+        /// <param name="format">Optional parameter: The output image format, can be either png or jpg</param>
+        /// <return>Returns the Stream response from the API call</return>
+        public async Task<Stream> ImageResizeAsync(
+                string imageUrl,
+                int width,
+                int height,
+                string format = "png")
+        {
+            //the base uri for api requests
+            string _baseUri = Configuration.BaseUri;
+
+            //prepare query string for API call
+            StringBuilder _queryBuilder = new StringBuilder(_baseUri);
+            _queryBuilder.Append("/image-resize");
+
+            //process optional query parameters
+            APIHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
+            {
+                { "user-id", Configuration.UserId },
+                { "api-key", Configuration.ApiKey }
+            },ArrayDeserializationFormat,ParameterSeparator);
+
+
+            //validate and preprocess url
+            string _queryUrl = APIHelper.CleanUrl(_queryBuilder);
+
+            //append request with appropriate headers and parameters
+            var _headers = new Dictionary<string,string>()
+            {
+                { "user-agent", "APIMATIC 2.0" }
+            };
+
+            //append form/field parameters
+            var _fields = new List<KeyValuePair<string, Object>>()
+            {
+                new KeyValuePair<string, object>( "image-url", imageUrl ),
+                new KeyValuePair<string, object>( "width", width ),
+                new KeyValuePair<string, object>( "height", height ),
+                new KeyValuePair<string, object>( "format", (null != format) ? format : "png" )
+            };
+            //remove null parameters
+            _fields = _fields.Where(kvp => kvp.Value != null).ToList();
+
+            //prepare the API call request to fetch the response
+            HttpRequest _request = ClientInstance.Post(_queryUrl, _headers, _fields);
+
+            //invoke request and get response
+            HttpResponse _response = await ClientInstance.ExecuteAsBinaryAsync(_request).ConfigureAwait(false);
+            HttpContext _context = new HttpContext(_request,_response);
+            //handle errors defined at the API level
+            base.ValidateResponse(_response, _context);
+
+            try
+            {
+                return _response.RawBody;
+            }
+            catch (Exception _ex)
+            {
+                throw new APIException("Failed to parse the response: " + _ex.Message, _context);
+            }
+        }
+
+        /// <summary>
         /// Render HTML content to PDF, JPG or PNG. See: https://www.neutrinoapi.com/api/html5-render/
         /// </summary>
         /// <param name="content">Required parameter: The HTML content. This can be either a URL to load HTML from or an actual HTML content string</param>
@@ -380,7 +380,7 @@ namespace NeutrinoAPI.Controllers
                 int? marginTop = 0,
                 int? marginBottom = 0,
                 bool? landscape = false,
-                int? zoom = 1.0,
+                double? zoom = 1,
                 bool? grayscale = false,
                 bool? mediaPrint = false,
                 bool? mediaQueries = false,
@@ -461,7 +461,7 @@ namespace NeutrinoAPI.Controllers
                 int? marginTop = 0,
                 int? marginBottom = 0,
                 bool? landscape = false,
-                int? zoom = 1.0,
+                double? zoom = 1,
                 bool? grayscale = false,
                 bool? mediaPrint = false,
                 bool? mediaQueries = false,
@@ -525,7 +525,7 @@ namespace NeutrinoAPI.Controllers
                 new KeyValuePair<string, object>( "margin-top", (null != marginTop) ? marginTop : 0 ),
                 new KeyValuePair<string, object>( "margin-bottom", (null != marginBottom) ? marginBottom : 0 ),
                 new KeyValuePair<string, object>( "landscape", (null != landscape) ? landscape : false ),
-                new KeyValuePair<string, object>( "zoom", (null != zoom) ? zoom : 1.0 ),
+                new KeyValuePair<string, object>( "zoom", (null != zoom) ? zoom : 1 ),
                 new KeyValuePair<string, object>( "grayscale", (null != grayscale) ? grayscale : false ),
                 new KeyValuePair<string, object>( "media-print", (null != mediaPrint) ? mediaPrint : false ),
                 new KeyValuePair<string, object>( "media-queries", (null != mediaQueries) ? mediaQueries : false ),

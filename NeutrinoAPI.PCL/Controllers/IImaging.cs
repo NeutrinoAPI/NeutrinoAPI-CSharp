@@ -21,66 +21,6 @@ namespace NeutrinoAPI.Controllers
     public partial interface IImaging
     {
         /// <summary>
-        /// Resize an image and output as either JPEG or PNG. See: https://www.neutrinoapi.com/api/image-resize/
-        /// </summary>
-        /// <param name="imageUrl">Required parameter: The URL to the source image</param>
-        /// <param name="width">Required parameter: The width to resize to (in px) while preserving aspect ratio</param>
-        /// <param name="height">Required parameter: The height to resize to (in px) while preserving aspect ratio</param>
-        /// <param name="format">Optional parameter: The output image format, can be either png or jpg</param>
-        /// <return>Returns the Stream response from the API call</return>
-        Stream ImageResize(
-                string imageUrl,
-                int width,
-                int height,
-                string format = "png");
-
-        /// <summary>
-        /// Resize an image and output as either JPEG or PNG. See: https://www.neutrinoapi.com/api/image-resize/
-        /// </summary>
-        /// <param name="imageUrl">Required parameter: The URL to the source image</param>
-        /// <param name="width">Required parameter: The width to resize to (in px) while preserving aspect ratio</param>
-        /// <param name="height">Required parameter: The height to resize to (in px) while preserving aspect ratio</param>
-        /// <param name="format">Optional parameter: The output image format, can be either png or jpg</param>
-        /// <return>Returns the Stream response from the API call</return>
-        Task<Stream> ImageResizeAsync(
-                string imageUrl,
-                int width,
-                int height,
-                string format = "png");
-
-        /// <summary>
-        /// Generate a QR code as a PNG image. See: https://www.neutrinoapi.com/api/qr-code/
-        /// </summary>
-        /// <param name="content">Required parameter: The content to encode into the QR code (e.g. a URL or a phone number)</param>
-        /// <param name="width">Optional parameter: The width of the QR code (in px)</param>
-        /// <param name="height">Optional parameter: The height of the QR code (in px)</param>
-        /// <param name="fgColor">Optional parameter: The QR code foreground color</param>
-        /// <param name="bgColor">Optional parameter: The QR code background color</param>
-        /// <return>Returns the Stream response from the API call</return>
-        Stream QRCode(
-                string content,
-                int? width = 256,
-                int? height = 256,
-                string fgColor = "#000000",
-                string bgColor = "#ffffff");
-
-        /// <summary>
-        /// Generate a QR code as a PNG image. See: https://www.neutrinoapi.com/api/qr-code/
-        /// </summary>
-        /// <param name="content">Required parameter: The content to encode into the QR code (e.g. a URL or a phone number)</param>
-        /// <param name="width">Optional parameter: The width of the QR code (in px)</param>
-        /// <param name="height">Optional parameter: The height of the QR code (in px)</param>
-        /// <param name="fgColor">Optional parameter: The QR code foreground color</param>
-        /// <param name="bgColor">Optional parameter: The QR code background color</param>
-        /// <return>Returns the Stream response from the API call</return>
-        Task<Stream> QRCodeAsync(
-                string content,
-                int? width = 256,
-                int? height = 256,
-                string fgColor = "#000000",
-                string bgColor = "#ffffff");
-
-        /// <summary>
         /// Watermark one image with another image. See: https://www.neutrinoapi.com/api/image-watermark/
         /// </summary>
         /// <param name="imageUrl">Required parameter: The URL to the source image</param>
@@ -119,6 +59,66 @@ namespace NeutrinoAPI.Controllers
                 string position = "center",
                 int? width = null,
                 int? height = null);
+
+        /// <summary>
+        /// Generate a QR code as a PNG image. See: https://www.neutrinoapi.com/api/qr-code/
+        /// </summary>
+        /// <param name="content">Required parameter: The content to encode into the QR code (e.g. a URL or a phone number)</param>
+        /// <param name="width">Optional parameter: The width of the QR code (in px)</param>
+        /// <param name="height">Optional parameter: The height of the QR code (in px)</param>
+        /// <param name="fgColor">Optional parameter: The QR code foreground color</param>
+        /// <param name="bgColor">Optional parameter: The QR code background color</param>
+        /// <return>Returns the Stream response from the API call</return>
+        Stream QRCode(
+                string content,
+                int? width = 256,
+                int? height = 256,
+                string fgColor = "#000000",
+                string bgColor = "#ffffff");
+
+        /// <summary>
+        /// Generate a QR code as a PNG image. See: https://www.neutrinoapi.com/api/qr-code/
+        /// </summary>
+        /// <param name="content">Required parameter: The content to encode into the QR code (e.g. a URL or a phone number)</param>
+        /// <param name="width">Optional parameter: The width of the QR code (in px)</param>
+        /// <param name="height">Optional parameter: The height of the QR code (in px)</param>
+        /// <param name="fgColor">Optional parameter: The QR code foreground color</param>
+        /// <param name="bgColor">Optional parameter: The QR code background color</param>
+        /// <return>Returns the Stream response from the API call</return>
+        Task<Stream> QRCodeAsync(
+                string content,
+                int? width = 256,
+                int? height = 256,
+                string fgColor = "#000000",
+                string bgColor = "#ffffff");
+
+        /// <summary>
+        /// Resize an image and output as either JPEG or PNG. See: https://www.neutrinoapi.com/api/image-resize/
+        /// </summary>
+        /// <param name="imageUrl">Required parameter: The URL to the source image</param>
+        /// <param name="width">Required parameter: The width to resize to (in px) while preserving aspect ratio</param>
+        /// <param name="height">Required parameter: The height to resize to (in px) while preserving aspect ratio</param>
+        /// <param name="format">Optional parameter: The output image format, can be either png or jpg</param>
+        /// <return>Returns the Stream response from the API call</return>
+        Stream ImageResize(
+                string imageUrl,
+                int width,
+                int height,
+                string format = "png");
+
+        /// <summary>
+        /// Resize an image and output as either JPEG or PNG. See: https://www.neutrinoapi.com/api/image-resize/
+        /// </summary>
+        /// <param name="imageUrl">Required parameter: The URL to the source image</param>
+        /// <param name="width">Required parameter: The width to resize to (in px) while preserving aspect ratio</param>
+        /// <param name="height">Required parameter: The height to resize to (in px) while preserving aspect ratio</param>
+        /// <param name="format">Optional parameter: The output image format, can be either png or jpg</param>
+        /// <return>Returns the Stream response from the API call</return>
+        Task<Stream> ImageResizeAsync(
+                string imageUrl,
+                int width,
+                int height,
+                string format = "png");
 
         /// <summary>
         /// Render HTML content to PDF, JPG or PNG. See: https://www.neutrinoapi.com/api/html5-render/
@@ -170,7 +170,7 @@ namespace NeutrinoAPI.Controllers
                 int? marginTop = 0,
                 int? marginBottom = 0,
                 bool? landscape = false,
-                int? zoom = 1.0,
+                double? zoom = 1,
                 bool? grayscale = false,
                 bool? mediaPrint = false,
                 bool? mediaQueries = false,
@@ -246,7 +246,7 @@ namespace NeutrinoAPI.Controllers
                 int? marginTop = 0,
                 int? marginBottom = 0,
                 bool? landscape = false,
-                int? zoom = 1.0,
+                double? zoom = 1,
                 bool? grayscale = false,
                 bool? mediaPrint = false,
                 bool? mediaQueries = false,

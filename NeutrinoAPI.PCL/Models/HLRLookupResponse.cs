@@ -43,6 +43,7 @@ namespace NeutrinoAPI.Models
         private string countryCode3;
         private string currencyCode;
         private string roamingCountryCode;
+        private string msc;
 
         /// <summary>
         /// True if this a valid phone number
@@ -79,7 +80,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// The mobile MNC number
+        /// The mobile MNC number (Mobile Network Code)
         /// </summary>
         [JsonProperty("mnc")]
         public string Mnc 
@@ -164,7 +165,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// The mobile IMSI number
+        /// The mobile IMSI number (International Mobile Subscriber Identity)
         /// </summary>
         [JsonProperty("imsi")]
         public string Imsi 
@@ -181,7 +182,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// The mobile MCC number
+        /// The mobile MCC number (Mobile Country Code)
         /// </summary>
         [JsonProperty("mcc")]
         public string Mcc 
@@ -266,7 +267,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// The mobile MSIN number
+        /// The mobile MSIN number (Mobile Subscription Identification Number)
         /// </summary>
         [JsonProperty("msin")]
         public string Msin 
@@ -415,6 +416,23 @@ namespace NeutrinoAPI.Models
             {
                 this.roamingCountryCode = value;
                 onPropertyChanged("RoamingCountryCode");
+            }
+        }
+
+        /// <summary>
+        /// The mobile MSC number (Mobile Switching Center)
+        /// </summary>
+        [JsonProperty("msc")]
+        public string Msc 
+        { 
+            get 
+            {
+                return this.msc; 
+            } 
+            set 
+            {
+                this.msc = value;
+                onPropertyChanged("Msc");
             }
         }
     }

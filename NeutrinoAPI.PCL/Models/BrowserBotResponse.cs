@@ -34,7 +34,7 @@ namespace NeutrinoAPI.Models
         private bool isHttpRedirect;
         private string httpRedirectUrl;
         private string serverIp;
-        private int loadTime;
+        private double loadTime;
         private Dictionary<string, string> responseHeaders;
         private bool isSecure;
         private Dictionary<string, string> securityDetails;
@@ -266,7 +266,7 @@ namespace NeutrinoAPI.Models
         /// The number of seconds taken to load the page (from initial request until DOM ready)
         /// </summary>
         [JsonProperty("loadTime")]
-        public int LoadTime 
+        public double LoadTime 
         { 
             get 
             {

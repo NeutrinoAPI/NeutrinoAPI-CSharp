@@ -7,9 +7,9 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>NeutrinoAPI.PCL</id>
-    <version>3.4.0</version>
+    <version>3.4.1</version>
     <title>NeutrinoAPI.PCL</title>
-    <authors>APIMATIC SDK Generator</authors>
+    <authors>NeutrinoAPI</authors>
     <iconUrl>https://nuget.org/Content/Images/packageDefaultIcon-50x50.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>The general-purpose API</description>
