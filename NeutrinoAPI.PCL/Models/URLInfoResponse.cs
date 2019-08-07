@@ -44,6 +44,7 @@ namespace NeutrinoAPI.Models
         private string contentType;
         private bool httpRedirect;
         private string content;
+        private bool isTimeout;
 
         /// <summary>
         /// The HTTP status message assoicated with the status code
@@ -433,6 +434,23 @@ namespace NeutrinoAPI.Models
             {
                 this.content = value;
                 onPropertyChanged("Content");
+            }
+        }
+
+        /// <summary>
+        /// True if a timeout occurred while loading the URL. You can set the timeout with the request parameter 'timeout'
+        /// </summary>
+        [JsonProperty("isTimeout")]
+        public bool IsTimeout 
+        { 
+            get 
+            {
+                return this.isTimeout; 
+            } 
+            set 
+            {
+                this.isTimeout = value;
+                onPropertyChanged("IsTimeout");
             }
         }
     }

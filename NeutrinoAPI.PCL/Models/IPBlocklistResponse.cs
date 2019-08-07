@@ -37,6 +37,7 @@ namespace NeutrinoAPI.Models
         private bool isVpn;
         private int lastSeen;
         private List<string> blocklists;
+        private List<string> sensors;
 
         /// <summary>
         /// The IP address
@@ -307,6 +308,23 @@ namespace NeutrinoAPI.Models
             {
                 this.blocklists = value;
                 onPropertyChanged("Blocklists");
+            }
+        }
+
+        /// <summary>
+        /// An array of objects containing details on which sensors were used to detect this IP
+        /// </summary>
+        [JsonProperty("sensors")]
+        public List<string> Sensors 
+        { 
+            get 
+            {
+                return this.sensors; 
+            } 
+            set 
+            {
+                this.sensors = value;
+                onPropertyChanged("Sensors");
             }
         }
     }

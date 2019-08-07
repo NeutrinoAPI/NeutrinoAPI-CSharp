@@ -34,7 +34,7 @@ namespace NeutrinoAPI.Models
         private bool isHttpRedirect;
         private string httpRedirectUrl;
         private string serverIp;
-        private double loadTime;
+        private int loadTime;
         private Dictionary<string, string> responseHeaders;
         private bool isSecure;
         private Dictionary<string, string> securityDetails;
@@ -266,7 +266,7 @@ namespace NeutrinoAPI.Models
         /// The number of seconds taken to load the page (from initial request until DOM ready)
         /// </summary>
         [JsonProperty("loadTime")]
-        public double LoadTime 
+        public int LoadTime 
         { 
             get 
             {
@@ -331,7 +331,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// Array containing all the elements matching the supplied selector.<br/>Each element object will contain the text content, HTML content and all current element attributes
+        /// Array containing all the elements matching the supplied selector. Each element object will contain the text content, HTML content and all current element attributes
         /// </summary>
         [JsonProperty("elements")]
         public List<string> Elements 

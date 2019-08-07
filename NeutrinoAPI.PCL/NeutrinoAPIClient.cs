@@ -14,17 +14,6 @@ namespace NeutrinoAPI
     {
 
         /// <summary>
-        /// Singleton access to WWW controller
-        /// </summary>
-        public IWWW WWW
-        {
-            get
-            {
-                return NeutrinoAPI.Controllers.WWW.Instance;
-            }
-        }
-
-        /// <summary>
         /// Singleton access to Imaging controller
         /// </summary>
         public IImaging Imaging
@@ -47,24 +36,13 @@ namespace NeutrinoAPI
         }
 
         /// <summary>
-        /// Singleton access to ECommerce controller
+        /// Singleton access to DataTools controller
         /// </summary>
-        public IECommerce ECommerce
+        public IDataTools DataTools
         {
             get
             {
-                return NeutrinoAPI.Controllers.ECommerce.Instance;
-            }
-        }
-
-        /// <summary>
-        /// Singleton access to Geolocation controller
-        /// </summary>
-        public IGeolocation Geolocation
-        {
-            get
-            {
-                return NeutrinoAPI.Controllers.Geolocation.Instance;
+                return NeutrinoAPI.Controllers.DataTools.Instance;
             }
         }
 
@@ -80,13 +58,35 @@ namespace NeutrinoAPI
         }
 
         /// <summary>
-        /// Singleton access to DataTools controller
+        /// Singleton access to Geolocation controller
         /// </summary>
-        public IDataTools DataTools
+        public IGeolocation Geolocation
         {
             get
             {
-                return NeutrinoAPI.Controllers.DataTools.Instance;
+                return NeutrinoAPI.Controllers.Geolocation.Instance;
+            }
+        }
+
+        /// <summary>
+        /// Singleton access to ECommerce controller
+        /// </summary>
+        public IECommerce ECommerce
+        {
+            get
+            {
+                return NeutrinoAPI.Controllers.ECommerce.Instance;
+            }
+        }
+
+        /// <summary>
+        /// Singleton access to WWW controller
+        /// </summary>
+        public IWWW WWW
+        {
+            get
+            {
+                return NeutrinoAPI.Controllers.WWW.Instance;
             }
         }
         /// <summary>

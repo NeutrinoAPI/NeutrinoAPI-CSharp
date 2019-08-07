@@ -26,6 +26,7 @@ namespace NeutrinoAPI.Models
         private string fromValue;
         private string toType;
         private string fromType;
+        private int resultFloat;
 
         /// <summary>
         /// True if the coversion was successful and produced a valid result
@@ -45,7 +46,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// The result of the conversion
+        /// The result of the conversion in string format
         /// </summary>
         [JsonProperty("result")]
         public string Result 
@@ -109,6 +110,23 @@ namespace NeutrinoAPI.Models
             {
                 this.fromType = value;
                 onPropertyChanged("FromType");
+            }
+        }
+
+        /// <summary>
+        /// The result of the conversion as a floating-point number
+        /// </summary>
+        [JsonProperty("resultFloat")]
+        public int ResultFloat 
+        { 
+            get 
+            {
+                return this.resultFloat; 
+            } 
+            set 
+            {
+                this.resultFloat = value;
+                onPropertyChanged("ResultFloat");
             }
         }
     }

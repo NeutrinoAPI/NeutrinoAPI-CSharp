@@ -50,56 +50,44 @@ namespace NeutrinoAPI.Controllers
         #endregion Singleton Pattern
 
         /// <summary>
-        /// Watermark one image with another image. See: https://www.neutrinoapi.com/api/image-watermark/
+        /// Resize an image and output as either JPEG or PNG. See: https://www.neutrinoapi.com/api/image-resize/
         /// </summary>
         /// <param name="imageUrl">Required parameter: The URL to the source image</param>
-        /// <param name="watermarkUrl">Required parameter: The URL to the watermark image</param>
-        /// <param name="opacity">Optional parameter: The opacity of the watermark (0 to 100)</param>
+        /// <param name="width">Required parameter: The width to resize to (in px) while preserving aspect ratio</param>
+        /// <param name="height">Required parameter: The height to resize to (in px) while preserving aspect ratio</param>
         /// <param name="format">Optional parameter: The output image format, can be either png or jpg</param>
-        /// <param name="position">Optional parameter: The position of the watermark image, possible values are:<br/>center, top-left, top-center, top-right, bottom-left, bottom-center, bottom-right</param>
-        /// <param name="width">Optional parameter: If set resize the resulting image to this width (in px) while preserving aspect ratio</param>
-        /// <param name="height">Optional parameter: If set resize the resulting image to this height (in px) while preserving aspect ratio</param>
         /// <return>Returns the Stream response from the API call</return>
-        public Stream ImageWatermark(
+        public Stream ImageResize(
                 string imageUrl,
-                string watermarkUrl,
-                int? opacity = 50,
-                string format = "png",
-                string position = "center",
-                int? width = null,
-                int? height = null)
+                int width,
+                int height,
+                string format = "png")
         {
-            Task<Stream> t = ImageWatermarkAsync(imageUrl, watermarkUrl, opacity, format, position, width, height);
+            Task<Stream> t = ImageResizeAsync(imageUrl, width, height, format);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
 
         /// <summary>
-        /// Watermark one image with another image. See: https://www.neutrinoapi.com/api/image-watermark/
+        /// Resize an image and output as either JPEG or PNG. See: https://www.neutrinoapi.com/api/image-resize/
         /// </summary>
         /// <param name="imageUrl">Required parameter: The URL to the source image</param>
-        /// <param name="watermarkUrl">Required parameter: The URL to the watermark image</param>
-        /// <param name="opacity">Optional parameter: The opacity of the watermark (0 to 100)</param>
+        /// <param name="width">Required parameter: The width to resize to (in px) while preserving aspect ratio</param>
+        /// <param name="height">Required parameter: The height to resize to (in px) while preserving aspect ratio</param>
         /// <param name="format">Optional parameter: The output image format, can be either png or jpg</param>
-        /// <param name="position">Optional parameter: The position of the watermark image, possible values are:<br/>center, top-left, top-center, top-right, bottom-left, bottom-center, bottom-right</param>
-        /// <param name="width">Optional parameter: If set resize the resulting image to this width (in px) while preserving aspect ratio</param>
-        /// <param name="height">Optional parameter: If set resize the resulting image to this height (in px) while preserving aspect ratio</param>
         /// <return>Returns the Stream response from the API call</return>
-        public async Task<Stream> ImageWatermarkAsync(
+        public async Task<Stream> ImageResizeAsync(
                 string imageUrl,
-                string watermarkUrl,
-                int? opacity = 50,
-                string format = "png",
-                string position = "center",
-                int? width = null,
-                int? height = null)
+                int width,
+                int height,
+                string format = "png")
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
 
             //prepare query string for API call
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/image-watermark");
+            _queryBuilder.Append("/image-resize");
 
             //process optional query parameters
             APIHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
@@ -122,12 +110,9 @@ namespace NeutrinoAPI.Controllers
             var _fields = new List<KeyValuePair<string, Object>>()
             {
                 new KeyValuePair<string, object>( "image-url", imageUrl ),
-                new KeyValuePair<string, object>( "watermark-url", watermarkUrl ),
-                new KeyValuePair<string, object>( "opacity", (null != opacity) ? opacity : 50 ),
-                new KeyValuePair<string, object>( "format", (null != format) ? format : "png" ),
-                new KeyValuePair<string, object>( "position", (null != position) ? position : "center" ),
                 new KeyValuePair<string, object>( "width", width ),
-                new KeyValuePair<string, object>( "height", height )
+                new KeyValuePair<string, object>( "height", height ),
+                new KeyValuePair<string, object>( "format", (null != format) ? format : "png" )
             };
             //remove null parameters
             _fields = _fields.Where(kvp => kvp.Value != null).ToList();
@@ -244,44 +229,56 @@ namespace NeutrinoAPI.Controllers
         }
 
         /// <summary>
-        /// Resize an image and output as either JPEG or PNG. See: https://www.neutrinoapi.com/api/image-resize/
+        /// Watermark one image with another image. See: https://www.neutrinoapi.com/api/image-watermark/
         /// </summary>
         /// <param name="imageUrl">Required parameter: The URL to the source image</param>
-        /// <param name="width">Required parameter: The width to resize to (in px) while preserving aspect ratio</param>
-        /// <param name="height">Required parameter: The height to resize to (in px) while preserving aspect ratio</param>
+        /// <param name="watermarkUrl">Required parameter: The URL to the watermark image</param>
+        /// <param name="opacity">Optional parameter: The opacity of the watermark (0 to 100)</param>
         /// <param name="format">Optional parameter: The output image format, can be either png or jpg</param>
+        /// <param name="position">Optional parameter: The position of the watermark image, possible values are: center, top-left, top-center, top-right, bottom-left, bottom-center, bottom-right</param>
+        /// <param name="width">Optional parameter: If set resize the resulting image to this width (in px) while preserving aspect ratio</param>
+        /// <param name="height">Optional parameter: If set resize the resulting image to this height (in px) while preserving aspect ratio</param>
         /// <return>Returns the Stream response from the API call</return>
-        public Stream ImageResize(
+        public Stream ImageWatermark(
                 string imageUrl,
-                int width,
-                int height,
-                string format = "png")
+                string watermarkUrl,
+                int? opacity = 50,
+                string format = "png",
+                string position = "center",
+                int? width = null,
+                int? height = null)
         {
-            Task<Stream> t = ImageResizeAsync(imageUrl, width, height, format);
+            Task<Stream> t = ImageWatermarkAsync(imageUrl, watermarkUrl, opacity, format, position, width, height);
             APIHelper.RunTaskSynchronously(t);
             return t.Result;
         }
 
         /// <summary>
-        /// Resize an image and output as either JPEG or PNG. See: https://www.neutrinoapi.com/api/image-resize/
+        /// Watermark one image with another image. See: https://www.neutrinoapi.com/api/image-watermark/
         /// </summary>
         /// <param name="imageUrl">Required parameter: The URL to the source image</param>
-        /// <param name="width">Required parameter: The width to resize to (in px) while preserving aspect ratio</param>
-        /// <param name="height">Required parameter: The height to resize to (in px) while preserving aspect ratio</param>
+        /// <param name="watermarkUrl">Required parameter: The URL to the watermark image</param>
+        /// <param name="opacity">Optional parameter: The opacity of the watermark (0 to 100)</param>
         /// <param name="format">Optional parameter: The output image format, can be either png or jpg</param>
+        /// <param name="position">Optional parameter: The position of the watermark image, possible values are: center, top-left, top-center, top-right, bottom-left, bottom-center, bottom-right</param>
+        /// <param name="width">Optional parameter: If set resize the resulting image to this width (in px) while preserving aspect ratio</param>
+        /// <param name="height">Optional parameter: If set resize the resulting image to this height (in px) while preserving aspect ratio</param>
         /// <return>Returns the Stream response from the API call</return>
-        public async Task<Stream> ImageResizeAsync(
+        public async Task<Stream> ImageWatermarkAsync(
                 string imageUrl,
-                int width,
-                int height,
-                string format = "png")
+                string watermarkUrl,
+                int? opacity = 50,
+                string format = "png",
+                string position = "center",
+                int? width = null,
+                int? height = null)
         {
             //the base uri for api requests
             string _baseUri = Configuration.BaseUri;
 
             //prepare query string for API call
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
-            _queryBuilder.Append("/image-resize");
+            _queryBuilder.Append("/image-watermark");
 
             //process optional query parameters
             APIHelper.AppendUrlWithQueryParameters(_queryBuilder, new Dictionary<string, object>()
@@ -304,9 +301,12 @@ namespace NeutrinoAPI.Controllers
             var _fields = new List<KeyValuePair<string, Object>>()
             {
                 new KeyValuePair<string, object>( "image-url", imageUrl ),
+                new KeyValuePair<string, object>( "watermark-url", watermarkUrl ),
+                new KeyValuePair<string, object>( "opacity", (null != opacity) ? opacity : 50 ),
+                new KeyValuePair<string, object>( "format", (null != format) ? format : "png" ),
+                new KeyValuePair<string, object>( "position", (null != position) ? position : "center" ),
                 new KeyValuePair<string, object>( "width", width ),
-                new KeyValuePair<string, object>( "height", height ),
-                new KeyValuePair<string, object>( "format", (null != format) ? format : "png" )
+                new KeyValuePair<string, object>( "height", height )
             };
             //remove null parameters
             _fields = _fields.Where(kvp => kvp.Value != null).ToList();
@@ -380,7 +380,7 @@ namespace NeutrinoAPI.Controllers
                 int? marginTop = 0,
                 int? marginBottom = 0,
                 bool? landscape = false,
-                double? zoom = 1,
+                int? zoom = 1,
                 bool? grayscale = false,
                 bool? mediaPrint = false,
                 bool? mediaQueries = false,
@@ -461,7 +461,7 @@ namespace NeutrinoAPI.Controllers
                 int? marginTop = 0,
                 int? marginBottom = 0,
                 bool? landscape = false,
-                double? zoom = 1,
+                int? zoom = 1,
                 bool? grayscale = false,
                 bool? mediaPrint = false,
                 bool? mediaQueries = false,

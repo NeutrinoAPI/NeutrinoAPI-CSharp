@@ -21,18 +21,18 @@ namespace NeutrinoAPI.Controllers
     public partial interface ISecurityAndNetworking
     {
         /// <summary>
-        /// The IP Blocklist API will detect potentially malicious or dangerous IP addresses. See: https://www.neutrinoapi.com/api/ip-blocklist/
+        /// Analyze and extract provider information for an IP address. See: https://www.neutrinoapi.com/api/ip-probe/
         /// </summary>
-        /// <param name="ip">Required parameter: An IPv4 or IPv6 address</param>
-        /// <return>Returns the Models.IPBlocklistResponse response from the API call</return>
-        Models.IPBlocklistResponse IPBlocklist(string ip);
+        /// <param name="ip">Required parameter: IPv4 or IPv6 address</param>
+        /// <return>Returns the Models.IPProbeResponse response from the API call</return>
+        Models.IPProbeResponse IPProbe(string ip);
 
         /// <summary>
-        /// The IP Blocklist API will detect potentially malicious or dangerous IP addresses. See: https://www.neutrinoapi.com/api/ip-blocklist/
+        /// Analyze and extract provider information for an IP address. See: https://www.neutrinoapi.com/api/ip-probe/
         /// </summary>
-        /// <param name="ip">Required parameter: An IPv4 or IPv6 address</param>
-        /// <return>Returns the Models.IPBlocklistResponse response from the API call</return>
-        Task<Models.IPBlocklistResponse> IPBlocklistAsync(string ip);
+        /// <param name="ip">Required parameter: IPv4 or IPv6 address</param>
+        /// <return>Returns the Models.IPProbeResponse response from the API call</return>
+        Task<Models.IPProbeResponse> IPProbeAsync(string ip);
 
         /// <summary>
         /// SMTP based email address verification. See: https://www.neutrinoapi.com/api/email-verify/
@@ -51,9 +51,23 @@ namespace NeutrinoAPI.Controllers
         Task<Models.EmailVerifyResponse> EmailVerifyAsync(string email, bool? fixTypos = false);
 
         /// <summary>
+        /// The IP Blocklist API will detect potentially malicious or dangerous IP addresses. See: https://www.neutrinoapi.com/api/ip-blocklist/
+        /// </summary>
+        /// <param name="ip">Required parameter: An IPv4 or IPv6 address</param>
+        /// <return>Returns the Models.IPBlocklistResponse response from the API call</return>
+        Models.IPBlocklistResponse IPBlocklist(string ip);
+
+        /// <summary>
+        /// The IP Blocklist API will detect potentially malicious or dangerous IP addresses. See: https://www.neutrinoapi.com/api/ip-blocklist/
+        /// </summary>
+        /// <param name="ip">Required parameter: An IPv4 or IPv6 address</param>
+        /// <return>Returns the Models.IPBlocklistResponse response from the API call</return>
+        Task<Models.IPBlocklistResponse> IPBlocklistAsync(string ip);
+
+        /// <summary>
         /// Check the reputation of an IP address, domain name, FQDN or URL against a comprehensive list of blacklists and blocklists. See: https://www.neutrinoapi.com/api/host-reputation/
         /// </summary>
-        /// <param name="host">Required parameter: An IP address, domain name, FQDN or URL.<br/>If you supply a domain/URL it will be checked against the URI DNSBL lists</param>
+        /// <param name="host">Required parameter: An IP address, domain name, FQDN or URL. If you supply a domain/URL it will be checked against the URI DNSBL lists</param>
         /// <param name="listRating">Optional parameter: Only check lists with this rating or better</param>
         /// <return>Returns the Models.HostReputationResponse response from the API call</return>
         Models.HostReputationResponse HostReputation(string host, int? listRating = 3);
@@ -61,24 +75,10 @@ namespace NeutrinoAPI.Controllers
         /// <summary>
         /// Check the reputation of an IP address, domain name, FQDN or URL against a comprehensive list of blacklists and blocklists. See: https://www.neutrinoapi.com/api/host-reputation/
         /// </summary>
-        /// <param name="host">Required parameter: An IP address, domain name, FQDN or URL.<br/>If you supply a domain/URL it will be checked against the URI DNSBL lists</param>
+        /// <param name="host">Required parameter: An IP address, domain name, FQDN or URL. If you supply a domain/URL it will be checked against the URI DNSBL lists</param>
         /// <param name="listRating">Optional parameter: Only check lists with this rating or better</param>
         /// <return>Returns the Models.HostReputationResponse response from the API call</return>
         Task<Models.HostReputationResponse> HostReputationAsync(string host, int? listRating = 3);
-
-        /// <summary>
-        /// Analyze and extract provider information for an IP address. See: https://www.neutrinoapi.com/api/ip-probe/
-        /// </summary>
-        /// <param name="ip">Required parameter: IPv4 or IPv6 address</param>
-        /// <return>Returns the Models.IPProbeResponse response from the API call</return>
-        Models.IPProbeResponse IPProbe(string ip);
-
-        /// <summary>
-        /// Analyze and extract provider information for an IP address. See: https://www.neutrinoapi.com/api/ip-probe/
-        /// </summary>
-        /// <param name="ip">Required parameter: IPv4 or IPv6 address</param>
-        /// <return>Returns the Models.IPProbeResponse response from the API call</return>
-        Task<Models.IPProbeResponse> IPProbeAsync(string ip);
 
     }
 } 

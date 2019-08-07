@@ -21,44 +21,32 @@ namespace NeutrinoAPI.Controllers
     public partial interface IImaging
     {
         /// <summary>
-        /// Watermark one image with another image. See: https://www.neutrinoapi.com/api/image-watermark/
+        /// Resize an image and output as either JPEG or PNG. See: https://www.neutrinoapi.com/api/image-resize/
         /// </summary>
         /// <param name="imageUrl">Required parameter: The URL to the source image</param>
-        /// <param name="watermarkUrl">Required parameter: The URL to the watermark image</param>
-        /// <param name="opacity">Optional parameter: The opacity of the watermark (0 to 100)</param>
+        /// <param name="width">Required parameter: The width to resize to (in px) while preserving aspect ratio</param>
+        /// <param name="height">Required parameter: The height to resize to (in px) while preserving aspect ratio</param>
         /// <param name="format">Optional parameter: The output image format, can be either png or jpg</param>
-        /// <param name="position">Optional parameter: The position of the watermark image, possible values are:<br/>center, top-left, top-center, top-right, bottom-left, bottom-center, bottom-right</param>
-        /// <param name="width">Optional parameter: If set resize the resulting image to this width (in px) while preserving aspect ratio</param>
-        /// <param name="height">Optional parameter: If set resize the resulting image to this height (in px) while preserving aspect ratio</param>
         /// <return>Returns the Stream response from the API call</return>
-        Stream ImageWatermark(
+        Stream ImageResize(
                 string imageUrl,
-                string watermarkUrl,
-                int? opacity = 50,
-                string format = "png",
-                string position = "center",
-                int? width = null,
-                int? height = null);
+                int width,
+                int height,
+                string format = "png");
 
         /// <summary>
-        /// Watermark one image with another image. See: https://www.neutrinoapi.com/api/image-watermark/
+        /// Resize an image and output as either JPEG or PNG. See: https://www.neutrinoapi.com/api/image-resize/
         /// </summary>
         /// <param name="imageUrl">Required parameter: The URL to the source image</param>
-        /// <param name="watermarkUrl">Required parameter: The URL to the watermark image</param>
-        /// <param name="opacity">Optional parameter: The opacity of the watermark (0 to 100)</param>
+        /// <param name="width">Required parameter: The width to resize to (in px) while preserving aspect ratio</param>
+        /// <param name="height">Required parameter: The height to resize to (in px) while preserving aspect ratio</param>
         /// <param name="format">Optional parameter: The output image format, can be either png or jpg</param>
-        /// <param name="position">Optional parameter: The position of the watermark image, possible values are:<br/>center, top-left, top-center, top-right, bottom-left, bottom-center, bottom-right</param>
-        /// <param name="width">Optional parameter: If set resize the resulting image to this width (in px) while preserving aspect ratio</param>
-        /// <param name="height">Optional parameter: If set resize the resulting image to this height (in px) while preserving aspect ratio</param>
         /// <return>Returns the Stream response from the API call</return>
-        Task<Stream> ImageWatermarkAsync(
+        Task<Stream> ImageResizeAsync(
                 string imageUrl,
-                string watermarkUrl,
-                int? opacity = 50,
-                string format = "png",
-                string position = "center",
-                int? width = null,
-                int? height = null);
+                int width,
+                int height,
+                string format = "png");
 
         /// <summary>
         /// Generate a QR code as a PNG image. See: https://www.neutrinoapi.com/api/qr-code/
@@ -93,32 +81,44 @@ namespace NeutrinoAPI.Controllers
                 string bgColor = "#ffffff");
 
         /// <summary>
-        /// Resize an image and output as either JPEG or PNG. See: https://www.neutrinoapi.com/api/image-resize/
+        /// Watermark one image with another image. See: https://www.neutrinoapi.com/api/image-watermark/
         /// </summary>
         /// <param name="imageUrl">Required parameter: The URL to the source image</param>
-        /// <param name="width">Required parameter: The width to resize to (in px) while preserving aspect ratio</param>
-        /// <param name="height">Required parameter: The height to resize to (in px) while preserving aspect ratio</param>
+        /// <param name="watermarkUrl">Required parameter: The URL to the watermark image</param>
+        /// <param name="opacity">Optional parameter: The opacity of the watermark (0 to 100)</param>
         /// <param name="format">Optional parameter: The output image format, can be either png or jpg</param>
+        /// <param name="position">Optional parameter: The position of the watermark image, possible values are: center, top-left, top-center, top-right, bottom-left, bottom-center, bottom-right</param>
+        /// <param name="width">Optional parameter: If set resize the resulting image to this width (in px) while preserving aspect ratio</param>
+        /// <param name="height">Optional parameter: If set resize the resulting image to this height (in px) while preserving aspect ratio</param>
         /// <return>Returns the Stream response from the API call</return>
-        Stream ImageResize(
+        Stream ImageWatermark(
                 string imageUrl,
-                int width,
-                int height,
-                string format = "png");
+                string watermarkUrl,
+                int? opacity = 50,
+                string format = "png",
+                string position = "center",
+                int? width = null,
+                int? height = null);
 
         /// <summary>
-        /// Resize an image and output as either JPEG or PNG. See: https://www.neutrinoapi.com/api/image-resize/
+        /// Watermark one image with another image. See: https://www.neutrinoapi.com/api/image-watermark/
         /// </summary>
         /// <param name="imageUrl">Required parameter: The URL to the source image</param>
-        /// <param name="width">Required parameter: The width to resize to (in px) while preserving aspect ratio</param>
-        /// <param name="height">Required parameter: The height to resize to (in px) while preserving aspect ratio</param>
+        /// <param name="watermarkUrl">Required parameter: The URL to the watermark image</param>
+        /// <param name="opacity">Optional parameter: The opacity of the watermark (0 to 100)</param>
         /// <param name="format">Optional parameter: The output image format, can be either png or jpg</param>
+        /// <param name="position">Optional parameter: The position of the watermark image, possible values are: center, top-left, top-center, top-right, bottom-left, bottom-center, bottom-right</param>
+        /// <param name="width">Optional parameter: If set resize the resulting image to this width (in px) while preserving aspect ratio</param>
+        /// <param name="height">Optional parameter: If set resize the resulting image to this height (in px) while preserving aspect ratio</param>
         /// <return>Returns the Stream response from the API call</return>
-        Task<Stream> ImageResizeAsync(
+        Task<Stream> ImageWatermarkAsync(
                 string imageUrl,
-                int width,
-                int height,
-                string format = "png");
+                string watermarkUrl,
+                int? opacity = 50,
+                string format = "png",
+                string position = "center",
+                int? width = null,
+                int? height = null);
 
         /// <summary>
         /// Render HTML content to PDF, JPG or PNG. See: https://www.neutrinoapi.com/api/html5-render/
@@ -170,7 +170,7 @@ namespace NeutrinoAPI.Controllers
                 int? marginTop = 0,
                 int? marginBottom = 0,
                 bool? landscape = false,
-                double? zoom = 1,
+                int? zoom = 1,
                 bool? grayscale = false,
                 bool? mediaPrint = false,
                 bool? mediaQueries = false,
@@ -246,7 +246,7 @@ namespace NeutrinoAPI.Controllers
                 int? marginTop = 0,
                 int? marginBottom = 0,
                 bool? landscape = false,
-                double? zoom = 1,
+                int? zoom = 1,
                 bool? grayscale = false,
                 bool? mediaPrint = false,
                 bool? mediaQueries = false,

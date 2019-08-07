@@ -118,7 +118,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// The full email address (this could be different to the supplied address if typos-fixed is true)
+        /// The email address. If you have used the fix-typos option then this will be the fixed address
         /// </summary>
         [JsonProperty("email")]
         public string Email 

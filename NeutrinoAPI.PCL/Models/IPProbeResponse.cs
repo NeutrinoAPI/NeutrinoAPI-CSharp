@@ -46,6 +46,7 @@ namespace NeutrinoAPI.Models
         private List<string> asDomains;
         private string asDescription;
         private int asAge;
+        private string hostDomain;
 
         /// <summary>
         /// Is this a valid IPv4 or IPv6 address
@@ -82,7 +83,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// The detected provider type, possible values are:<br/><ul><li>isp - IP belongs to an internet service provider. This includes both mobile, home and business internet providers</li><li>hosting - IP belongs to a hosting company. This includes website hosting, cloud computing platforms and colocation facilities</li><li>vpn - IP belongs to a VPN provider</li><li>proxy - IP belongs to a proxy service. This includes HTTP/SOCKS proxies and browser based proxies</li><li>university - IP belongs to a university/college/campus</li><li>government - IP belongs to a government department. This includes military facilities</li><li>commercial - IP belongs to a commercial entity such as a corporate headquarters or company office</li><li>unknown - could not identify the provider type</li></ul>
+        /// The detected provider type, possible values are: <ul> <li>isp - IP belongs to an internet service provider. This includes both mobile, home and business internet providers</li> <li>hosting - IP belongs to a hosting company. This includes website hosting, cloud computing platforms and colocation facilities</li> <li>vpn - IP belongs to a VPN provider</li> <li>proxy - IP belongs to a proxy service. This includes HTTP/SOCKS proxies and browser based proxies</li> <li>university - IP belongs to a university/college/campus</li> <li>government - IP belongs to a government department. This includes military facilities</li> <li>commercial - IP belongs to a commercial entity such as a corporate headquarters or company office</li> <li>unknown - could not identify the provider type</li> </ul>
         /// </summary>
         [JsonProperty("providerType")]
         public string ProviderType 
@@ -116,7 +117,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// The IPs hostname (PTR)
+        /// The IPs full hostname (PTR)
         /// </summary>
         [JsonProperty("hostname")]
         public string Hostname 
@@ -469,6 +470,23 @@ namespace NeutrinoAPI.Models
             {
                 this.asAge = value;
                 onPropertyChanged("AsAge");
+            }
+        }
+
+        /// <summary>
+        /// The IPs host domain
+        /// </summary>
+        [JsonProperty("hostDomain")]
+        public string HostDomain 
+        { 
+            get 
+            {
+                return this.hostDomain; 
+            } 
+            set 
+            {
+                this.hostDomain = value;
+                onPropertyChanged("HostDomain");
             }
         }
     }

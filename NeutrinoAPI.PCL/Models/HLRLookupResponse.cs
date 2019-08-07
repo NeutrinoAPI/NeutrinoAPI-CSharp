@@ -97,7 +97,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// The number type, possible values are:<br/><ul><li>mobile</li><li>fixed-line</li><li>premium-rate</li><li>toll-free</li><li>voip</li><li>unknown</li></ul>
+        /// The number type, possible values are: <ul> <li>mobile</li> <li>fixed-line</li> <li>premium-rate</li> <li>toll-free</li> <li>voip</li> <li>unknown</li> </ul>
         /// </summary>
         [JsonProperty("numberType")]
         public string NumberType 
@@ -131,7 +131,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// The HLR lookup status, possible values are:<br/><ul><li>ok - the HLR lookup was successful and the device is connected</li><li>absent - the number was once registered but the device has been switched off or out of network range for some time</li><li>unknown - the number is not known by the mobile network</li><li>invalid  - the number is not a valid mobile MSISDN number</li><li>fixed-line - the number is a registered fixed-line not mobile</li><li>voip - the number has been detected as a VOIP line</li><li>failed - the HLR lookup has failed, we could not determine the real status of this number</li></ul>
+        /// The HLR lookup status, possible values are: <ul> <li>ok - the HLR lookup was successful and the device is connected</li> <li>absent - the number was once registered but the device has been switched off or out of network range for some time</li> <li>unknown - the number is not known by the mobile network</li> <li>invalid - the number is not a valid mobile MSISDN number</li> <li>fixed-line - the number is a registered fixed-line not mobile</li> <li>voip - the number has been detected as a VOIP line</li> <li>failed - the HLR lookup has failed, we could not determine the real status of this number</li> </ul>
         /// </summary>
         [JsonProperty("hlrStatus")]
         public string HlrStatus 

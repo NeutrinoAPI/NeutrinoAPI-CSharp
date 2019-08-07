@@ -10,7 +10,7 @@
     <AssemblyName>NeutrinoAPI.PCL</AssemblyName>
     <OutputType>Library</OutputType>
     <OutputPath>bin/DEBUG/</OutputPath>
-    <ProjectGuid>{bc083039-e2dc-4cd8-88e6-f3fa6b81fda0}</ProjectGuid>
+    <ProjectGuid>{b48dcec1-a8bc-4c43-8bb4-beec60781fb8}</ProjectGuid>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
     <NuGetPackageImportStamp>ee2bb91c</NuGetPackageImportStamp>
@@ -70,44 +70,44 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\IPInfoResponse.cs" />
-    <Compile Include="Models\PhonePlaybackResponse.cs" />
     <Compile Include="Models\HLRLookupResponse.cs" />
-    <Compile Include="Models\URLInfoResponse.cs" />
-    <Compile Include="Models\IPProbeResponse.cs" />
-    <Compile Include="Models\BINLookupResponse.cs" />
-    <Compile Include="Models\HostReputationResponse.cs" />
-    <Compile Include="Models\GeocodeReverseResponse.cs" />
-    <Compile Include="Models\Location.cs" />
-    <Compile Include="Models\PhoneValidateResponse.cs" />
-    <Compile Include="Models\Blacklist.cs" />
     <Compile Include="Models\VerifySecurityCodeResponse.cs" />
-    <Compile Include="Models\IPBlocklistResponse.cs" />
-    <Compile Include="Models\EmailVerifyResponse.cs" />
-    <Compile Include="Models\UserAgentInfoResponse.cs" />
+    <Compile Include="Models\BadWordFilterResponse.cs" />
+    <Compile Include="Models\SMSVerifyResponse.cs" />
     <Compile Include="Models\PhoneVerifyResponse.cs" />
     <Compile Include="Models\GeocodeAddressResponse.cs" />
-    <Compile Include="Models\ConvertResponse.cs" />
+    <Compile Include="Models\UserAgentInfoResponse.cs" />
     <Compile Include="Models\EmailValidateResponse.cs" />
-    <Compile Include="Models\BrowserBotResponse.cs" />
-    <Compile Include="Models\SMSVerifyResponse.cs" />
-    <Compile Include="Models\BadWordFilterResponse.cs" />
+    <Compile Include="Models\EmailVerifyResponse.cs" />
+    <Compile Include="Models\ConvertResponse.cs" />
     <Compile Include="Models\SMSMessageResponse.cs" />
+    <Compile Include="Models\Blacklist.cs" />
+    <Compile Include="Models\HostReputationResponse.cs" />
+    <Compile Include="Models\IPInfoResponse.cs" />
+    <Compile Include="Models\PhoneValidateResponse.cs" />
+    <Compile Include="Models\Location.cs" />
+    <Compile Include="Models\GeocodeReverseResponse.cs" />
+    <Compile Include="Models\BINLookupResponse.cs" />
+    <Compile Include="Models\BrowserBotResponse.cs" />
+    <Compile Include="Models\IPProbeResponse.cs" />
+    <Compile Include="Models\URLInfoResponse.cs" />
+    <Compile Include="Models\IPBlocklistResponse.cs" />
+    <Compile Include="Models\PhonePlaybackResponse.cs" />
     <Compile Include="Exceptions\APIErrorException.cs" />
-    <Compile Include="Controllers\WWW.cs" />
-    <Compile Include="Controllers\IWWW.cs" />
     <Compile Include="Controllers\Imaging.cs" />
     <Compile Include="Controllers\IImaging.cs" />
     <Compile Include="Controllers\Telephony.cs" />
     <Compile Include="Controllers\ITelephony.cs" />
-    <Compile Include="Controllers\ECommerce.cs" />
-    <Compile Include="Controllers\IECommerce.cs" />
-    <Compile Include="Controllers\Geolocation.cs" />
-    <Compile Include="Controllers\IGeolocation.cs" />
-    <Compile Include="Controllers\SecurityAndNetworking.cs" />
-    <Compile Include="Controllers\ISecurityAndNetworking.cs" />
     <Compile Include="Controllers\DataTools.cs" />
     <Compile Include="Controllers\IDataTools.cs" />
+    <Compile Include="Controllers\SecurityAndNetworking.cs" />
+    <Compile Include="Controllers\ISecurityAndNetworking.cs" />
+    <Compile Include="Controllers\Geolocation.cs" />
+    <Compile Include="Controllers\IGeolocation.cs" />
+    <Compile Include="Controllers\ECommerce.cs" />
+    <Compile Include="Controllers\IECommerce.cs" />
+    <Compile Include="Controllers\WWW.cs" />
+    <Compile Include="Controllers\IWWW.cs" />
     <Compile Include="Http\Client\IHTTPClient.cs" />
     <Compile Include="Http\Client\HTTPClient.cs" />
     <Compile Include="Http\Client\HttpEventHandlers.cs" />

@@ -26,13 +26,15 @@ namespace NeutrinoAPI.Models
         private string hostname;
         private string city;
         private string countryCode;
-        private double latitude;
+        private int latitude;
         private string region;
-        private double longitude;
+        private int longitude;
         private string continentCode;
         private string ip;
         private string countryCode3;
         private string currencyCode;
+        private string hostDomain;
+        private Dictionary<string, string> timezone;
 
         /// <summary>
         /// Is this a valid IPv4 or IPv6 address
@@ -69,7 +71,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// The IPs hostname (only set if reverse-lookup has been used)
+        /// The IPs full hostname (only set if reverse-lookup has been used)
         /// </summary>
         [JsonProperty("hostname")]
         public string Hostname 
@@ -86,7 +88,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// Full city name (if detectable)
+        /// Name of the city (if detectable)
         /// </summary>
         [JsonProperty("city")]
         public string City 
@@ -123,7 +125,7 @@ namespace NeutrinoAPI.Models
         /// Location latitude
         /// </summary>
         [JsonProperty("latitude")]
-        public double Latitude 
+        public int Latitude 
         { 
             get 
             {
@@ -137,7 +139,7 @@ namespace NeutrinoAPI.Models
         }
 
         /// <summary>
-        /// Full region name (if detectable)
+        /// Name of the region (if detectable)
         /// </summary>
         [JsonProperty("region")]
         public string Region 
@@ -157,7 +159,7 @@ namespace NeutrinoAPI.Models
         /// Location longitude
         /// </summary>
         [JsonProperty("longitude")]
-        public double Longitude 
+        public int Longitude 
         { 
             get 
             {
@@ -235,6 +237,40 @@ namespace NeutrinoAPI.Models
             {
                 this.currencyCode = value;
                 onPropertyChanged("CurrencyCode");
+            }
+        }
+
+        /// <summary>
+        /// The IPs host domain (only set if reverse-lookup has been used)
+        /// </summary>
+        [JsonProperty("hostDomain")]
+        public string HostDomain 
+        { 
+            get 
+            {
+                return this.hostDomain; 
+            } 
+            set 
+            {
+                this.hostDomain = value;
+                onPropertyChanged("HostDomain");
+            }
+        }
+
+        /// <summary>
+        /// Map containing timezone details for the location: <ul> <li>id - the time zone ID as per the IANA time zone database (tzdata)</li> <li>name - the time zone name</li> <li>abbr - the time zone abbreviation</li> <li>date - the current date within the time zone (ISO format)</li> <li>time - the current time within the time zone (ISO format)</li> </ul>
+        /// </summary>
+        [JsonProperty("timezone")]
+        public Dictionary<string, string> Timezone 
+        { 
+            get 
+            {
+                return this.timezone; 
+            } 
+            set 
+            {
+                this.timezone = value;
+                onPropertyChanged("Timezone");
             }
         }
     }

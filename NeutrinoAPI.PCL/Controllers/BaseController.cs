@@ -28,7 +28,7 @@ namespace NeutrinoAPI.Controllers
                     {
                         clientInstance = new HTTPClient()
 ;
-                        clientInstance.setTimeout(TimeSpan.FromMilliseconds(45000));
+                        clientInstance.setTimeout(TimeSpan.FromMilliseconds(90000));
                     }
                     return clientInstance;
                 }
@@ -57,16 +57,17 @@ namespace NeutrinoAPI.Controllers
         internal void ValidateResponse(HttpResponse _response, HttpContext _context)
         {
             if (_response.StatusCode == 400)
-                throw new APIErrorException(@"Your API request has been rejected. Check the error code for details", _context);
+                throw new APIErrorException(@"Your API request has been rejected. Check error code for details", _context);
 
             if (_response.StatusCode == 403)
-                throw new APIException(@"You have failed to authenticate or are using an invalid API path", _context);
+                throw new APIErrorException(@"You have failed to authenticate", _context);
 
             if (_response.StatusCode == 500)
-                throw new APIException(@"We messed up, sorry! Your request has caused a fatal exception", _context);
+                throw new APIErrorException(@"We messed up, sorry! Your request has caused a fatal exception", _context);
 
             if ((_response.StatusCode < 200) || (_response.StatusCode > 208)) //[200,208] = HTTP OK
-                throw new APIException(@"HTTP Response Not OK", _context);
+                throw new APIErrorException(@"We messed up, sorry! Your request has caused an error", _context);
+
         }
     }
 } 
