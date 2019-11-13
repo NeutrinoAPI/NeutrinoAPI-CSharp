@@ -10,7 +10,7 @@
     <AssemblyName>NeutrinoAPI.PCL</AssemblyName>
     <OutputType>Library</OutputType>
     <OutputPath>bin/DEBUG/</OutputPath>
-    <ProjectGuid>{b48dcec1-a8bc-4c43-8bb4-beec60781fb8}</ProjectGuid>
+    <ProjectGuid>{205e8061-d9ad-4de6-96bc-67d8f5ac3588}</ProjectGuid>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
     <NuGetPackageImportStamp>ee2bb91c</NuGetPackageImportStamp>

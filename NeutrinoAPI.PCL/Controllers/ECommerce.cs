@@ -71,7 +71,7 @@ namespace NeutrinoAPI.Controllers
         public async Task<Models.BINLookupResponse> BINLookupAsync(string binNumber, string customerIp = null)
         {
             //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
+            string _baseUri = Configuration.GetBaseURI();
 
             //prepare query string for API call
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);

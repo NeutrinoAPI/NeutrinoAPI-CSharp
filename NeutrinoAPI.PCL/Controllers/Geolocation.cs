@@ -83,7 +83,7 @@ namespace NeutrinoAPI.Controllers
                 string zoom = "address")
         {
             //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
+            string _baseUri = Configuration.GetBaseURI();
 
             //prepare query string for API call
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
@@ -160,7 +160,7 @@ namespace NeutrinoAPI.Controllers
         public async Task<Models.IPInfoResponse> IPInfoAsync(string ip, bool? reverseLookup = false)
         {
             //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
+            string _baseUri = Configuration.GetBaseURI();
 
             //prepare query string for API call
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
@@ -247,7 +247,7 @@ namespace NeutrinoAPI.Controllers
                 bool? fuzzySearch = false)
         {
             //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
+            string _baseUri = Configuration.GetBaseURI();
 
             //prepare query string for API call
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);

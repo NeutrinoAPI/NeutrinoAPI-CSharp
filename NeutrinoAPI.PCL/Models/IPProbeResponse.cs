@@ -47,6 +47,7 @@ namespace NeutrinoAPI.Models
         private string asDescription;
         private int asAge;
         private string hostDomain;
+        private string vpnDomain;
 
         /// <summary>
         /// Is this a valid IPv4 or IPv6 address
@@ -487,6 +488,23 @@ namespace NeutrinoAPI.Models
             {
                 this.hostDomain = value;
                 onPropertyChanged("HostDomain");
+            }
+        }
+
+        /// <summary>
+        /// The domain of the VPN provider (may be empty if the VPN domain is not detectable)
+        /// </summary>
+        [JsonProperty("vpnDomain")]
+        public string VpnDomain 
+        { 
+            get 
+            {
+                return this.vpnDomain; 
+            } 
+            set 
+            {
+                this.vpnDomain = value;
+                onPropertyChanged("VpnDomain");
             }
         }
     }

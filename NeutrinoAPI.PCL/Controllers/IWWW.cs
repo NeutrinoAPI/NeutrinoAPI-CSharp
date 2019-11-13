@@ -80,7 +80,7 @@ namespace NeutrinoAPI.Controllers
                 int? timeout = 30,
                 int? delay = 3,
                 string selector = null,
-                List<string> exec,
+                List<string> exec = null,
                 string userAgent = null,
                 bool? ignoreCertificateErrors = false);
 
@@ -100,7 +100,7 @@ namespace NeutrinoAPI.Controllers
                 int? timeout = 30,
                 int? delay = 3,
                 string selector = null,
-                List<string> exec,
+                List<string> exec = null,
                 string userAgent = null,
                 bool? ignoreCertificateErrors = false);
 

@@ -2,6 +2,64 @@
 
 The general-purpose API
 
+## How to Build
+
+The generated code uses the Newtonsoft Json.NET NuGet Package. If the automatic NuGet package restore
+is enabled, these dependencies will be installed automatically. Therefore,
+you will need internet access for build.
+
+1. Open the solution (NeutrinoAPI.sln) file.
+2. Invoke the build process using `Ctrl+Shift+B` shortcut key or using the `Build` menu as shown below.
+
+![Building SDK using Visual Studio](https://apidocs.io/illustration/cs?step=buildSDK&workspaceFolder=NeutrinoAPI-CSharp&workspaceName=NeutrinoAPI&projectName=NeutrinoAPI.PCL)
+
+## How to Use
+
+The build process generates a portable class library, which can be used like a normal class library. The generated library is compatible with Windows Forms, Windows RT, Windows Phone 8,
+Silverlight 5, Xamarin iOS, Xamarin Android and Mono. More information on how to use can be found at the [MSDN Portable Class Libraries documentation](http://msdn.microsoft.com/en-us/library/vstudio/gg597391%28v=vs.100%29.aspx).
+
+The following section explains how to use the NeutrinoAPI library in a new console project.
+
+### 1. Starting a new project
+
+For starting a new project, right click on the current solution from the *solution explorer* and choose  ``` Add -> New Project ```.
+
+![Add a new project in the existing solution using Visual Studio](https://apidocs.io/illustration/cs?step=addProject&workspaceFolder=NeutrinoAPI-CSharp&workspaceName=NeutrinoAPI&projectName=NeutrinoAPI.PCL)
+
+Next, choose "Console Application", provide a ``` TestConsoleProject ``` as the project name and click ``` OK ```.
+
+![Create a new console project using Visual Studio](https://apidocs.io/illustration/cs?step=createProject&workspaceFolder=NeutrinoAPI-CSharp&workspaceName=NeutrinoAPI&projectName=NeutrinoAPI.PCL)
+
+### 2. Set as startup project
+
+The new console project is the entry point for the eventual execution. This requires us to set the ``` TestConsoleProject ``` as the start-up project. To do this, right-click on the  ``` TestConsoleProject ``` and choose  ``` Set as StartUp Project ``` form the context menu.
+
+![Set the new cosole project as the start up project](https://apidocs.io/illustration/cs?step=setStartup&workspaceFolder=NeutrinoAPI-CSharp&workspaceName=NeutrinoAPI&projectName=NeutrinoAPI.PCL)
+
+### 3. Add reference of the library project
+
+In order to use the NeutrinoAPI library in the new project, first we must add a projet reference to the ``` TestConsoleProject ```. First, right click on the ``` References ``` node in the *solution explorer* and click ``` Add Reference... ```.
+
+![Open references of the TestConsoleProject](https://apidocs.io/illustration/cs?step=addReference&workspaceFolder=NeutrinoAPI-CSharp&workspaceName=NeutrinoAPI&projectName=NeutrinoAPI.PCL)
+
+Next, a window will be displayed where we must set the ``` checkbox ``` on ``` NeutrinoAPI.PCL ``` and click ``` OK ```. By doing this, we have added a reference of the ```NeutrinoAPI.PCL``` project into the new ``` TestConsoleProject ```.
+
+![Add a reference to the TestConsoleProject](https://apidocs.io/illustration/cs?step=createReference&workspaceFolder=NeutrinoAPI-CSharp&workspaceName=NeutrinoAPI&projectName=NeutrinoAPI.PCL)
+
+### 4. Write sample code
+
+Once the ``` TestConsoleProject ``` is created, a file named ``` Program.cs ``` will be visible in the *solution explorer* with an empty ``` Main ``` method. This is the entry point for the execution of the entire solution.
+Here, you can add code to initialize the client library and acquire the instance of a *Controller* class. Sample code to initialize the client library and using controller methods is given in the subsequent sections.
+
+![Add a reference to the TestConsoleProject](https://apidocs.io/illustration/cs?step=addCode&workspaceFolder=NeutrinoAPI-CSharp&workspaceName=NeutrinoAPI&projectName=NeutrinoAPI.PCL)
+
+## How to Test
+
+The generated SDK also contain one or more Tests, which are contained in the Tests project.
+In order to invoke these test cases, you will need *NUnit 3.0 Test Adapter Extension for Visual Studio*.
+Once the SDK is complied, the test cases should appear in the Test Explorer window.
+Here, you can click *Run All* to execute these test cases.
+
 ## Initialization
 
 ### Authentication
@@ -75,8 +133,8 @@ Task<Stream> ImageResize(
 
 ```csharp
 string imageUrl = "image-url";
-int width = 237;
-int height = 237;
+int width = 137;
+int height = 137;
 string format = "png";
 
 Stream result = await imaging.ImageResize(imageUrl, width, height, format);
@@ -160,8 +218,8 @@ string watermarkUrl = "watermark-url";
 int? opacity = 50;
 string format = "png";
 string position = "center";
-int? width = 237;
-int? height = 237;
+int? width = 137;
+int? height = 137;
 
 Stream result = await imaging.ImageWatermark(imageUrl, watermarkUrl, opacity, format, position, width, height);
 
@@ -273,7 +331,7 @@ bool? mediaQueries = false;
 bool? forms = false;
 string css = "css";
 int? imageWidth = 1024;
-int? imageHeight = 237;
+int? imageHeight = 137;
 int? renderDelay = 0;
 string headerTextLeft = "header-text-left";
 string headerTextCenter = "header-text-center";
@@ -289,8 +347,8 @@ int? footerSize = 9;
 string footerFont = "Courier";
 int? footerFontSize = 11;
 bool? footerLine = false;
-int? pageWidth = 237;
-int? pageHeight = 237;
+int? pageWidth = 137;
+int? pageHeight = 137;
 
 Stream result = await imaging.HTML5Render(content, format, pageSize, title, margin, marginLeft, marginRight, marginTop, marginBottom, landscape, zoom, grayscale, mediaPrint, mediaQueries, forms, css, imageWidth, imageHeight, renderDelay, headerTextLeft, headerTextCenter, headerTextRight, headerSize, headerFont, headerFontSize, headerLine, footerTextLeft, footerTextCenter, footerTextRight, footerSize, footerFont, footerFontSize, footerLine, pageWidth, pageHeight);
 
@@ -421,7 +479,7 @@ Task<Models.SMSVerifyResponse> SMSVerify(
 ```csharp
 string number = "number";
 int? codeLength = 5;
-int? securityCode = 237;
+int? securityCode = 228;
 string countryCode = "country-code";
 string languageCode = "en";
 
@@ -492,7 +550,7 @@ Task<Models.PhoneVerifyResponse> PhoneVerify(
 ```csharp
 string number = "number";
 int? codeLength = 6;
-int? securityCode = 237;
+int? securityCode = 228;
 int? playbackDelay = 800;
 string countryCode = "country-code";
 string languageCode = "en";
@@ -1015,7 +1073,7 @@ Task<Models.BrowserBotResponse> BrowserBot(
         int? timeout = 30,
         int? delay = 3,
         string selector = null,
-        List<string> exec,
+        List<string> exec = null,
         string userAgent = null,
         bool? ignoreCertificateErrors = false)
 ```
@@ -1028,7 +1086,7 @@ Task<Models.BrowserBotResponse> BrowserBot(
 | timeout |  ``` Optional ```  ``` DefaultValue ```  | Timeout in seconds. Give up if still trying to load the page after this number of seconds |
 | delay |  ``` Optional ```  ``` DefaultValue ```  | Delay in seconds to wait before capturing any page data, executing selectors or JavaScript |
 | selector |  ``` Optional ```  | Extract content from the page DOM using this selector. Commonly known as a CSS selector, you can find a good reference <a href="https://www.w3schools.com/cssref/css_selectors.asp">here</a> |
-| exec |  ``` Optional ```  ``` Collection ```  ``` DefaultValue ```  | Execute JavaScript on the page. Each array element should contain a valid JavaScript statement in string form. If a statement returns any kind of value it will be returned in the 'exec-results' response. For your convenience you can also use the following special shortcut functions: <div> sleep(seconds); Just wait/sleep for the specified number of seconds. click('selector'); Click on the first element matching the given selector. focus('selector'); Focus on the first element matching the given selector. keys('characters'); Send the specified keyboard characters. Use click() or focus() first to send keys to a specific element. enter(); Send the Enter key. tab(); Send the Tab key. </div> Example: <div> [ "click('#button-id')", "sleep(1)", "click('.field-class')", "keys('1234')", "enter()" ] </div> |
+| exec |  ``` Optional ```  ``` Collection ```  | Execute JavaScript on the page. Each array element should contain a valid JavaScript statement in string form. If a statement returns any kind of value it will be returned in the 'exec-results' response. For your convenience you can also use the following special shortcut functions: <div> sleep(seconds); Just wait/sleep for the specified number of seconds. click('selector'); Click on the first element matching the given selector. focus('selector'); Focus on the first element matching the given selector. keys('characters'); Send the specified keyboard characters. Use click() or focus() first to send keys to a specific element. enter(); Send the Enter key. tab(); Send the Tab key. </div> Example: <div> [ "click('#button-id')", "sleep(1)", "click('.field-class')", "keys('1234')", "enter()" ] </div> |
 | userAgent |  ``` Optional ```  | Override the browsers default user-agent string with this one |
 | ignoreCertificateErrors |  ``` Optional ```  ``` DefaultValue ```  | Ignore any TLS/SSL certificate errors and load the page anyway |
 
@@ -1040,8 +1098,7 @@ string url = "url";
 int? timeout = 30;
 int? delay = 3;
 string selector = "selector";
-string execValue = "[]";
-var exec = Newtonsoft.Json.JsonConvert.DeserializeObject<List<string>>(execValue);
+List<string> exec = new List<string> { "exec" };
 string userAgent = "user-agent";
 bool? ignoreCertificateErrors = false;
 

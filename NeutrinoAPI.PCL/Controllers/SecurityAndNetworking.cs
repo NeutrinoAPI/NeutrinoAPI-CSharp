@@ -69,7 +69,7 @@ namespace NeutrinoAPI.Controllers
         public async Task<Models.IPProbeResponse> IPProbeAsync(string ip)
         {
             //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
+            string _baseUri = Configuration.GetBaseURI();
 
             //prepare query string for API call
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
@@ -143,7 +143,7 @@ namespace NeutrinoAPI.Controllers
         public async Task<Models.EmailVerifyResponse> EmailVerifyAsync(string email, bool? fixTypos = false)
         {
             //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
+            string _baseUri = Configuration.GetBaseURI();
 
             //prepare query string for API call
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
@@ -216,7 +216,7 @@ namespace NeutrinoAPI.Controllers
         public async Task<Models.IPBlocklistResponse> IPBlocklistAsync(string ip)
         {
             //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
+            string _baseUri = Configuration.GetBaseURI();
 
             //prepare query string for API call
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
@@ -290,7 +290,7 @@ namespace NeutrinoAPI.Controllers
         public async Task<Models.HostReputationResponse> HostReputationAsync(string host, int? listRating = 3)
         {
             //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
+            string _baseUri = Configuration.GetBaseURI();
 
             //prepare query string for API call
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);

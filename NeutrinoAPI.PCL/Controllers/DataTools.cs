@@ -71,7 +71,7 @@ namespace NeutrinoAPI.Controllers
         public async Task<Models.EmailValidateResponse> EmailValidateAsync(string email, bool? fixTypos = false)
         {
             //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
+            string _baseUri = Configuration.GetBaseURI();
 
             //prepare query string for API call
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
@@ -144,7 +144,7 @@ namespace NeutrinoAPI.Controllers
         public async Task<Models.UserAgentInfoResponse> UserAgentInfoAsync(string userAgent)
         {
             //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
+            string _baseUri = Configuration.GetBaseURI();
 
             //prepare query string for API call
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
@@ -218,7 +218,7 @@ namespace NeutrinoAPI.Controllers
         public async Task<Models.BadWordFilterResponse> BadWordFilterAsync(string content, string censorCharacter = null)
         {
             //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
+            string _baseUri = Configuration.GetBaseURI();
 
             //prepare query string for API call
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
@@ -295,7 +295,7 @@ namespace NeutrinoAPI.Controllers
         public async Task<Models.ConvertResponse> ConvertAsync(string fromValue, string fromType, string toType)
         {
             //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
+            string _baseUri = Configuration.GetBaseURI();
 
             //prepare query string for API call
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
@@ -373,7 +373,7 @@ namespace NeutrinoAPI.Controllers
         public async Task<Models.PhoneValidateResponse> PhoneValidateAsync(string number, string countryCode = null, string ip = null)
         {
             //the base uri for api requests
-            string _baseUri = Configuration.BaseUri;
+            string _baseUri = Configuration.GetBaseURI();
 
             //prepare query string for API call
             StringBuilder _queryBuilder = new StringBuilder(_baseUri);
