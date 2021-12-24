@@ -2,6 +2,15 @@
 
 The general-purpose API
 
+### NuGet
+
+Install NeutrinoAPI from [NuGet](https://www.nuget.org/packages/NeutrinoAPI/):
+
+```
+Install-Package NeutrinoAPI
+```
+
+
 ## How to Build
 
 The generated code uses the Newtonsoft Json.NET NuGet Package. If the automatic NuGet package restore
@@ -14,9 +23,6 @@ you will need internet access for build.
 ![Building SDK using Visual Studio](https://apidocs.io/illustration/cs?step=buildSDK&workspaceFolder=NeutrinoAPI-CSharp&workspaceName=NeutrinoAPI&projectName=NeutrinoAPI.PCL)
 
 ## How to Use
-
-The build process generates a portable class library, which can be used like a normal class library. The generated library is compatible with Windows Forms, Windows RT, Windows Phone 8,
-Silverlight 5, Xamarin iOS, Xamarin Android and Mono. More information on how to use can be found at the [MSDN Portable Class Libraries documentation](http://msdn.microsoft.com/en-us/library/vstudio/gg597391%28v=vs.100%29.aspx).
 
 The following section explains how to use the NeutrinoAPI library in a new console project.
 

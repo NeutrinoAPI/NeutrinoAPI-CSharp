@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Company>Neutrino API</Company>
+    <Version>3.4.5.0</Version>
+    <Description>The general-purpose API.</Description>
+    <Copyright>Copyright © 2016-2021</Copyright>
+    <PackageProjectUrl>https://www.neutrinoapi.com</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/NeutrinoAPI/NeutrinoAPI-CSharp</RepositoryUrl>
+    <AnalysisLevel>latest</AnalysisLevel>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <Authors>Neutrino API</Authors>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>neutrino api</PackageTags>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageIconUrl />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+</Project>

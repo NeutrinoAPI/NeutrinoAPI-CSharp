@@ -1,21 +1,25 @@
+﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31911.196
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeutrinoAPI.PCL", "NeutrinoAPI.PCL/NeutrinoAPI.PCL.csproj", "{205e8061-d9ad-4de6-96bc-67d8f5ac3588}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeutrinoAPI", "NeutrinoAPI.PCL\NeutrinoAPI.csproj", "{205E8061-D9AD-4DE6-96BC-67D8F5AC3588}"
 EndProject
 Global
-    GlobalSection(SolutionConfigurationPlatforms) = preSolution
-        Debug|Any CPU = Debug|Any CPU
-        Release|Any CPU = Release|Any CPU
-    EndGlobalSection
-    GlobalSection(ProjectConfigurationPlatforms) = postSolution
-        {205e8061-d9ad-4de6-96bc-67d8f5ac3588}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-        {205e8061-d9ad-4de6-96bc-67d8f5ac3588}.Debug|Any CPU.Build.0 = Debug|Any CPU
-        {205e8061-d9ad-4de6-96bc-67d8f5ac3588}.Release|Any CPU.ActiveCfg = Release|Any CPU
-        {205e8061-d9ad-4de6-96bc-67d8f5ac3588}.Release|Any CPU.Build.0 = Release|Any CPU
-    EndGlobalSection
-    GlobalSection(SolutionProperties) = preSolution
-        HideSolutionNode = FALSE
-    EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{205E8061-D9AD-4DE6-96BC-67D8F5AC3588}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{205E8061-D9AD-4DE6-96BC-67D8F5AC3588}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{205E8061-D9AD-4DE6-96BC-67D8F5AC3588}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{205E8061-D9AD-4DE6-96BC-67D8F5AC3588}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {858CEFD7-1A90-4425-8B0C-303A2D3BD8EF}
+	EndGlobalSection
 EndGlobal
