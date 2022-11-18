@@ -26,9 +26,9 @@ namespace NeutrinoAPI.Models
         private string hostname;
         private string city;
         private string countryCode;
-        private decimal latitude;
+        private double latitude;
         private string region;
-        private decimal longitude;
+        private double longitude;
         private string continentCode;
         private string ip;
         private string countryCode3;
@@ -125,7 +125,7 @@ namespace NeutrinoAPI.Models
         /// Location latitude
         /// </summary>
         [JsonProperty("latitude")]
-        public decimal Latitude 
+        public double Latitude 
         { 
             get 
             {
@@ -159,7 +159,7 @@ namespace NeutrinoAPI.Models
         /// Location longitude
         /// </summary>
         [JsonProperty("longitude")]
-        public decimal Longitude 
+        public double Longitude 
         { 
             get 
             {
