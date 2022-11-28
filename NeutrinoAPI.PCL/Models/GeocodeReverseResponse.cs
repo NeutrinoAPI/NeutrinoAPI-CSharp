@@ -33,8 +33,8 @@ namespace NeutrinoAPI.Models
         private string currencyCode;
         private string locationType;
         private List<string> locationTags;
-        private double latitude;
-        private double longitude;
+        private double? latitude;
+        private double? longitude;
         private Dictionary<string, string> timezone;
 
         /// <summary>
@@ -245,7 +245,7 @@ namespace NeutrinoAPI.Models
         /// The location latitude
         /// </summary>
         [JsonProperty("latitude")]
-        public double Latitude 
+        public double? Latitude 
         { 
             get 
             {
@@ -262,7 +262,7 @@ namespace NeutrinoAPI.Models
         /// The location longitude
         /// </summary>
         [JsonProperty("longitude")]
-        public double Longitude 
+        public double? Longitude 
         { 
             get 
             {
